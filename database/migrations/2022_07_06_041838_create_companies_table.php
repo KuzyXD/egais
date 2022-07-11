@@ -17,6 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('group');
+            $table->bigInteger('manager_id');
 
             $table->timestamps();
             $table->softDeletes();
