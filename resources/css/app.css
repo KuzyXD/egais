@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .material-icon {
+    font-family: 'Material Icons';
+  }
+}
