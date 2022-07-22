@@ -13,7 +13,7 @@ class CreateApplicationsListTable extends Migration
      */
     public function up()
     {
-        Schema::create('applications_list', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('created_by');
             $table->bigInteger('ac_id')->nullable();
