@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import { createApp } from 'vue';
+import 'flowbite';
 import CryptoProSetup from './components/tech/CryptoProSetup';
 import StaffLogin from './components/login/Staff';
 import ClientLogin from './components/login/Client';
