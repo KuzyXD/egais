@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('fio');
             $table->string('password');
             $table->string('certificate_serial_number', 50);
+            $table->timestamp('certificate_expire_to_date')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
