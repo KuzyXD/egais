@@ -19519,7 +19519,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       certificates: [],
       selectedCertificate: undefined,
-      password: '',
+      password: '15krot68',
+      errorText: '',
       cadesplugin_initialization: _cadesplugin_initialization__WEBPACK_IMPORTED_MODULE_1__.cadesplugin_initialization
     };
   },
@@ -19529,14 +19530,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.get('/sanctum/csrf-cookie').then(function (response) {
         console.log(response);
         axios.post('api/login', {
-          thumbprint: vue.selectedCertificate,
+          certificate_serial_number: vue.selectedCertificate.toLowerCase(),
           password: vue.password
         }).then(function (loginResponse) {
-          console.log(loginResponse);
+          window.location.href = 'dashboard';
         })["catch"](function (error) {
-          console.log(error.response.data);
+          console.log(error.response);
+          vue.errorText = error.response.data;
+          vue.showError();
         });
       });
+    },
+    showError: function showError() {
+      var targetEl = document.getElementById('alert-2');
+      targetEl.classList.remove('opacity-0');
+      targetEl.classList.remove('hidden');
     },
     getCertificatesForLogin: function getCertificatesForLogin() {
       var _this = this;
@@ -19702,12 +19710,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "min-h-screen"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_crypto_pro_setup = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("crypto-pro-setup");
 
   var _component_client_login = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-login");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_crypto_pro_setup), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_login, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_crypto_pro_setup), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_login, {
     logo: $props.logo
   }, null, 8
   /* PROPS */
@@ -19730,7 +19741,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "overflow-hidden bg-gray-50"
+  "class": "bg-gray-50"
 };
 var _hoisted_2 = {
   "class": "relative flex flex-col items-center justify-center py-12 lg:py-6"
@@ -19774,6 +19785,62 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-start\"><div class=\"flex items-start\"><div class=\"flex items-center h-5\"><input id=\"remember\" aria-describedby=\"remember\" type=\"checkbox\" class=\"w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300\"></div><div class=\"ml-3 text-sm\"><label for=\"remember\" class=\"font-medium text-gray-900\">Запомнить меня</label></div></div></div><button type=\"submit\" class=\"w-full text-white bg-light-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center\"> Войти </button>", 2);
 
+var _hoisted_11 = {
+  id: "alert-2",
+  "class": "absolute flex hidden p-4 mt-4 transition-opacity duration-300 ease-out bg-red-100 rounded-lg opacity-0 -bottom-10 dark:bg-red-200",
+  role: "alert"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "aria-hidden": "true",
+  "class": "flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800",
+  fill: "currentColor",
+  viewBox: "0 0 20 20",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "fill-rule": "evenodd",
+  d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
+  "clip-rule": "evenodd"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "sr-only"
+}, "Info", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "mx-3 text-sm font-medium text-red-700 dark:text-red-800"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "font-semibold"
+}, "Ошибка! ", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300",
+  "data-dismiss-target": "#alert-2",
+  "aria-label": "Close"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "sr-only"
+}, "Close"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "w-5 h-5",
+  fill: "currentColor",
+  viewBox: "0 0 20 20",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "fill-rule": "evenodd",
+  d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
+  "clip-rule": "evenodd"
+})])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "space-y-6",
@@ -19789,7 +19856,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.certificates, function (certificate) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-      value: certificate.thumbprint
+      value: certificate.serialNumber
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(certificate.shortInfo), 9
     /* TEXT, PROPS */
     , _hoisted_7);
@@ -19811,7 +19878,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.password]])]), _hoisted_9], 32
   /* HYDRATE_EVENTS */
-  )])])]);
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorText), 1
+  /* TEXT */
+  )]), _hoisted_16])])]);
 }
 
 /***/ }),
@@ -19830,10 +19899,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-h-screen overflow-hidden bg-gray-50"
+  "class": "overflow-hidden bg-gray-50"
 };
 var _hoisted_2 = {
-  "class": "relative flex flex-col items-center justify-center min-h-screen py-12 lg:py-6"
+  "class": "relative flex flex-col items-center justify-center py-12 lg:py-6"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {

@@ -17,5 +17,8 @@ class Authenticate extends Middleware
         if (!$request->expectsJson() && $request->route()->getPrefix() == '/manager') {
             return route('manager.login');
         }
+        if (!$request->expectsJson() && $request->route()->getPrefix() == '/client') {
+            return route('client.login');
+        }
     }
 }

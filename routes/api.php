@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Login\ClientController;
 use App\Http\Controllers\Login\ManagerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [ManagerController::class, 'authenticate'])->prefix('manager');
+Route::post('login', [ClientController::class, 'authenticate'])->prefix('client');
