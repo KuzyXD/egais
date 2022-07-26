@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login.client');
+Route::prefix('client')->group(function () {
+    Route::view('/login', 'login.client')->name('client.login');
+});
+
+Route::prefix('manager')->group(function () {
+    Route::view('/login', 'login.staff')->name('manager.login');
+});
+
+Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
+    //Route::view('/dashboard', 'login.client');
 });
