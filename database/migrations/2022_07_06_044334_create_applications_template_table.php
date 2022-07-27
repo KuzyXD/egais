@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplicationsTemplateTable extends Migration
-{
+class CreateApplicationsTemplateTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('applications_template', function (Blueprint $table) {
             $table->id();
             $table->foreignId("created_by")->constrained("managers");
@@ -61,8 +59,7 @@ class CreateApplicationsTemplateTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('applications_template');
     }
 }

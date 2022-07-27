@@ -4,16 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplicationsFiles extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('applications_files', function (Blueprint $table) {
+return new class extends Migration {
+    public function up() {
+        Schema::create('application_files', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('application_id');
             $table->string('type');
@@ -25,13 +18,7 @@ class CreateApplicationsFiles extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('applications_files');
+    public function down() {
+        Schema::dropIfExists('application_files');
     }
-}
+};
