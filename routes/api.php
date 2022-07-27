@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Login\ClientController;
 use App\Http\Controllers\Login\ManagerController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [ManagerController::class, 'authenticate'])->prefix('manager');
 Route::post('login', [ClientController::class, 'authenticate'])->prefix('client');
+
+Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
+    Route::prefix('company')->group(function () {
+        Route::post('store', [CompanyController::class, 'store']);
+    });
+});
