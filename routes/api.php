@@ -21,6 +21,9 @@ Route::post('login', [ClientController::class, 'authenticate'])->prefix('client'
 
 Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
     Route::prefix('company')->group(function () {
+        Route::get('list', [CompanyController::class, 'index']);
         Route::post('store', [CompanyController::class, 'store']);
+        Route::patch('{id}/update', [CompanyController::class, 'update']);
+        Route::delete('{id}/delete', [CompanyController::class, 'destroy']);
     });
 });
