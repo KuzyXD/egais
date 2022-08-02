@@ -22,5 +22,5 @@ Route::prefix('manager')->group(function () {
 });
 
 Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
-    //Route::view('/dashboard', 'login.client');
+    Route::view('/dashboard', 'manager.dashboard');
 });

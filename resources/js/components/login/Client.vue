@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-gray-50">
+	<div>
 		<div
 			class="relative flex flex-col items-center justify-center py-12 lg:py-6">
 			<div class="p-5">
