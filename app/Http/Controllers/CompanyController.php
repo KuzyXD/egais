@@ -11,7 +11,7 @@ class CompanyController extends Controller {
     public function index(Request $request, Company $companyService) {
         $paginate = $companyService->index($request->query);
         if ($paginate) {
-            return response($paginate, 201);
+            return response($paginate, 200);
         }
 
         return response('Произошла ошибка. Свяжитесь с программистом.', '500');

@@ -19,7 +19,17 @@ class Company {
             $companies->withTrashed();
         }
 
-        return $companies->orderByDesc('id')->paginate(10, ['*'], 'page', $currentPage);
+        $companies->join('managers', 'companies.manager_id', '=', 'managers.id')->latest()
+                ->select([
+                        'companies.id',
+                        'companies.name',
+                        'companies.group',
+                        'managers.fio',
+                        'companies.created_at',
+                        'companies.updated_at'
+                ]);
+
+        return $companies->orderByDesc('companies.id')->paginate(10, ['*'], 'page', $currentPage);
     }
 
     public function store($parameters, $by): bool {
