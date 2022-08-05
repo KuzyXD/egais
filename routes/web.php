@@ -19,6 +19,11 @@ Route::prefix('client')->group(function () {
 
 Route::prefix('manager')->group(function () {
     Route::view('/login', 'login.staff')->name('manager.login');
+    Route::prefix('list')->group(function () {
+        Route::view('/clients', 'manager.clients_list')->name('manager.clients_list');
+        Route::view('/companies', 'manager.company_list')->name('manager.companies');
+        Route::view('/applications', 'manager.clients_list')->name('manager.applications');
+    });
 });
 
 Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
