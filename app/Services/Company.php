@@ -9,16 +9,6 @@ class Company {
         $companies = \App\Models\Company::query();
         $currentPage = $query->get('page');
 
-        if ($query->get('name')) {
-            $companies->where('name', 'like', '%' . $query->get('name') . '%');
-        }
-        if ($query->get('group')) {
-            $companies->where('group', 'like', '%' . $query->get('group') . '%');
-        }
-        if ($query->get('deleted'==='true')) {
-            $companies->withTrashed();
-        }
-
         $companies->join('managers', 'companies.manager_id', '=', 'managers.id')->latest()
                 ->select([
                         'companies.id',
@@ -26,10 +16,25 @@ class Company {
                         'companies.group',
                         'managers.fio',
                         'companies.created_at',
-                        'companies.updated_at'
+                        'companies.updated_at',
+                        'companies.deleted_at'
                 ]);
 
-        return $companies->orderByDesc('companies.id')->paginate(10, ['*'], 'page', $currentPage);
+
+        if ($query->get('search')) {
+            $companies->orWhere('companies.group', 'like', '%' . $query->get('search') . '%');
+            $companies->orWhere('companies.name', 'like', '%' . $query->get('search') . '%');
+            $companies->orWhere('managers.fio', 'like', '%' . $query->get('search') . '%');
+            $companies->orWhere('companies.id', 'like', '%' . $query->get('search') . '%');
+        }
+        if ($query->get('deleted')==='true') {
+            $companies->withTrashed();
+        }
+        if ($query->get('owned')==='true') {
+            $companies->where('companies.manager_id', '=', auth()->id());
+        }
+
+        return $companies->orderByDesc('companies.id')->paginate(6, ['*'], 'page', $currentPage);
     }
 
     public function store($parameters, $by): bool {
@@ -44,7 +49,7 @@ class Company {
     }
 
     public function destroy($id): ?bool {
-        $company = \App\Models\Company::find($id);
+        $company = \App\Models\Company::withTrashed()->find($id);
 
         if ($company->trashed()) {
             return $company->restore();
