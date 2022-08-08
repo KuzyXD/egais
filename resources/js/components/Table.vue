@@ -5,11 +5,13 @@
       <p v-show="text" class="mt-1 text-sm font-normal text-gray-500">
         {{ text }}
       </p>
-      <div class="mb-2 mt-4">
-        <input id="default-checkbox"
-               class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" type="checkbox"
-               value="">
-        <label class="ml-2 text-sm font-medium text-gray-900" for="default-checkbox">Отобразить удаленные записи</label>
+      <div class="mb-2 mt-4 flex gap-8">
+        <div v-for="(filter, index) in filters" :key="index">
+          <input :id="'checkbox'+index"
+                 class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" type="checkbox"
+                 @change="$emit(filter.name)">
+          <label :for="'checkbox'+index" class="ml-2 text-sm font-medium text-gray-900">{{ filter.text }}</label>
+        </div>
       </div>
       <div class="flex">
         <div class="pb-4 pr-4">
@@ -26,7 +28,8 @@
             <input id="table-search"
                    class="block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                    placeholder="Искать"
-                   type="text">
+                   type="text"
+                   @change.lazy="event => $emit('search', event.target.value)">
           </div>
         </div>
       </div>
@@ -39,7 +42,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(item, index) in items" :key="index" class=" border-b hover:bg-gray-100">
+    <tr v-for="(item, index) in items" :key="index" class="border-b hover:bg-gray-100">
       <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
           scope="row">
         {{ item[0] }}
@@ -50,6 +53,7 @@
       <td class="py-4 px-6">
         <button :id="'dropdownAction' + index" :data-dropdown-toggle="'dropdown' + index"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                data-dropdown-placement="left"
                 type="button" @click="openDropdown">Действия
           <svg aria-hidden="true" class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +66,7 @@
           <ul :aria-labelledby="'dropdownAction' + index" class="py-1 text-sm text-gray-700">
             <li v-for="(action, actionIndex) in actions" :key="actionIndex">
               <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600" href="#"
-                 @click.prevent="$emit(action.name, item)">{{ action.text }}</a>
+                 @click.prevent="$emit(action.name, item[0])">{{ action.text }}</a>
             </li>
           </ul>
         </div>
@@ -74,7 +78,7 @@
 
 <script>
 export default {
-  props: ['title', 'text', 'cols', 'items', 'actions'],
+  props: ['title', 'text', 'cols', 'items', 'actions', 'filters'],
   methods: {
     openDropdown(event) {
       let el = document.getElementById(event.target.getAttribute('data-dropdown-toggle'));
