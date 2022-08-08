@@ -18,11 +18,11 @@ class CompanyControllerTest extends TestCase {
                 'manager'
         );
 
-        Company::factory()->count(50)->create();
+        Company::factory()->count(10)->create(['manager_id' => 1]);
 
-        $response = $this->get('api/manager/company/list');
-
-        $this->assertTrue(count($response->json('data'))==10);
+        $response = $this->get('api/manager/company/list?page=1');
+        
+        $this->assertEquals(10, $response->json('total'));
     }
 
     public function testStore() {

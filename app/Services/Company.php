@@ -27,10 +27,10 @@ class Company {
             $companies->orWhere('managers.fio', 'like', '%' . $query->get('search') . '%');
             $companies->orWhere('companies.id', 'like', '%' . $query->get('search') . '%');
         }
-        if ($query->get('deleted')==='true') {
+        if ($query->get('deleted', 'false')==='true') {
             $companies->withTrashed();
         }
-        if ($query->get('owned')==='true') {
+        if ($query->get('owned', false)==='true') {
             $companies->where('companies.manager_id', '=', auth()->id());
         }
 
