@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden">
+  <div>
     <div
         class="relative flex flex-col items-center justify-center py-12 lg:py-6">
       <div class="p-5">
@@ -95,7 +95,7 @@
       </div>
       <div
           id="alert-2"
-          class="absolute flex hidden p-4 mt-4 transition-opacity duration-300 ease-out bg-red-100 rounded-lg opacity-0  bottom-5 dark:bg-red-200"
+          class="absolute flex hidden p-4 mt-4 transition-opacity duration-300 ease-out bg-red-100 rounded-lg opacity-0 -bottom-10 dark:bg-red-200"
           role="alert">
         <svg
             aria-hidden="true"
