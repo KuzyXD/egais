@@ -5,9 +5,10 @@
       <div class="relative">
         <custom-table v-show="!loading"
                       :actions="[
-                          {name: 'delete', text: 'Удалить/восстановить'}
+                          {name: 'to_templates', text: 'Шаблоны заявок'},
+                          {name: 'delete', text: 'Удалить/восстановить'},
                       ]"
-                      :cols="['ID', 'Наименование', 'Тэг', 'Менеджер', 'Создана', 'Обновлена', 'Удалена', 'Действие']"
+                      :cols="['ID', 'Наименование', 'Тэг', 'Менеджер', 'Создана', 'Обновлена', 'Удалена', 'Действия']"
                       :filters="[
                           {name: 'deleted', text: 'Отобразить удаленные компании'},
                           {name: 'owned', text: 'Отобразить мои компании'},
@@ -22,18 +23,25 @@
         ></custom-table>
         <pagination v-show="!loading" class="flex justify-end my-3"
                     @next="paginationNext"
-                    @previous="paginationPrevious"></pagination>
+                    @previous="paginationPrevious">
+          <a class="inline-flex bg-green text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+             data-modal-toggle="create-company-model" href="#">
+            Создать компанию
+          </a>
+        </pagination>
         <skeleton v-show="loading"></skeleton>
       </div>
     </div>
-
+    <create-company-modal @submit="create"></create-company-modal>
   </div>
 </template>
 
 <script>
 import {formatYmd} from "../../helper_functions";
+import CreateCompanyModal from "../CreateCompanyModal";
 
 export default {
+  components: {CreateCompanyModal},
   data() {
     return {
       items: [],
@@ -88,6 +96,16 @@ export default {
       }).catch(function (error) {
         console.log(error.response);
         alert('Ошибка, обратитесь к программисту.');
+      });
+    },
+    create(form) {
+      const vue = this;
+
+      axios.post('/api/manager/company/store', form).then(function (response) {
+        vue.fetch();
+        alert('Успешно');
+      }).catch(function (error) {
+        alert((Object.values(error.response.data.errors)).flat().join(', '));
       });
     },
     paginationNext() {
