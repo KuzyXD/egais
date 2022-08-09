@@ -21,6 +21,10 @@ axios.interceptors.response.use(function (response) {
         document.location.href = '/manager/login';
     }
 
+    if (error.response.status === 500) {
+        alert('Ошибка на сервере. Свяжитесь с программистом.');
+    }
+
     return Promise.reject(error);
 });
 
