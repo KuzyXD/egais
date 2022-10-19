@@ -50,9 +50,9 @@ export default {
 		getStyle() {
 			switch (cadesplugin_initialization.state) {
 				case 'loaded':
-					return 'relative w-full p-10 mb-4 text-white bg-green';
+					return 'relative w-full p-10 mb-4 text-white bg-green-500';
 				case 'error':
-					return 'relative w-full p-10 mb-4 text-white bg-red';
+					return 'relative w-full p-10 mb-4 text-white bg-red-700';
 				default:
 					return 'relative w-full p-10 mb-4 text-blue-700 bg-blue-100';
 			}

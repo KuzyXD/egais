@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('client')->group(function () {
+Route::prefix('rg-client')->group(function () {
     Route::view('/login', 'login.client')->name('client.login');
 });
 
-Route::prefix('manager')->group(function () {
+Route::prefix('rg-manager')->group(function () {
     Route::view('/login', 'login.staff')->name('manager.login');
     Route::prefix('list')->group(function () {
         Route::view('/clients', 'manager.clients_list')->name('manager.clients_list');
@@ -26,6 +26,6 @@ Route::prefix('manager')->group(function () {
     });
 });
 
-Route::middleware(['auth:manager'])->prefix('manager')->group(function () {
+Route::middleware(['auth:rg-manager'])->prefix('manager')->group(function () {
     Route::view('/dashboard', 'manager.dashboard');
 });

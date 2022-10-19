@@ -3,7 +3,7 @@
 		<div
 			class="relative flex flex-col items-center justify-center py-12 lg:py-6">
 			<div class="p-5">
-				<span class="text-green text-7xl">ПНК.</span>
+				<span class="text-green-500 text-7xl">ПНК.</span>
 				<span class="text-light-blue text-7xl">ЕГАИС</span>
 			</div>
 			<div
@@ -171,11 +171,12 @@ export default {
 	methods: {
 		login() {
 			const vue = this;
+            const apiMethod = window.location.pathname.slice(1);
 
 			axios.get('/sanctum/csrf-cookie').then((response) => {
 				console.log(response);
 				axios
-					.post('api/login', {
+					.post(`/api/${apiMethod}`, {
 						certificate_serial_number: vue.selectedCertificate.toLowerCase(),
 						password: vue.password
 					})

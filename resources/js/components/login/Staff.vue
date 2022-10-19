@@ -162,10 +162,11 @@ export default {
   methods: {
     login() {
       const vue = this;
+      const apiMethod = window.location.pathname.slice(1);
 
       axios.get('/sanctum/csrf-cookie').then((response) => {
         axios
-            .post('/api/manager/login', {
+            .post(`/api/${apiMethod}`, {
               email: vue.email,
               password: vue.password
             })

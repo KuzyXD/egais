@@ -36,17 +36,21 @@ return [
     */
 
     'guards' => [
-        'web' => [
+//        'manager' => [
+//            'driver' => 'session',
+//            'provider' => 'manager',
+//        ],
+//        'client' => [
+//            'driver' => 'session',
+//            'provider' => 'client',
+//        ],
+        'rg-manager' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'rg-manager',
         ],
-        'manager' => [
+        'rg-client' => [
             'driver' => 'session',
-            'provider' => 'manager',
-        ],
-        'client' => [
-            'driver' => 'session',
-            'provider' => 'client',
+            'provider' => 'rg-client',
         ],
     ],
 
@@ -68,17 +72,22 @@ return [
     */
 
     'providers' => [
-        'users' => [
+//        'manager' => [
+//            'driver' => 'eloquent',
+//            'model' => App\Models\Manager::class,
+//        ],
+//        'client' => [
+//            'driver' => 'eloquent',
+//            'model' => App\Models\Client::class,
+//        ],
+
+        'rg-manager' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\RemoteGeneration\RgManager::class,
         ],
-        'manager' => [
+        'rg-client' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Manager::class,
-        ],
-        'client' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Client::class,
+            'model' => App\Models\RemoteGeneration\RgClient::class,
         ],
 
         // 'users' => [

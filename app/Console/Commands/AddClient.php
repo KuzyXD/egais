@@ -2,12 +2,13 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Arr;
 use App\Services\Auth\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 
 class AddClient extends Command
 {
+    //TODO для RG добавить свои методы
     /**
      * The name and signature of the console command.
      *
