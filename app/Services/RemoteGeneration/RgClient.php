@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Services\Auth;
+namespace App\Services\RemoteGeneration;
 
+use App\Models\RemoteGeneration\RgClient as ModelsClient;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Client as ModelsClient;
 
-class Client {
-    public function create($parameters): ModelsClient {
+class RgClient
+{
+    public function create($parameters): ModelsClient
+    {
         $parameters['password'] = Hash::make($parameters['password']);
 
         return ModelsClient::create($parameters);

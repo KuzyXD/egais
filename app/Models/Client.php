@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * App\Models\Client
@@ -36,8 +36,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static \Illuminate\Database\Query\Builder|Client withoutTrashed()
  * @mixin \Eloquent
  */
-class Client extends Authenticatable {
+class Client extends Authenticatable
+{
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = ['fio', 'password', 'certificate_serial_number'];
 }
