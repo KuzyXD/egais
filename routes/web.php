@@ -26,6 +26,6 @@ Route::prefix('rg-manager')->group(function () {
     });
 });
 
-Route::middleware(['auth:rg-manager'])->prefix('manager')->group(function () {
+Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () {
     Route::view('/dashboard', 'manager.dashboard');
 });
