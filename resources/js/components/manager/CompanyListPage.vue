@@ -1,7 +1,7 @@
 <template>
     <div class="overflow-hidden">
         <div class="relative flex flex-col items-center justify-center">
-            <div class="relative max-w-4xl">
+            <div class="relative max-w-7xl">
                 <custom-table v-show="!loading"
                               :actions="[
                                   {name: 'to_templates', text: 'Шаблоны заявок'},
@@ -24,7 +24,7 @@
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
-                       data-modal-toggle="create-company-model" href="#">
+                       data-modal-toggle="create-company-model" href="#" @click.prevent="">
                         Создать компанию
                     </a>
                 </pagination>

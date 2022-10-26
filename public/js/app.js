@@ -20110,7 +20110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-4 max-w-sm rounded border border-gray-200 shadow animate-pulse md:p-6 dark:border-gray-700",
+  "class": "p-4 rounded border border-gray-200 shadow animate-pulse md:p-6 w-96",
   role: "status"
 };
 
@@ -20642,17 +20642,8 @@ var _hoisted_2 = {
   "class": "relative flex flex-col items-center justify-center"
 };
 var _hoisted_3 = {
-  "class": "relative max-w-4xl"
+  "class": "relative max-w-7xl"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  "class": "inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4",
-  "data-modal-toggle": "create-company-model",
-  href: "#"
-}, " Создать компанию ", -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -20701,7 +20692,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onPrevious: $options.paginationPrevious
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_4];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": "inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4",
+        "data-modal-toggle": "create-company-model",
+        href: "#",
+        onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+      }, " Создать компанию ")];
     }),
     _: 1
     /* STABLE */
@@ -21686,7 +21682,9 @@ axios.interceptors.response.use(function (response) {
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
   if (error.response.status === 401) {
-    document.location.href = '/manager/login';
+    var regex = /\w+-\w+/;
+    var apiLocation = regex.exec(window.location.pathname);
+    document.location.href = "/".concat(apiLocation, "/login");
   }
 
   if (error.response.status === 500) {
