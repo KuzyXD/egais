@@ -27,6 +27,21 @@ class RgCompanyControllerTest extends TestCase
         $this->assertEquals(10, $response->json('total'));
     }
 
+    public function testIndexWithSort()
+    {
+        Sanctum::actingAs(
+            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            ['*'],
+            'rg-manager'
+        );
+
+        RgCompany::factory()->count(10)->create(['manager_id' => 1]);
+
+        $response = $this->get('api/rg-manager/company/list?page=1&sort=id,desc&deleted=false&owned=false');
+
+        $this->assertEquals(10, $response->json('data')[0]['id']);
+    }
+
     public function testStore()
     {
         Sanctum::actingAs(

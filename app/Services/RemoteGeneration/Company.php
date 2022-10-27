@@ -3,6 +3,7 @@
 namespace App\Services\RemoteGeneration;
 
 use App\Models\RemoteGeneration\RgCompany;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\InputBag;
 
 class Company
@@ -23,6 +24,13 @@ class Company
                 'rg_companies.deleted_at'
             ]);
 
+        if ($query->get('sort', '')) {
+            $sortby = explode(';', $query->get('sort'));
+            foreach ($sortby as $sortbyraw) {
+                $sorts = explode(',', $sortbyraw);
+                $rg_companies->orderBy($sorts[0], $sorts[1]);
+            }
+        }
 
         if ($query->get('search')) {
             $rg_companies->orWhere('rg_companies.group', 'like', '%' . $query->get('search') . '%');
@@ -37,7 +45,7 @@ class Company
             $rg_companies->where('rg_companies.manager_id', '=', auth()->id());
         }
 
-        return $rg_companies->orderByDesc('rg_companies.id')->paginate(6, ['*'], 'page', $currentPage);
+        return $rg_companies->paginate(6, ['*'], 'page', $currentPage);
     }
 
     public function store($parameters, $by): bool

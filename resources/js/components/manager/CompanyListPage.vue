@@ -7,7 +7,7 @@
                                   {name: 'to_templates', text: 'Шаблоны заявок'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
                               ]"
-                              :cols="['ID', 'Наименование', 'Тэг', 'Менеджер', 'Создана', 'Обновлена', 'Удалена', 'Действия']"
+                              :cols=cols
                               :filters="[
                                   {name: 'deleted', text: 'Отобразить удаленные компании'},
                                   {name: 'owned', text: 'Отобразить мои компании'},
@@ -19,6 +19,7 @@
                               @deleted="this.deleted = !this.deleted"
                               @owned="this.owned = !this.owned"
                               @search="value => this.search = value"
+                              @sorted="this.fetch"
                 ></custom-table>
                 <pagination v-show="!loading" class="flex justify-end my-3"
                             @next="paginationNext"
@@ -36,13 +37,23 @@
 </template>
 
 <script>
-import {formatYmd} from "../../helper_functions";
+import {formatYmd, getSortableState} from "../../helper_functions";
 import CreateCompanyModal from "../CreateCompanyModal";
 
 export default {
     components: {CreateCompanyModal},
     data() {
         return {
+            cols: [
+                {name: 'ID', key: 'id', sortable: true, sortableState: 'desc'},
+                {name: 'Наименование', key: 'name', sortable: true, sortableState: 'normal'},
+                {name: 'Группа', key: 'group', sortable: true, sortableState: 'normal'},
+                {name: 'Менеджер', key: 'manager_id', sortable: true, sortableState: 'normal'},
+                {name: 'Создана', key: 'created_at', sortable: true, sortableState: 'normal'},
+                {name: 'Обновлена', key: 'updated_at', sortable: true, sortableState: 'normal'},
+                {name: 'Удалена', key: 'deleted_at', sortable: true, sortableState: 'normal'},
+                {name: 'Действия', key: 'actions', sortable: false, sortableState: 'normal'}
+            ],
             items: [],
             loading: true,
 
@@ -64,6 +75,17 @@ export default {
                 apiUri += `&search=${this.search}`;
             }
 
+            const sortableCols = this.cols.filter(getSortableState);
+            if (sortableCols.length > 0) {
+                apiUri += '&sort='
+                for (let i = 0; i < sortableCols.length; i++) {
+                    apiUri += `${sortableCols[i].key},${sortableCols[i].sortableState}`
+                    if (!((i + 1) >= sortableCols.length)) {
+                        apiUri += ';'
+                    }
+                }
+            }
+
             apiUri += `&deleted=${this.deleted}`
             apiUri += `&owned=${this.owned}`
 
@@ -76,7 +98,7 @@ export default {
                         object.deleted_at = formatYmd(new Date(object.deleted_at));
                     }
 
-                    return Object.values(object);
+                    return object;
                 });
 
                 window.setTimeout(() => {
