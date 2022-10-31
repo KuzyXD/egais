@@ -13,6 +13,7 @@ import Table from "./components/Table";
 import Pagination from "./components/Pagination";
 import Skeleton from "./components/Skeleton";
 import Logo from "./components/Logo";
+import TemplatesPage from "./components/manager/TemplatesPage";
 
 const app = createApp({});
 
@@ -26,5 +27,6 @@ app.component('custom-table', Table);
 app.component('skeleton', Skeleton);
 app.component('pagination', Pagination);
 app.component('logo', Logo);
+app.component('templates-page', TemplatesPage);
 
 app.mount('#app');

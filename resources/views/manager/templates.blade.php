@@ -3,5 +3,6 @@
 @section('title', 'Шаблоны заявок')
 
 @section('content')
-    TODO
+    <logo></logo>
+    <templates-page class="pt-5"></templates-page>
 @endsection
