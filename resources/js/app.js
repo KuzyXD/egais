@@ -12,6 +12,7 @@ import CreateCompanyModal from "./components/CreateCompanyModal";
 import Table from "./components/Table";
 import Pagination from "./components/Pagination";
 import Skeleton from "./components/Skeleton";
+import Logo from "./components/Logo";
 
 const app = createApp({});
 
@@ -24,5 +25,6 @@ app.component('company-create-modal', CreateCompanyModal);
 app.component('custom-table', Table);
 app.component('skeleton', Skeleton);
 app.component('pagination', Pagination);
+app.component('logo', Logo);
 
 app.mount('#app');

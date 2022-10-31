@@ -22,7 +22,7 @@
                               @sorted="this.fetch"
                               @to_templates="redirectToTemplates"
                 ></custom-table>
-                <pagination v-show="!loading" class="flex justify-end my-3"
+                <pagination v-show="!loading" class="flex justify-end mt-3"
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
