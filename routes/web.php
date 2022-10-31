@@ -22,6 +22,7 @@ Route::prefix('rg-manager')->group(function () {
     Route::prefix('list')->group(function () {
         Route::view('/clients', 'manager.clients_list')->name('manager.clients_list');
         Route::view('/companies', 'manager.company_list')->name('manager.companies');
+        Route::view('/companies/{id}/templates', 'manager.templates')->name('manager.companies.templates');
         Route::view('/applications', 'manager.clients_list')->name('manager.applications');
     });
 });

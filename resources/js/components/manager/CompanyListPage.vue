@@ -20,6 +20,7 @@
                               @owned="this.owned = !this.owned"
                               @search="value => this.search = value"
                               @sorted="this.fetch"
+                              @to_templates="redirectToTemplates"
                 ></custom-table>
                 <pagination v-show="!loading" class="flex justify-end my-3"
                             @next="paginationNext"
@@ -110,12 +111,13 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        deleteCompany(id) {
+        deleteCompany(item) {
             const vue = this;
+            const companyId = item.id;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
-            axios.delete(`/api/${apiLocation}/company/${id}/delete`).then(function (response) {
+            axios.delete(`/api/${apiLocation}/company/${companyId}/delete`).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
             }).catch(function (error) {
@@ -146,6 +148,10 @@ export default {
                 this.page -= 1;
                 this.fetch();
             }
+        },
+        redirectToTemplates(item) {
+            const companyId = item.id;
+            window.location.href += `/${companyId}/templates`;
         }
     },
     mounted() {

@@ -79,7 +79,7 @@
                     <ul :aria-labelledby="'dropdownAction' + index" class="py-1 text-sm text-gray-700">
                         <li v-for="(action, actionIndex) in actions" :key="actionIndex">
                             <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600" href="#"
-                               @click.prevent="$emit(action.name, item[0])">{{ action.text }}</a>
+                               @click.prevent="$emit(action.name, item)">{{ action.text }}</a>
                         </li>
                     </ul>
                 </div>

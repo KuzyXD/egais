@@ -19874,11 +19874,12 @@ __webpack_require__.r(__webpack_exports__);
         alert('Ошибка, обратитесь к программисту.');
       });
     },
-    deleteCompany: function deleteCompany(id) {
+    deleteCompany: function deleteCompany(item) {
       var vue = this;
+      var companyId = item.id;
       var regex = /\w+-\w+/;
       var apiLocation = regex.exec(window.location.pathname);
-      axios["delete"]("/api/".concat(apiLocation, "/company/").concat(id, "/delete")).then(function (response) {
+      axios["delete"]("/api/".concat(apiLocation, "/company/").concat(companyId, "/delete")).then(function (response) {
         vue.fetch();
         alert('Успешно');
       })["catch"](function (error) {
@@ -19908,6 +19909,10 @@ __webpack_require__.r(__webpack_exports__);
         this.page -= 1;
         this.fetch();
       }
+    },
+    redirectToTemplates: function redirectToTemplates(item) {
+      var companyId = item.id;
+      window.location.href += "/".concat(companyId, "/templates");
     }
   },
   mounted: function mounted() {
@@ -20419,7 +20424,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600",
         href: "#",
         onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-          return _ctx.$emit(action.name, item[0]);
+          return _ctx.$emit(action.name, item);
         }, ["prevent"])
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.text), 9
       /* TEXT, PROPS */
@@ -20802,10 +20807,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSearch: _cache[2] || (_cache[2] = function (value) {
       return _this.search = value;
     }),
-    onSorted: this.fetch
+    onSorted: this.fetch,
+    onTo_templates: $options.redirectToTemplates
   }, null, 8
   /* PROPS */
-  , ["cols", "items", "onDelete", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
+  , ["cols", "items", "onDelete", "onSorted", "onTo_templates"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
     "class": "flex justify-end my-3",
     onNext: $options.paginationNext,
     onPrevious: $options.paginationPrevious
