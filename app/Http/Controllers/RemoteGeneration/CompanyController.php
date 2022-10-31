@@ -28,18 +28,6 @@ class CompanyController extends Controller
         return response('Произошла ошибка. Свяжитесь с программистом.', '500');
     }
 
-    public function create()
-    {
-    }
-
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }
-
     public function update(CompanyUpdateRequest $request, $id, Company $companyService)
     {
         if ($companyService->update($request->validated(), $id)) {
