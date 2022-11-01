@@ -151,7 +151,7 @@ export default {
         },
         redirectToTemplates(item) {
             const companyId = item.id;
-            window.location.href += `/${companyId}/templates`;
+            window.open(window.location.href + `/${companyId}/templates`)
         }
     },
     mounted() {
