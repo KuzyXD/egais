@@ -17,4 +17,9 @@ class RgCompany extends Model
     {
         return $this->hasOne(RgManager::class, 'id', 'manager_id');
     }
+
+    public function applicationTemplates(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RgApplicationsTemplate::class, 'created_for', 'id');
+    }
 }

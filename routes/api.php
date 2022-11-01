@@ -33,7 +33,7 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::get('{id}/templates', [TemplatesController::class, 'index']);
         Route::post('{id}/templates/store', [TemplatesController::class, 'store']);
         Route::get('templates/{template_id}/show', [TemplatesController::class, 'show']);
-        Route::post('templates/{template_id}/update', [TemplatesController::class, 'update']);
-        Route::post('templates/{template_id}/delete', [TemplatesController::class, 'destroy']);
+        Route::patch('templates/{template_id}/update', [TemplatesController::class, 'update']);
+        Route::delete('templates/{template_id}/delete', [TemplatesController::class, 'destroy']);
     });
 });

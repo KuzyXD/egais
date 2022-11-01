@@ -19936,7 +19936,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     redirectToTemplates: function redirectToTemplates(item) {
       var companyId = item.id;
-      window.location.href += "/".concat(companyId, "/templates");
+      window.open(window.location.href + "/".concat(companyId, "/templates"));
     }
   },
   mounted: function mounted() {
@@ -20002,6 +20002,21 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: 'Создавший менеджер',
         key: 'created_by',
+        sortable: true,
+        sortableState: 'normal'
+      }, {
+        name: 'Создано',
+        key: 'created_at',
+        sortable: true,
+        sortableState: 'normal'
+      }, {
+        name: 'Обновлено',
+        key: 'updated_at',
+        sortable: true,
+        sortableState: 'normal'
+      }, {
+        name: 'Удалено',
+        key: 'deleted_at',
         sortable: true,
         sortableState: 'normal'
       }],

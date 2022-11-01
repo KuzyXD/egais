@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\RemoteGeneration;
 
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,14 +27,14 @@ class RgApplicationsTemplateFactory extends Factory
             'company' => $this->faker->company(),
             'position' => $this->faker->word(),
             'department' => $this->faker->word(),
-            'passportSerial' => $this->faker->word(),
-            'passportNumber' => $this->faker->word(),
-            'passportDate' => $this->faker->word(),
-            'passportCode' => $this->faker->word(),
+            'passportSerial' => $this->faker->numerify('####'),
+            'passportNumber' => $this->faker->numerify('######'),
+            'passportDate' => $this->faker->date('d-m-Y'),
+            'passportCode' => $this->faker->numerify('######'),
             'passportDivision' => $this->faker->word(),
             'gender' => 'M',
             'birthDate' => $this->faker->date(),
-            'inn' => $this->faker->numerify('############'),
+            'inn' => $this->faker->numerify('##########'),
             'personInn' => $this->faker->numerify('############'),
             'ogrn' => $this->faker->numerify('#############'),
             'kpp' => $this->faker->numerify('#########'),
@@ -42,7 +42,7 @@ class RgApplicationsTemplateFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->numerify('##########'),
             'companyPhone' => $this->faker->numerify('##########'),
-            'region' => $this->faker->randomNumber(),
+            'region' => $this->faker->randomDigit(),
             'city' => $this->faker->city(),
             'address' => $this->faker->address(),
             'index' => $this->faker->numerify('######'),

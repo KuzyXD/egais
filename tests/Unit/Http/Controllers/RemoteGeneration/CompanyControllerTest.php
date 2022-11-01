@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers;
+namespace Http\Controllers\RemoteGeneration;
 
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class RgCompanyControllerTest extends TestCase
+class CompanyControllerTest extends TestCase
 {
     use RefreshDatabase;
 

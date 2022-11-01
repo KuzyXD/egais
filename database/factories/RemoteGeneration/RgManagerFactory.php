@@ -4,6 +4,7 @@ namespace Database\Factories\RemoteGeneration;
 
 use App\Models\RemoteGeneration\RgManager;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 
 class RgManagerFactory extends Factory
