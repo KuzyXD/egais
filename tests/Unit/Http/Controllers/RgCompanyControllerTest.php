@@ -15,7 +15,7 @@ class RgCompanyControllerTest extends TestCase
     public function testIndex()
     {
         Sanctum::actingAs(
-            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
             ['*'],
             'rg-manager'
         );
@@ -30,7 +30,7 @@ class RgCompanyControllerTest extends TestCase
     public function testIndexWithSort()
     {
         Sanctum::actingAs(
-            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
             ['*'],
             'rg-manager'
         );
@@ -39,13 +39,13 @@ class RgCompanyControllerTest extends TestCase
 
         $response = $this->get('api/rg-manager/company/list?page=1&sort=id,desc&deleted=false&owned=false');
 
-        $this->assertEquals(10, $response->json('data')[0]['id']);
+        $this->assertGreaterThan(10, $response->json('data')[0]['id']);
     }
 
     public function testStore()
     {
         Sanctum::actingAs(
-            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
             ['*'],
             'rg-manager'
         );
@@ -62,7 +62,7 @@ class RgCompanyControllerTest extends TestCase
     public function testDestroy()
     {
         Sanctum::actingAs(
-            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
             ['*'],
             'rg-manager'
         );
@@ -77,12 +77,12 @@ class RgCompanyControllerTest extends TestCase
     public function testUpdate()
     {
         Sanctum::actingAs(
-            RgManager::factory(['fio' => 'Илья Кузнецов'])->create(),
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
             ['*'],
             'rg-manager'
         );
 
-        $newManager = RgManager::factory(['fio' => 'Шагалеев Максим'])->create();
+        $newManager = RgManager::factory(['fio' => 'Шагалеев Максим', 'id' => 2])->create();
         $existedCompany = RgCompany::factory(['manager_id' => 1])->create();
         $existedCompanyId = $existedCompany->id;
 

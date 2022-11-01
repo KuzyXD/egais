@@ -2,15 +2,14 @@
 
 namespace App\Services\RemoteGeneration;
 
-use App\Models\RemoteGeneration\RgCompany;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\InputBag;
 
-class Company
+class RgCompany
 {
     public function index(InputBag $query)
     {
-        $rg_companies = RgCompany::query();
+        $rg_companies = \App\Models\RemoteGeneration\RgCompany::query();
         $currentPage = $query->get('page');
 
         $rg_companies->join('rg_managers', 'rg_companies.manager_id', '=', 'rg_managers.id')->latest()
@@ -24,7 +23,7 @@ class Company
                 'rg_companies.deleted_at'
             ]);
 
-        if ($query->get('sort', '')) {
+        if ($query->get('sort')) {
             $sortby = explode(';', $query->get('sort'));
             foreach ($sortby as $sortbyraw) {
                 $sorts = explode(',', $sortbyraw);
@@ -50,7 +49,7 @@ class Company
 
     public function store($parameters, $by): bool
     {
-        $createdModel = new RgCompany($parameters);
+        $createdModel = new \App\Models\RemoteGeneration\RgCompany($parameters);
         $createdModel->manager_id = $by;
 
         return $createdModel->save();
@@ -58,12 +57,12 @@ class Company
 
     public function update($parameters, $id): bool
     {
-        return RgCompany::find($id)->update($parameters);
+        return \App\Models\RemoteGeneration\RgCompany::find($id)->update($parameters);
     }
 
     public function destroy($id): ?bool
     {
-        $company = RgCompany::withTrashed()->find($id);
+        $company = \App\Models\RemoteGeneration\RgCompany::withTrashed()->find($id);
 
         if ($company->trashed()) {
             return $company->restore();
@@ -73,6 +72,6 @@ class Company
 
     public function restore($id): bool
     {
-        return RgCompany::find($id)->restore();
+        return \App\Models\RemoteGeneration\RgCompany::find($id)->restore();
     }
 }
