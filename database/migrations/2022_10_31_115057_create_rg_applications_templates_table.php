@@ -13,6 +13,8 @@ class CreateRgApplicationsTemplatesTable extends Migration
             $table->foreignId("created_by")->constrained("rg_managers");
             $table->foreignId("created_for")->constrained("rg_companies");
             $table->tinyInteger("type");
+            $table->tinyInteger("identificationKind");
+            $table->string("BasisOfActs", 500)->nullable();
             $table->string("firstName", 500)->nullable();
             $table->string("middleName", 500)->nullable();
             $table->string("lastName", 500)->nullable();

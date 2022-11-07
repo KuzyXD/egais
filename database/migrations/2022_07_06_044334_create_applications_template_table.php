@@ -18,6 +18,8 @@ class CreateApplicationsTemplateTable extends Migration
             $table->foreignId("created_by")->constrained("managers");
             $table->foreignId("created_for")->constrained("companies");
             $table->tinyInteger("type");
+            $table->tinyInteger("identificationKind");
+            $table->string("BasisOfActs", 500)->nullable();
             $table->string("firstName", 500)->nullable();
             $table->string("middleName", 500)->nullable();
             $table->string("lastName", 500)->nullable();

@@ -1,5 +1,5 @@
 <template>
-    <table class="w-full text-sm text-left text-gray-500 table-fixed">
+    <table class=" text-sm text-left text-gray-500 table-fixed">
         <caption class="px-5 text-lg font-semibold text-left text-gray-900">
             {{ title }}
             <p v-show="text" class="mt-1 text-sm font-normal text-gray-500">
@@ -60,7 +60,7 @@
                 scope="row">
                 {{ item.id }}
             </th>
-            <td v-for="value in Object.values(item).slice(1)" class="py-4 px-6">
+            <td v-for="value in dataWithoutId(item)" class="py-4 px-6">
                 {{ value }}
             </td>
             <td class="py-4 px-6">
@@ -121,6 +121,9 @@ export default {
                 case 'asc':
                     return 'M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z';
             }
+        },
+        dataWithoutId(rawArray) {
+            return Object.values(rawArray).slice(1);
         },
         changeSortableState(col) {
             col.sortableState = col.sortableState === 'normal' ? 'desc' : (col.sortableState === 'desc' ? 'asc' : 'normal');

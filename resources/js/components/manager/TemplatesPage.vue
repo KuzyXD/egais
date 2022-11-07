@@ -1,9 +1,10 @@
 <template>
-    <div class="overflow-hidden">
-        <div class="relative flex flex-col items-center justify-center">
-            <div class="relative max-w-7xl">
+    <div class="">
+        <div class="relative flex flex-col items-center justify-center overflow-x-auto">
+            <div class="relative mx-2">
                 <custom-table v-show="!loading"
                               :actions="[
+                                  {name: 'update', text: 'Изменить'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
                               ]"
                               :cols=cols
@@ -14,7 +15,7 @@
                               :items="items"
                               text="Добавляйте, удаляйте, изменяйте шаблоны с помощью таблицы. В поиске вы можете использовать данные из любого столбца."
                               title="Список шаблонов"
-                              @delete="deleteCompany"
+                              @delete="deleteTemplate"
                               @deleted="this.deleted = !this.deleted"
                               @owned="this.owned = !this.owned"
                               @search="value => this.search = value"
@@ -23,25 +24,35 @@
                 <pagination v-show="!loading" class="flex justify-end mt-3"
                             @next="paginationNext"
                             @previous="paginationPrevious">
+                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       data-modal-toggle="create-ur-template-modal" href="#" @click.prevent="">
+                        Создать шаблон юр. лица
+                    </a>
                     <!--                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"-->
-                    <!--                       data-modal-toggle="create-company-model" href="#" @click.prevent="">-->
-                    <!--                        Создать компанию-->
+                    <!--                       data-modal-toggle="create-template-modal" href="#" @click.prevent="">-->
+                    <!--                        Создать шаблон ИП-->
+                    <!--                    </a>-->
+                    <!--                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"-->
+                    <!--                       data-modal-toggle="create-template-modal" href="#" @click.prevent="">-->
+                    <!--                        Создать шаблон физ. лица-->
                     <!--                    </a>-->
                 </pagination>
                 <skeleton v-show="loading"></skeleton>
             </div>
         </div>
-        <!--        <create-company-modal @submit="create"></create-company-modal>-->
+        <create-ur-template-modal @submit="create"></create-ur-template-modal>
     </div>
 </template>
 
 <script>
 import {getSortableState, formatYmd} from "../../helper_functions";
+import CreateUrTemplateModal from "./CreateUrTemplateModal";
 
 export default {
-    components: {},
+    components: {CreateUrTemplateModal},
     data() {
         return {
+            companyId: 0,
             cols: [
                 {name: 'ID', key: 'id', sortable: true, sortableState: 'desc'},
                 {name: 'Тип', key: 'type', sortable: true, sortableState: 'normal'},
@@ -52,6 +63,7 @@ export default {
                 {name: 'Создано', key: 'created_at', sortable: true, sortableState: 'normal'},
                 {name: 'Обновлено', key: 'updated_at', sortable: true, sortableState: 'normal'},
                 {name: 'Удалено', key: 'deleted_at', sortable: true, sortableState: 'normal'},
+                {name: 'Действия', key: 'actions', sortable: false, sortableState: 'normal'},
             ],
             items: [],
             loading: true,
@@ -68,7 +80,7 @@ export default {
             const vue = this;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
-            let apiUri = `/api/${apiLocation}/company/list?page=${this.page}`;
+            let apiUri = `/api/${apiLocation}/company/${this.companyId}/templates?page=${this.page}`;
 
             if (this.search) {
                 apiUri += `&search=${this.search}`;
@@ -90,7 +102,7 @@ export default {
 
             axios.get(apiUri).then(function (response) {
                 vue.last_page = response.data.last_page;
-                vue.items = response.data.data.map(function (object) {
+                vue.items = response.data.map(function (object) {
                     object.created_at = formatYmd(new Date(object.created_at));
                     object.updated_at = formatYmd(new Date(object.updated_at));
                     if (object.deleted_at) {
@@ -109,13 +121,13 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        deleteCompany(item) {
+        deleteTemplate(item) {
             const vue = this;
-            const companyId = item.id;
+            const templateId = item.id;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
-            axios.delete(`/api/${apiLocation}/company/${companyId}/delete`).then(function (response) {
+            axios.delete(`/api/${apiLocation}/company/templates/${templateId}/delete`).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
             }).catch(function (error) {
@@ -123,13 +135,14 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        create(form) {
+        create(form, closeButton) {
             const vue = this;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
-            axios.post(`/api/${apiLocation}/company/store`, form).then(function (response) {
+            axios.post(`/api/${apiLocation}/company/${this.companyId}/templates/store`, form).then(function (response) {
                 vue.fetch();
+                closeButton.click();
                 alert('Успешно');
             }).catch(function (error) {
                 alert((Object.values(error.response.data.errors)).flat().join(', '));
@@ -147,12 +160,13 @@ export default {
                 this.fetch();
             }
         },
-        redirectToTemplates(item) {
-            const companyId = item.id;
-            window.location.href += `/${companyId}/templates`;
+        setTheId() {
+            const regex = /(?<=companies\/)\d+/;
+            this.companyId = regex.exec(window.location.pathname)[0];
         }
     },
     mounted() {
+        this.setTheId();
         this.fetch();
     },
     watch: {

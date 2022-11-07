@@ -1,5 +1,5 @@
 <template>
-    <div id="create-company-model" ref="modal" aria-hidden="true"
+    <div id="create-company-modal" ref="modal" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
          tabindex="-1">
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -8,8 +8,9 @@
                 <button
                     ref="close"
                     class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-toggle="create-company-model"
-                    type="button">
+                    data-modal-toggle="create-company-modal"
+                    type="button"
+                    @click="clearData">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path clip-rule="evenodd"
@@ -66,9 +67,9 @@ export default {
     },
     methods: {
         submit() {
-            this.$emit('submit', this.form);
-            this.$refs.close.click();
-
+            this.$emit('submit', this.form, this.$refs.close);
+        },
+        clearData() {
             this.form = {
                 name: '',
                 group: ''

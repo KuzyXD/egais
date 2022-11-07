@@ -11,14 +11,14 @@ class TemplatesUpdateRequest extends FormRequest
     {
         return [
             'type' => 'bail|nullable|numeric|min:1|max:3',
+            'identificationKind' => 'bail|nullable|numeric|min:0|max:1',
+            'BasisOfActs' => 'bail|nullable|string',
             'lastName' => 'bail|nullable|string',
             'firstName' => 'bail|nullable|string',
             'middleName' => 'bail|string|nullable',
-            'applicant_fio' => 'bail|nullable|string',
             'headLastName' => 'bail|nullable|string',
             'headFirstName' => 'bail|nullable|string',
             'headMiddleName' => 'bail|string|nullable',
-            'head_fio' => 'bail|nullable|string',
             'HeadPosition' => 'bail|nullable|string',
             'company' => 'bail|nullable|string',
             'position' => 'bail|nullable|string',

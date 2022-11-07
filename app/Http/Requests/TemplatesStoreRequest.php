@@ -11,14 +11,14 @@ class TemplatesStoreRequest extends FormRequest
     {
         return [
             'type' => 'bail|required|numeric|min:1|max:3',
+            'identificationKind' => 'bail|required|numeric|min:0|max:1',
+            'BasisOfActs' => 'bail|required|string',
             'lastName' => 'bail|required|string',
             'firstName' => 'bail|required|string',
             'middleName' => 'bail|string|nullable',
-            'applicant_fio' => 'bail|required|string',
             'headLastName' => 'bail|required|string',
             'headFirstName' => 'bail|required|string',
             'headMiddleName' => 'bail|string|nullable',
-            'head_fio' => 'bail|required|string',
             'HeadPosition' => 'bail|required|string',
             'company' => 'bail|required|string',
             'position' => 'bail|required|string',

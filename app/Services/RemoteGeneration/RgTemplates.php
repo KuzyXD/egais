@@ -2,6 +2,8 @@
 
 namespace App\Services\RemoteGeneration;
 
+use App\Http\Resources\RemoteGeneration\RgApplicationsTemplateResource;
+use App\Http\Resources\RemoteGeneration\RgApplicationsTemplateShowResource;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -17,6 +19,7 @@ class RgTemplates
         $rg_applications_templates->join('rg_managers', 'rg_applications_templates.created_by', '=', 'rg_managers.id')->latest()
             ->select([
                 'rg_applications_templates.id',
+                'rg_applications_templates.created_by',
                 'rg_applications_templates.type',
                 'rg_applications_templates.applicant_fio',
                 'rg_managers.fio',
@@ -49,7 +52,7 @@ class RgTemplates
             $rg_applications_templates->where('rg_applications_templates.created_by', '=', auth()->id());
         }
 
-        return $rg_applications_templates->paginate(6, ['*'], 'page', $currentPage);
+        return RgApplicationsTemplateShowResource::collection($rg_applications_templates->paginate(6, ['*'], 'page', $currentPage));
     }
 
     public function store($parameters, $by, $companyId): bool

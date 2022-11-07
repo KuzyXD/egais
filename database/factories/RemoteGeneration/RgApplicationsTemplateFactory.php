@@ -15,6 +15,8 @@ class RgApplicationsTemplateFactory extends Factory
         return [
             'created_by' => $this->faker->randomNumber(),
             'type' => 3,
+            'identificationKind' => 1,
+            'BasisOfActs' => 'устава',
             'firstName' => $this->faker->firstName(),
             'middleName' => $this->faker->name(),
             'lastName' => $this->faker->lastName(),

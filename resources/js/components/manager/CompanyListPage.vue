@@ -26,7 +26,7 @@
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
-                       data-modal-toggle="create-company-model" href="#" @click.prevent="">
+                       data-modal-toggle="create-company-modal" href="#" @click.prevent="">
                         Создать компанию
                     </a>
                 </pagination>
@@ -39,7 +39,7 @@
 
 <script>
 import {formatYmd, getSortableState} from "../../helper_functions";
-import CreateCompanyModal from "../CreateCompanyModal";
+import CreateCompanyModal from "./CreateCompanyModal";
 
 export default {
     components: {CreateCompanyModal},
@@ -125,13 +125,14 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        create(form) {
+        create(form, closeButton) {
             const vue = this;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
             axios.post(`/api/${apiLocation}/company/store`, form).then(function (response) {
                 vue.fetch();
+                closeButton.click();
                 alert('Успешно');
             }).catch(function (error) {
                 alert((Object.values(error.response.data.errors)).flat().join(', '));

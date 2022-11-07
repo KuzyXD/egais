@@ -28,7 +28,7 @@ class TemplatesControllerTest extends TestCase
 
         $response = $this->get('api/rg-manager/company/1/templates/?page=1');
 
-        $this->assertEquals(6, $response->json('total'));
+        $response->assertJsonCount(6);
     }
 
     public function testStore()
@@ -43,6 +43,8 @@ class TemplatesControllerTest extends TestCase
 
         $templateData = [
             'type' => 3,
+            'identificationKind' => 1,
+            'BasisOfActs' => 'устава',
             'lastName' => 'Кузнецов',
             'firstName' => 'Илья',
             'middleName' => '',
@@ -95,6 +97,8 @@ class TemplatesControllerTest extends TestCase
 
         $templateData = [
             'type' => 3,
+            'identificationKind' => 1,
+            'BasisOfActs' => 'устава',
             'lastName' => 'Кузнецов',
             'firstName' => 'Илья',
             'middleName' => '',
@@ -136,10 +140,8 @@ class TemplatesControllerTest extends TestCase
                 'applicationTemplates')->create();
 
         $this->patch("api/rg-manager/company/templates/1/update", $templateData);
-
-        $templateData['middleName'] = null;
-
-        $this->assertDatabaseHas('rg_applications_templates', $templateData);
+        
+        $this->assertDatabaseHas('rg_applications_templates', ['company' => $templateData['company']]);
     }
 
     public function testShow()
