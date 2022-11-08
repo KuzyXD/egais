@@ -140,7 +140,7 @@ class TemplatesControllerTest extends TestCase
                 'applicationTemplates')->create();
 
         $this->patch("api/rg-manager/company/templates/1/update", $templateData);
-        
+
         $this->assertDatabaseHas('rg_applications_templates', ['company' => $templateData['company']]);
     }
 
@@ -174,5 +174,147 @@ class TemplatesControllerTest extends TestCase
 
         $this->delete("api/rg-manager/company/templates/1/delete");
         $this->assertSoftDeleted('rg_applications_templates', ['id' => 1]);
+    }
+
+    public function testUrStore()
+    {
+        Sanctum::actingAs(
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
+            ['*'],
+            'rg-manager'
+        );
+
+        RgCompany::factory()->create(['id' => 1]);
+
+        $templateData = [
+            'type' => 3,
+            'identificationKind' => 1,
+            'BasisOfActs' => 'устава',
+            'lastName' => 'Кузнецов',
+            'firstName' => 'Илья',
+            'middleName' => '',
+            'applicant_fio' => 'Кузнецов Илья',
+            'headLastName' => 'Коваль',
+            'headFirstName' => 'Леонид',
+            'headMiddleName' => 'Васильевич',
+            'head_fio' => 'Коваль Леонид Васильевич',
+            'HeadPosition' => 'Генеральный директор',
+            'company' => 'ООО "ПНК"',
+            'position' => 'Программист',
+            'department' => 'Общее подразделение',
+            'passportSerial' => '1234',
+            'passportNumber' => '123456',
+            'passportDate' => '30.06.2019',
+            'passportCode' => '654321',
+            'passportDivision' => 'ГУ МВД',
+            'gender' => 'M',
+            'birthDate' => '30.05.1999',
+            'inn' => '1234567890',
+            'personInn' => '123456789012',
+            'ogrn' => '3210987654321',
+            'kpp' => '123456789',
+            'snils' => '12345678901',
+            'email' => 'kuzyxd@yandex.ru',
+            'phone' => '9058317811',
+            'companyPhone' => '8117138509',
+            'region' => 74,
+            'city' => 'г Челябинск',
+            'address' => 'Каплининская 19в, 73',
+            'index' => '454094',
+            'offerJoining' => true,
+            'products' => '1234,32165',
+        ];
+
+        $this->post('api/rg-manager/company/1/templates/store', $templateData);
+
+        $templateData['middleName'] = null;
+
+        $this->assertDatabaseHas('rg_applications_templates', $templateData);
+    }
+
+    public function testIpStore()
+    {
+        Sanctum::actingAs(
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
+            ['*'],
+            'rg-manager'
+        );
+
+        RgCompany::factory()->create(['id' => 1]);
+
+        $templateData = [
+            'type' => 2,
+            'identificationKind' => 1,
+            'lastName' => 'Кузнецов',
+            'firstName' => 'Илья',
+            'middleName' => '',
+            'applicant_fio' => 'Кузнецов Илья',
+            'passportSerial' => '1234',
+            'passportNumber' => '123456',
+            'passportDate' => '30.06.2019',
+            'passportCode' => '654321',
+            'passportDivision' => 'ГУ МВД',
+            'gender' => 'M',
+            'birthDate' => '30.05.1999',
+            'inn' => '1234567890',
+            'ogrn' => '321098765432112',
+            'snils' => '12345678901',
+            'email' => 'kuzyxd@yandex.ru',
+            'phone' => '9058317811',
+            'companyPhone' => '8117138509',
+            'region' => 74,
+            //'city' => 'г Челябинск',
+            //'address' => 'Каплининская 19в, 73',
+            'offerJoining' => true,
+            'products' => '1234,32165',
+        ];
+
+        $this->post('api/rg-manager/company/1/templates/store', $templateData);
+
+        $templateData['middleName'] = null;
+
+        $this->assertDatabaseHas('rg_applications_templates', $templateData);
+    }
+
+    public function testPhysStore()
+    {
+        Sanctum::actingAs(
+            RgManager::factory(['fio' => 'Илья Кузнецов', 'id' => 1])->create(),
+            ['*'],
+            'rg-manager'
+        );
+
+        RgCompany::factory()->create(['id' => 1]);
+
+        $templateData = [
+            'type' => 1,
+            'identificationKind' => 1,
+            'lastName' => 'Кузнецов',
+            'firstName' => 'Илья',
+            'middleName' => '',
+            'applicant_fio' => 'Кузнецов Илья',
+            'passportSerial' => '1234',
+            'passportNumber' => '123456',
+            'passportDate' => '30.06.2019',
+            'passportCode' => '654321',
+            'passportDivision' => 'ГУ МВД',
+            'gender' => 'M',
+            'birthDate' => '30.05.1999',
+            'inn' => '1234567890',
+            'snils' => '12345678901',
+            'email' => 'kuzyxd@yandex.ru',
+            'phone' => '9058317811',
+            'region' => 74,
+            'city' => 'г Челябинск',
+            //'address' => 'Каплининская 19в, 73',
+            'offerJoining' => true,
+            'products' => '1234,32165',
+        ];
+
+        $this->post('api/rg-manager/company/1/templates/store', $templateData);
+
+        $templateData['middleName'] = null;
+
+        $this->assertDatabaseHas('rg_applications_templates', $templateData);
     }
 }

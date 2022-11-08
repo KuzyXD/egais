@@ -61,7 +61,10 @@ class RgTemplates
         $createdModel->created_by = $by;
         $createdModel->created_for = $companyId;
         $createdModel->applicant_fio = $this->getFioString($parameters['lastName'], $parameters['firstName'], $parameters['middleName']);
-        $createdModel->head_fio = $this->getFioString($parameters['headLastName'], $parameters['headFirstName'], $parameters['headMiddleName']);
+
+        if ($createdModel->type == 3) {
+            $createdModel->head_fio = $this->getFioString($parameters['headLastName'], $parameters['headFirstName'], $parameters['headMiddleName']);
+        }
 
         return $createdModel->save();
     }
