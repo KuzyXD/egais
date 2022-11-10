@@ -20,13 +20,20 @@
                               @owned="this.owned = !this.owned"
                               @search="value => this.search = value"
                               @sorted="this.fetch"
-                ></custom-table>
+                              @update="update"
+                >
+                </custom-table>
                 <pagination v-show="!loading" class="flex justify-end mt-3"
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
                        data-modal-toggle="create-ur-template-modal" href="#" @click.prevent="">
                         Создать шаблон юр. лица
+                    </a>
+                    <a ref="update-ur-template"
+                       class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       data-modal-toggle="update-ur-template-modal" href="#" @click.prevent="">
+                        Изменить шаблон юр. лица
                     </a>
                     <!--                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"-->
                     <!--                       data-modal-toggle="create-template-modal" href="#" @click.prevent="">-->
@@ -41,15 +48,18 @@
             </div>
         </div>
         <create-ur-template-modal @submit="create"></create-ur-template-modal>
+        <update-ur-template-modal :selectedItem="selectedItem"
+                                  @update="updateTemplate"></update-ur-template-modal>
     </div>
 </template>
 
 <script>
 import {getSortableState, formatYmd} from "../../helper_functions";
 import CreateUrTemplateModal from "./CreateUrTemplateModal";
+import UpdateUrTemplateModal from "./UpdateUrTemplateModal";
 
 export default {
-    components: {CreateUrTemplateModal},
+    components: {CreateUrTemplateModal, UpdateUrTemplateModal},
     data() {
         return {
             companyId: 0,
@@ -73,6 +83,8 @@ export default {
             search: '',
             page: 1,
             last_page: 1,
+
+            selectedItem: [],
         }
     },
     methods: {
@@ -101,8 +113,8 @@ export default {
             apiUri += `&owned=${this.owned}`
 
             axios.get(apiUri).then(function (response) {
-                vue.last_page = response.data.last_page;
-                vue.items = response.data.map(function (object) {
+                vue.last_page = response.data.meta.last_page
+                vue.items = response.data.data.map(function (object) {
                     object.created_at = formatYmd(new Date(object.created_at));
                     object.updated_at = formatYmd(new Date(object.updated_at));
                     if (object.deleted_at) {
@@ -141,6 +153,24 @@ export default {
             const apiLocation = regex.exec(window.location.pathname);
 
             axios.post(`/api/${apiLocation}/company/${this.companyId}/templates/store`, form).then(function (response) {
+                vue.fetch();
+                closeButton.click();
+                alert('Успешно');
+            }).catch(function (error) {
+                alert((Object.values(error.response.data.errors)).flat().join(', '));
+            });
+        },
+        update(item) {
+            this.selectedItem = item;
+            this.$refs['update-ur-template'].click();
+        },
+        updateTemplate(form, closeButton) {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+            const templateId = this.selectedItem.id;
+
+            axios.patch(`/api/${apiLocation}/company/templates/${templateId}/update`, form).then(function (response) {
                 vue.fetch();
                 closeButton.click();
                 alert('Успешно');

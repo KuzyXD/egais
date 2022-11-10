@@ -19973,53 +19973,105 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _TemplatesForm_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TemplatesForm/Input */ "./resources/js/components/manager/TemplatesForm/Input.vue");
-/* harmony import */ var _TemplatesForm_Select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesForm/Select */ "./resources/js/components/manager/TemplatesForm/Select.vue");
+/* harmony import */ var _TemplatesForm_UrFields__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TemplatesForm/UrFields */ "./resources/js/components/manager/TemplatesForm/UrFields.vue");
+/* harmony import */ var _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesForm/UrTemplate */ "./resources/js/components/manager/TemplatesForm/UrTemplate.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TemplateInput: _TemplatesForm_Input__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TemplateSelect: _TemplatesForm_Select__WEBPACK_IMPORTED_MODULE_1__["default"]
+    UrFields: _TemplatesForm_UrFields__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      form: {
-        BasisOfActs: '',
-        identificationKind: 1,
-        lastName: '',
-        firstName: '',
-        middleName: '',
-        gender: '',
-        birthDate: '',
-        position: '',
-        department: '',
-        email: '',
-        phone: '',
-        passportSerial: '',
-        passportNumber: '',
-        passportDate: '',
-        passportDivision: '',
-        passportCode: '',
-        snils: '',
-        personInn: '',
-        ogrn: '',
-        company: '',
-        inn: '',
-        kpp: '',
-        companyPhone: '',
-        region: '',
-        city: '',
-        address: '',
-        index: '',
-        headLastName: '',
-        headFirstName: '',
-        headMiddleName: '',
-        HeadPosition: '',
-        offerJoining: '',
-        type: 3,
-        products: ''
+      form: new _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__.UrTemplate()
+    };
+  },
+  methods: {
+    submit: function submit() {
+      this.$emit('submit', this.form, this.$refs.close);
+    },
+    clearData: function clearData() {
+      this.form = new _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__.UrTemplate();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Input.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Input.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['name', 'id', 'type', 'placeholder', 'required', 'modelValue', 'pattern'],
+  emits: ['update:modelValue'],
+  computed: {
+    value: {
+      get: function get() {
+        return this.modelValue;
       },
+      set: function set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Select.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Select.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['name', 'id', 'required', 'modelValue', 'options'],
+  emits: ['update:modelValue'],
+  computed: {
+    value: {
+      get: function get() {
+        return this.modelValue;
+      },
+      set: function set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Input */ "./resources/js/components/manager/TemplatesForm/Input.vue");
+/* harmony import */ var _Select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Select */ "./resources/js/components/manager/TemplatesForm/Select.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
       regionList: [{
         value: 1,
         name: "1 Республика Адыгея (Адыгея)"
@@ -20278,65 +20330,14 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  methods: {
-    submit: function submit() {
-      this.$emit('submit', this.form, this.$refs.close);
-    },
-    clearData: function clearData() {
-      this.form = {
-        name: '',
-        group: ''
-      };
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Input.vue?vue&type=script&lang=js":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Input.vue?vue&type=script&lang=js ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['name', 'id', 'type', 'placeholder', 'required', 'modelValue', 'pattern'],
+  components: {
+    TemplateInput: _Input__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TemplateSelect: _Select__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: ['modelValue'],
   emits: ['update:modelValue'],
   computed: {
-    value: {
-      get: function get() {
-        return this.modelValue;
-      },
-      set: function set(value) {
-        this.$emit('update:modelValue', value);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Select.vue?vue&type=script&lang=js":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/Select.vue?vue&type=script&lang=js ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['name', 'id', 'required', 'modelValue', 'options'],
-  emits: ['update:modelValue'],
-  computed: {
-    value: {
+    form: {
       get: function get() {
         return this.modelValue;
       },
@@ -20362,11 +20363,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _helper_functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper_functions */ "./resources/js/helper_functions.js");
 /* harmony import */ var _CreateUrTemplateModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateUrTemplateModal */ "./resources/js/components/manager/CreateUrTemplateModal.vue");
+/* harmony import */ var _UpdateUrTemplateModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UpdateUrTemplateModal */ "./resources/js/components/manager/UpdateUrTemplateModal.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    CreateUrTemplateModal: _CreateUrTemplateModal__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CreateUrTemplateModal: _CreateUrTemplateModal__WEBPACK_IMPORTED_MODULE_1__["default"],
+    UpdateUrTemplateModal: _UpdateUrTemplateModal__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -20428,7 +20432,8 @@ __webpack_require__.r(__webpack_exports__);
       owned: false,
       search: '',
       page: 1,
-      last_page: 1
+      last_page: 1,
+      selectedItem: []
     };
   },
   methods: {
@@ -20459,8 +20464,8 @@ __webpack_require__.r(__webpack_exports__);
       apiUri += "&deleted=".concat(this.deleted);
       apiUri += "&owned=".concat(this.owned);
       axios.get(apiUri).then(function (response) {
-        vue.last_page = response.data.last_page;
-        vue.items = response.data.map(function (object) {
+        vue.last_page = response.data.meta.last_page;
+        vue.items = response.data.data.map(function (object) {
           object.created_at = (0,_helper_functions__WEBPACK_IMPORTED_MODULE_0__.formatYmd)(new Date(object.created_at));
           object.updated_at = (0,_helper_functions__WEBPACK_IMPORTED_MODULE_0__.formatYmd)(new Date(object.updated_at));
 
@@ -20503,6 +20508,23 @@ __webpack_require__.r(__webpack_exports__);
         alert(Object.values(error.response.data.errors).flat().join(', '));
       });
     },
+    update: function update(item) {
+      this.selectedItem = item;
+      this.$refs['update-ur-template'].click();
+    },
+    updateTemplate: function updateTemplate(form, closeButton) {
+      var vue = this;
+      var regex = /\w+-\w+/;
+      var apiLocation = regex.exec(window.location.pathname);
+      var templateId = this.selectedItem.id;
+      axios.patch("/api/".concat(apiLocation, "/company/templates/").concat(templateId, "/update"), form).then(function (response) {
+        vue.fetch();
+        closeButton.click();
+        alert('Успешно');
+      })["catch"](function (error) {
+        alert(Object.values(error.response.data.errors).flat().join(', '));
+      });
+    },
     paginationNext: function paginationNext() {
       if (this.page + 1 <= this.last_page) {
         this.page += 1;
@@ -20532,6 +20554,60 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     owned: function owned() {
+      this.fetch();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _TemplatesForm_UrFields__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TemplatesForm/UrFields */ "./resources/js/components/manager/TemplatesForm/UrFields.vue");
+/* harmony import */ var _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesForm/UrTemplate */ "./resources/js/components/manager/TemplatesForm/UrTemplate.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['selectedItem'],
+  components: {
+    UrFields: _TemplatesForm_UrFields__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      form: new _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__.UrTemplate()
+    };
+  },
+  methods: {
+    fetch: function fetch() {
+      var vue = this;
+      var templateId = this.selectedItem.id;
+      var regex = /\w+-\w+/;
+      var apiLocation = regex.exec(window.location.pathname);
+      axios.get("/api/".concat(apiLocation, "/company/templates/").concat(templateId, "/show")).then(function (response) {
+        vue.form.assingData(response.data.data);
+      })["catch"](function (error) {
+        console.log(error.response);
+        alert('Ошибка, обратитесь к программисту.');
+      });
+    },
+    update: function update() {
+      this.$emit('update', this.form, this.$refs.close);
+    },
+    clearData: function clearData() {
+      this.form = new _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__.UrTemplate();
+    }
+  },
+  watch: {
+    selectedItem: function selectedItem(newValue, oldValue) {
       this.fetch();
     }
   }
@@ -21514,14 +21590,8 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "relative bg-white rounded-lg shadow"
 };
-var _hoisted_4 = {
-  ref: "close",
-  "class": "absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
-  "data-modal-toggle": "create-ur-template-modal",
-  type: "button"
-};
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "aria-hidden": "true",
   "class": "w-5 h-5",
   fill: "currentColor",
@@ -21535,438 +21605,58 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "Close modal", -1
 /* HOISTED */
 );
 
-var _hoisted_7 = [_hoisted_5, _hoisted_6];
-var _hoisted_8 = {
+var _hoisted_6 = [_hoisted_4, _hoisted_5];
+var _hoisted_7 = {
   "class": "py-6 px-6 lg:px-8"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "mb-4 text-xl font-medium text-gray-900"
 }, "Создать шаблон заявки:", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
+var _hoisted_9 = {
   action: "#",
   "class": "space-y-4"
 };
-var _hoisted_11 = {
-  "class": "grid grid-cols-4 gap-2"
-};
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-sm text-gray-500"
 }, "При нажатии кнопки \"Готово\" вы автоматически становитесь ответственным за созданную заявку.", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_TemplateInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TemplateInput");
+  var _component_ur_fields = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ur-fields");
 
-  var _component_TemplateSelect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TemplateSelect");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_4, _hoisted_7, 512
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    ref: "close",
+    "class": "absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
+    "data-modal-toggle": "create-ur-template-modal",
+    type: "button",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.clearData && $options.clearData.apply($options, arguments);
+    })
+  }, _hoisted_6, 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "BasisOfActs",
-    modelValue: $data.form.BasisOfActs,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.form.BasisOfActs = $event;
-    }),
-    required: true,
-    name: "Действует на основании",
-    placeholder: "устава",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
-    id: "identificationKind",
-    modelValue: $data.form.identificationKind,
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ur_fields, {
+    modelValue: $data.form,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.form.identificationKind = $event;
-    }),
-    options: [{
-      name: 'Лично',
-      value: 0
-    }, {
-      name: 'По действующей ЭП',
-      value: 1
-    }],
-    name: "Способ идентификации",
-    required: "true"
+      return $data.form = $event;
+    })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "lastName",
-    modelValue: $data.form.lastName,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.lastName = $event;
-    }),
-    required: true,
-    name: "Фамилия",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "firstName",
-    modelValue: $data.form.firstName,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.form.firstName = $event;
-    }),
-    required: true,
-    name: "Имя",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "middleName",
-    modelValue: $data.form.middleName,
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.form.middleName = $event;
-    }),
-    required: false,
-    name: "Отчество",
-    placeholder: "Необязательное поле",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
-    id: "gender",
-    modelValue: $data.form.gender,
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.form.gender = $event;
-    }),
-    options: [{
-      name: 'Мужчина',
-      value: 'M'
-    }, {
-      name: 'Женщина',
-      value: 'F'
-    }, {
-      name: 'Не указан',
-      value: 'U'
-    }],
-    name: "Пол",
-    required: "true"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "birthDate",
-    modelValue: $data.form.birthDate,
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.form.birthDate = $event;
-    }),
-    required: true,
-    name: "Дата рождения",
-    pattern: "dd-mm-yyyy",
-    type: "date"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "position",
-    modelValue: $data.form.position,
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-      return $data.form.position = $event;
-    }),
-    required: true,
-    name: "Должность",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "department",
-    modelValue: $data.form.department,
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-      return $data.form.department = $event;
-    }),
-    required: false,
-    name: "Подразделение/отдел",
-    placeholder: "Необязательное поле",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "email",
-    modelValue: $data.form.email,
-    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-      return $data.form.email = $event;
-    }),
-    required: true,
-    name: "Электронная почта",
-    type: "email"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "phone",
-    modelValue: $data.form.phone,
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-      return $data.form.phone = $event;
-    }),
-    required: true,
-    name: "Телефон",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "passportSerial",
-    modelValue: $data.form.passportSerial,
-    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-      return $data.form.passportSerial = $event;
-    }),
-    required: true,
-    name: "Серия паспорта",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "passportNumber",
-    modelValue: $data.form.passportNumber,
-    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-      return $data.form.passportNumber = $event;
-    }),
-    required: true,
-    name: "Номер паспорта",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "passportDate",
-    modelValue: $data.form.passportDate,
-    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-      return $data.form.passportDate = $event;
-    }),
-    required: true,
-    name: "Дата выдачи паспорта",
-    pattern: "dd-mm-yyyy",
-    type: "date"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "passportDivision",
-    modelValue: $data.form.passportDivision,
-    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-      return $data.form.passportDivision = $event;
-    }),
-    required: true,
-    name: "Кем выдан паспорт",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "passportCode",
-    modelValue: $data.form.passportCode,
-    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-      return $data.form.passportCode = $event;
-    }),
-    required: true,
-    name: "Код подразделения паспорта",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "snils",
-    modelValue: $data.form.snils,
-    "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
-      return $data.form.snils = $event;
-    }),
-    required: true,
-    name: "СНИЛС",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "personInn",
-    modelValue: $data.form.personInn,
-    "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
-      return $data.form.personInn = $event;
-    }),
-    required: true,
-    name: "ИНН заявителя",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "ogrn",
-    modelValue: $data.form.ogrn,
-    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
-      return $data.form.ogrn = $event;
-    }),
-    required: true,
-    name: "ОГРН",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "company",
-    modelValue: $data.form.company,
-    "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
-      return $data.form.company = $event;
-    }),
-    required: true,
-    name: "Наименование организации",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "inn",
-    modelValue: $data.form.inn,
-    "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
-      return $data.form.inn = $event;
-    }),
-    required: true,
-    name: "ИНН организации",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "kpp",
-    modelValue: $data.form.kpp,
-    "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
-      return $data.form.kpp = $event;
-    }),
-    required: true,
-    name: "КПП организации",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "companyPhone",
-    modelValue: $data.form.companyPhone,
-    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
-      return $data.form.companyPhone = $event;
-    }),
-    required: true,
-    name: "Телефон организации",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
-    id: "region",
-    modelValue: $data.form.region,
-    "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-      return $data.form.region = $event;
-    }),
-    options: $data.regionList,
-    required: true,
-    name: "Регион"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "city",
-    modelValue: $data.form.city,
-    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
-      return $data.form.city = $event;
-    }),
-    required: true,
-    name: "Населенный пункт",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "address",
-    modelValue: $data.form.address,
-    "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
-      return $data.form.address = $event;
-    }),
-    required: true,
-    name: "Адрес (ЕГРЮЛ) начиная с улицы",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "index",
-    modelValue: $data.form.index,
-    "onUpdate:modelValue": _cache[26] || (_cache[26] = function ($event) {
-      return $data.form.index = $event;
-    }),
-    required: true,
-    name: "Индекс",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "headLastName",
-    modelValue: $data.form.headLastName,
-    "onUpdate:modelValue": _cache[27] || (_cache[27] = function ($event) {
-      return $data.form.headLastName = $event;
-    }),
-    required: true,
-    name: "Фамилия руководителя",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "headFirstName",
-    modelValue: $data.form.headFirstName,
-    "onUpdate:modelValue": _cache[28] || (_cache[28] = function ($event) {
-      return $data.form.headFirstName = $event;
-    }),
-    required: true,
-    name: "Имя руководителя",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "headMiddleName",
-    modelValue: $data.form.headMiddleName,
-    "onUpdate:modelValue": _cache[29] || (_cache[29] = function ($event) {
-      return $data.form.headMiddleName = $event;
-    }),
-    required: false,
-    name: "Отчество руководителя",
-    placeholder: "Необязательное поле",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "HeadPosition",
-    modelValue: $data.form.HeadPosition,
-    "onUpdate:modelValue": _cache[30] || (_cache[30] = function ($event) {
-      return $data.form.HeadPosition = $event;
-    }),
-    required: true,
-    name: "Должность руководителя",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
-    id: "offerJoining",
-    modelValue: $data.form.offerJoining,
-    "onUpdate:modelValue": _cache[31] || (_cache[31] = function ($event) {
-      return $data.form.offerJoining = $event;
-    }),
-    options: [{
-      name: 'Есть',
-      value: true
-    }, {
-      name: 'Нет',
-      value: false
-    }],
-    required: true,
-    name: "Присоединение к оферте"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
-    id: "products",
-    modelValue: $data.form.products,
-    "onUpdate:modelValue": _cache[32] || (_cache[32] = function ($event) {
-      return $data.form.products = $event;
-    }),
-    required: true,
-    name: "Продукты",
-    type: "text"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["modelValue"]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "w-full focus:outline-none text-white bg-green-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
     type: "button",
-    onClick: _cache[33] || (_cache[33] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.submit && $options.submit.apply($options, arguments);
     })
   }, " Готово ")])])])])], 512
@@ -22060,6 +21750,422 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "grid grid-cols-4 gap-2"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_TemplateInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TemplateInput");
+
+  var _component_TemplateSelect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TemplateSelect");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "BasisOfActs",
+    modelValue: $options.form.BasisOfActs,
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $options.form.BasisOfActs = $event;
+    }),
+    required: true,
+    name: "Действует на основании",
+    placeholder: "устава",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
+    id: "identificationKind",
+    modelValue: $options.form.identificationKind,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $options.form.identificationKind = $event;
+    }),
+    options: [{
+      name: 'Лично',
+      value: 0
+    }, {
+      name: 'По действующей ЭП',
+      value: 1
+    }],
+    name: "Способ идентификации",
+    required: "true"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "lastName",
+    modelValue: $options.form.lastName,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $options.form.lastName = $event;
+    }),
+    required: true,
+    name: "Фамилия",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "firstName",
+    modelValue: $options.form.firstName,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $options.form.firstName = $event;
+    }),
+    required: true,
+    name: "Имя",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "middleName",
+    modelValue: $options.form.middleName,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $options.form.middleName = $event;
+    }),
+    required: false,
+    name: "Отчество",
+    placeholder: "Необязательное поле",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
+    id: "gender",
+    modelValue: $options.form.gender,
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $options.form.gender = $event;
+    }),
+    options: [{
+      name: 'Мужчина',
+      value: 'M'
+    }, {
+      name: 'Женщина',
+      value: 'F'
+    }, {
+      name: 'Не указан',
+      value: 'U'
+    }],
+    name: "Пол",
+    required: "true"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "birthDate",
+    modelValue: $options.form.birthDate,
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $options.form.birthDate = $event;
+    }),
+    required: true,
+    name: "Дата рождения",
+    pattern: "dd-mm-yyyy",
+    type: "date"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "position",
+    modelValue: $options.form.position,
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $options.form.position = $event;
+    }),
+    required: true,
+    name: "Должность",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "department",
+    modelValue: $options.form.department,
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return $options.form.department = $event;
+    }),
+    required: false,
+    name: "Подразделение/отдел",
+    placeholder: "Необязательное поле",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "email",
+    modelValue: $options.form.email,
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+      return $options.form.email = $event;
+    }),
+    required: true,
+    name: "Электронная почта",
+    type: "email"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "phone",
+    modelValue: $options.form.phone,
+    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+      return $options.form.phone = $event;
+    }),
+    required: true,
+    name: "Телефон",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "passportSerial",
+    modelValue: $options.form.passportSerial,
+    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+      return $options.form.passportSerial = $event;
+    }),
+    required: true,
+    name: "Серия паспорта",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "passportNumber",
+    modelValue: $options.form.passportNumber,
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+      return $options.form.passportNumber = $event;
+    }),
+    required: true,
+    name: "Номер паспорта",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "passportDate",
+    modelValue: $options.form.passportDate,
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+      return $options.form.passportDate = $event;
+    }),
+    required: true,
+    name: "Дата выдачи паспорта",
+    pattern: "dd-mm-yyyy",
+    type: "date"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "passportDivision",
+    modelValue: $options.form.passportDivision,
+    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+      return $options.form.passportDivision = $event;
+    }),
+    required: true,
+    name: "Кем выдан паспорт",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "passportCode",
+    modelValue: $options.form.passportCode,
+    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+      return $options.form.passportCode = $event;
+    }),
+    required: true,
+    name: "Код подразделения паспорта",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "snils",
+    modelValue: $options.form.snils,
+    "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
+      return $options.form.snils = $event;
+    }),
+    required: true,
+    name: "СНИЛС",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "personInn",
+    modelValue: $options.form.personInn,
+    "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
+      return $options.form.personInn = $event;
+    }),
+    required: true,
+    name: "ИНН заявителя",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "ogrn",
+    modelValue: $options.form.ogrn,
+    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+      return $options.form.ogrn = $event;
+    }),
+    required: true,
+    name: "ОГРН",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "company",
+    modelValue: $options.form.company,
+    "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
+      return $options.form.company = $event;
+    }),
+    required: true,
+    name: "Наименование организации",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "inn",
+    modelValue: $options.form.inn,
+    "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
+      return $options.form.inn = $event;
+    }),
+    required: true,
+    name: "ИНН организации",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "kpp",
+    modelValue: $options.form.kpp,
+    "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
+      return $options.form.kpp = $event;
+    }),
+    required: true,
+    name: "КПП организации",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "companyPhone",
+    modelValue: $options.form.companyPhone,
+    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
+      return $options.form.companyPhone = $event;
+    }),
+    required: true,
+    name: "Телефон организации",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
+    id: "region",
+    modelValue: $options.form.region,
+    "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
+      return $options.form.region = $event;
+    }),
+    options: $data.regionList,
+    required: true,
+    name: "Регион"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "city",
+    modelValue: $options.form.city,
+    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
+      return $options.form.city = $event;
+    }),
+    required: true,
+    name: "Населенный пункт",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "address",
+    modelValue: $options.form.address,
+    "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
+      return $options.form.address = $event;
+    }),
+    required: true,
+    name: "Адрес (ЕГРЮЛ) начиная с улицы",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "index",
+    modelValue: $options.form.index,
+    "onUpdate:modelValue": _cache[26] || (_cache[26] = function ($event) {
+      return $options.form.index = $event;
+    }),
+    required: true,
+    name: "Индекс",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "headLastName",
+    modelValue: $options.form.headLastName,
+    "onUpdate:modelValue": _cache[27] || (_cache[27] = function ($event) {
+      return $options.form.headLastName = $event;
+    }),
+    required: true,
+    name: "Фамилия руководителя",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "headFirstName",
+    modelValue: $options.form.headFirstName,
+    "onUpdate:modelValue": _cache[28] || (_cache[28] = function ($event) {
+      return $options.form.headFirstName = $event;
+    }),
+    required: true,
+    name: "Имя руководителя",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "headMiddleName",
+    modelValue: $options.form.headMiddleName,
+    "onUpdate:modelValue": _cache[29] || (_cache[29] = function ($event) {
+      return $options.form.headMiddleName = $event;
+    }),
+    required: false,
+    name: "Отчество руководителя",
+    placeholder: "Необязательное поле",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "HeadPosition",
+    modelValue: $options.form.HeadPosition,
+    "onUpdate:modelValue": _cache[30] || (_cache[30] = function ($event) {
+      return $options.form.HeadPosition = $event;
+    }),
+    required: true,
+    name: "Должность руководителя",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateSelect, {
+    id: "offerJoining",
+    modelValue: $options.form.offerJoining,
+    "onUpdate:modelValue": _cache[31] || (_cache[31] = function ($event) {
+      return $options.form.offerJoining = $event;
+    }),
+    options: [{
+      name: 'Есть',
+      value: true
+    }, {
+      name: 'Нет',
+      value: false
+    }],
+    required: true,
+    name: "Присоединение к оферте"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TemplateInput, {
+    id: "products",
+    modelValue: $options.form.products,
+    "onUpdate:modelValue": _cache[32] || (_cache[32] = function ($event) {
+      return $options.form.products = $event;
+    }),
+    required: true,
+    name: "Продукты",
+    type: "text"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesPage.vue?vue&type=template&id=bab43baa":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesPage.vue?vue&type=template&id=bab43baa ***!
@@ -22093,6 +22199,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_create_ur_template_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("create-ur-template-modal");
 
+  var _component_update_ur_template_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("update-ur-template-modal");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_table, {
     actions: [{
       name: 'update',
@@ -22122,10 +22230,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSearch: _cache[2] || (_cache[2] = function (value) {
       return _this.search = value;
     }),
-    onSorted: this.fetch
+    onSorted: this.fetch,
+    onUpdate: $options.update
   }, null, 8
   /* PROPS */
-  , ["cols", "items", "onDelete", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
+  , ["cols", "items", "onDelete", "onSorted", "onUpdate"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
     "class": "flex justify-end mt-3",
     onNext: $options.paginationNext,
     onPrevious: $options.paginationPrevious
@@ -22136,7 +22245,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "data-modal-toggle": "create-ur-template-modal",
         href: "#",
         onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
-      }, " Создать шаблон юр. лица "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <a class=\"inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                       data-modal-toggle=\"create-template-modal\" href=\"#\" @click.prevent=\"\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        Создать шаблон ИП"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <a class=\"inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                       data-modal-toggle=\"create-template-modal\" href=\"#\" @click.prevent=\"\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        Создать шаблон физ. лица"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </a>")];
+      }, " Создать шаблон юр. лица "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        ref: "update-ur-template",
+        "class": "hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4",
+        "data-modal-toggle": "update-ur-template-modal",
+        href: "#",
+        onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+      }, " Изменить шаблон юр. лица ", 512
+      /* NEED_PATCH */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <a class=\"inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                       data-modal-toggle=\"create-template-modal\" href=\"#\" @click.prevent=\"\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        Создать шаблон ИП"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <a class=\"inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                       data-modal-toggle=\"create-template-modal\" href=\"#\" @click.prevent=\"\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        Создать шаблон физ. лица"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </a>")];
     }),
     _: 1
     /* STABLE */
@@ -22149,7 +22266,114 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmit: $options.create
   }, null, 8
   /* PROPS */
-  , ["onSubmit"])]);
+  , ["onSubmit"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_update_ur_template_modal, {
+    selectedItem: $data.selectedItem,
+    onUpdate: $options.updateTemplate
+  }, null, 8
+  /* PROPS */
+  , ["selectedItem", "onUpdate"])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0 ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  id: "update-ur-template-modal",
+  ref: "modal",
+  "aria-hidden": "true",
+  "class": "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full",
+  tabindex: "-1"
+};
+var _hoisted_2 = {
+  "class": "relative p-4 w-full max-w-7xl h-full md:h-auto"
+};
+var _hoisted_3 = {
+  "class": "relative bg-white rounded-lg shadow"
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "aria-hidden": "true",
+  "class": "w-5 h-5",
+  fill: "currentColor",
+  viewBox: "0 0 20 20",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "clip-rule": "evenodd",
+  d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",
+  "fill-rule": "evenodd"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "sr-only"
+}, "Close modal", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = [_hoisted_4, _hoisted_5];
+var _hoisted_7 = {
+  "class": "py-6 px-6 lg:px-8"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-4 text-xl font-medium text-gray-900"
+}, "Измените шаблон заявки:", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  action: "#",
+  "class": "space-y-4"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-sm text-gray-500"
+}, "При нажатии кнопки \"Изменить\" вы измените старые на те, которые указаны в форме.", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_ur_fields = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ur-fields");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    ref: "close",
+    "class": "absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
+    "data-modal-toggle": "update-ur-template-modal",
+    type: "button",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.clearData && $options.clearData.apply($options, arguments);
+    })
+  }, _hoisted_6, 512
+  /* NEED_PATCH */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ur_fields, {
+    modelValue: $data.form,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.form = $event;
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "w-full focus:outline-none text-white bg-green-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
+    type: "button",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.update && $options.update.apply($options, arguments);
+    })
+  }, " Изменить ")])])])])], 512
+  /* NEED_PATCH */
+  );
 }
 
 /***/ }),
@@ -23187,6 +23411,80 @@ var cadesplugin_initialization = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
     });
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/manager/TemplatesForm/UrTemplate.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/manager/TemplatesForm/UrTemplate.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UrTemplate": () => (/* binding */ UrTemplate)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var UrTemplate = /*#__PURE__*/function () {
+  function UrTemplate() {
+    _classCallCheck(this, UrTemplate);
+
+    this.BasisOfActs = '';
+    this.identificationKind = 1;
+    this.lastName = '';
+    this.firstName = '';
+    this.middleName = '';
+    this.gender = '';
+    this.birthDate = '';
+    this.position = '';
+    this.department = '';
+    this.email = '';
+    this.phone = '';
+    this.passportSerial = '';
+    this.passportNumber = '';
+    this.passportDate = '';
+    this.passportDivision = '';
+    this.passportCode = '';
+    this.snils = '';
+    this.personInn = '';
+    this.ogrn = '';
+    this.company = '';
+    this.inn = '';
+    this.kpp = '';
+    this.companyPhone = '';
+    this.region = '';
+    this.city = '';
+    this.address = '';
+    this.index = '';
+    this.headLastName = '';
+    this.headFirstName = '';
+    this.headMiddleName = '';
+    this.HeadPosition = '';
+    this.offerJoining = '';
+    this.type = 3;
+    this.products = '';
+  }
+
+  _createClass(UrTemplate, [{
+    key: "assingData",
+    value: function assingData(data) {
+      var objectKeys = Object.keys(this);
+
+      for (var _i = 0, _objectKeys = objectKeys; _i < _objectKeys.length; _i++) {
+        var objectKey = _objectKeys[_i];
+        this[objectKey] = data[objectKey];
+      }
+    }
+  }]);
+
+  return UrTemplate;
+}();
 
 /***/ }),
 
@@ -44633,6 +44931,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/manager/TemplatesForm/UrFields.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/manager/TemplatesForm/UrFields.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UrFields_vue_vue_type_template_id_29f69256__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UrFields.vue?vue&type=template&id=29f69256 */ "./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256");
+/* harmony import */ var _UrFields_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UrFields.vue?vue&type=script&lang=js */ "./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js");
+/* harmony import */ var _home_kuzyxd_egais_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_home_kuzyxd_egais_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_UrFields_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UrFields_vue_vue_type_template_id_29f69256__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/manager/TemplatesForm/UrFields.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/manager/TemplatesPage.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/manager/TemplatesPage.vue ***!
@@ -44653,6 +44979,34 @@ __webpack_require__.r(__webpack_exports__);
 
 ;
 const __exports__ = /*#__PURE__*/(0,_home_kuzyxd_egais_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_TemplatesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_TemplatesPage_vue_vue_type_template_id_bab43baa__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/manager/TemplatesPage.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/components/manager/UpdateUrTemplateModal.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/manager/UpdateUrTemplateModal.vue ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UpdateUrTemplateModal_vue_vue_type_template_id_6dae3df0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0 */ "./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0");
+/* harmony import */ var _UpdateUrTemplateModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateUrTemplateModal.vue?vue&type=script&lang=js */ "./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js");
+/* harmony import */ var _home_kuzyxd_egais_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_home_kuzyxd_egais_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_UpdateUrTemplateModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UpdateUrTemplateModal_vue_vue_type_template_id_6dae3df0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/manager/UpdateUrTemplateModal.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -44881,6 +45235,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UrFields_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UrFields_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UrFields.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/manager/TemplatesPage.vue?vue&type=script&lang=js":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/manager/TemplatesPage.vue?vue&type=script&lang=js ***!
@@ -44893,6 +45263,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_TemplatesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_TemplatesPage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./TemplatesPage.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesPage.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateUrTemplateModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateUrTemplateModal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UpdateUrTemplateModal.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -45105,6 +45491,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256 ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UrFields_vue_vue_type_template_id_29f69256__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UrFields_vue_vue_type_template_id_29f69256__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UrFields.vue?vue&type=template&id=29f69256 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesForm/UrFields.vue?vue&type=template&id=29f69256");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/manager/TemplatesPage.vue?vue&type=template&id=bab43baa":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/manager/TemplatesPage.vue?vue&type=template&id=bab43baa ***!
@@ -45117,6 +45519,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_TemplatesPage_vue_vue_type_template_id_bab43baa__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_TemplatesPage_vue_vue_type_template_id_bab43baa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./TemplatesPage.vue?vue&type=template&id=bab43baa */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/TemplatesPage.vue?vue&type=template&id=bab43baa");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0 ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateUrTemplateModal_vue_vue_type_template_id_6dae3df0__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UpdateUrTemplateModal_vue_vue_type_template_id_6dae3df0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/manager/UpdateUrTemplateModal.vue?vue&type=template&id=6dae3df0");
 
 
 /***/ }),

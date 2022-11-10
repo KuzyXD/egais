@@ -16,7 +16,7 @@ class TemplatesController extends Controller
     {
         $paginate = $templates->index($request->query, $id);
         if ($paginate) {
-            return response($paginate, 200);
+            return $paginate->response();
         }
 
         return response('Произошла ошибка. Свяжитесь с программистом.', '500');
@@ -32,7 +32,7 @@ class TemplatesController extends Controller
 
     public function show($template_id)
     {
-        return new RgApplicationsTemplateResource(RgApplicationsTemplate::findOrFail($template_id)->first());
+        return new RgApplicationsTemplateResource(RgApplicationsTemplate::find($template_id));
     }
 
     public function update(TemplatesUpdateRequest $request, $template_id, RgTemplates $templates)

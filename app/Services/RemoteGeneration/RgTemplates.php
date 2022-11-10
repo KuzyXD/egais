@@ -3,7 +3,7 @@
 namespace App\Services\RemoteGeneration;
 
 use App\Http\Resources\RemoteGeneration\RgApplicationsTemplateResource;
-use App\Http\Resources\RemoteGeneration\RgApplicationsTemplateShowResource;
+use App\Http\Resources\RemoteGeneration\RgApplicationsTemplateIndexResource;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -52,7 +52,7 @@ class RgTemplates
             $rg_applications_templates->where('rg_applications_templates.created_by', '=', auth()->id());
         }
 
-        return RgApplicationsTemplateShowResource::collection($rg_applications_templates->paginate(6, ['*'], 'page', $currentPage));
+        return RgApplicationsTemplateIndexResource::collection($rg_applications_templates->paginate(6, ['*'], 'page', $currentPage));
     }
 
     public function store($parameters, $by, $companyId): bool

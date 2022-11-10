@@ -1,5 +1,5 @@
 <template>
-    <div id="create-ur-template-modal" ref="modal" aria-hidden="true"
+    <div id="update-ur-template-modal" ref="modal" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
          tabindex="-1">
         <div class="relative p-4 w-full max-w-7xl h-full md:h-auto">
@@ -8,7 +8,7 @@
                 <button
                     ref="close"
                     class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-toggle="create-ur-template-modal"
+                    data-modal-toggle="update-ur-template-modal"
                     type="button"
                     @click="clearData">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -20,17 +20,17 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="py-6 px-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900">Создать шаблон заявки:</h3>
+                    <h3 class="mb-4 text-xl font-medium text-gray-900">Измените шаблон заявки:</h3>
                     <form action="#" class="space-y-4">
 
                         <ur-fields v-model="form"></ur-fields>
-                        
-                        <p class="text-sm text-gray-500">При нажатии кнопки "Готово" вы автоматически становитесь
-                            ответственным за созданную заявку.</p>
+
+                        <p class="text-sm text-gray-500">При нажатии кнопки "Изменить" вы измените старые на те, которые
+                            указаны в форме.</p>
                         <button
                             class="w-full focus:outline-none text-white bg-green-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
-                            type="button" @click="submit">
-                            Готово
+                            type="button" @click="update">
+                            Изменить
                         </button>
                     </form>
                 </div>
@@ -44,6 +44,7 @@ import UrFields from "./TemplatesForm/UrFields";
 import {UrTemplate} from "./TemplatesForm/UrTemplate";
 
 export default {
+    props: ['selectedItem'],
     components: {UrFields},
     data() {
         return {
@@ -51,13 +52,33 @@ export default {
         }
     },
     methods: {
-        submit() {
-            this.$emit('submit', this.form, this.$refs.close);
+        fetch() {
+            const vue = this;
+            const templateId = this.selectedItem.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/company/templates/${templateId}/show`).then(function (response) {
+                vue.form.assingData(response.data.data);
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+
+
+        },
+        update() {
+            this.$emit('update', this.form, this.$refs.close);
         },
         clearData() {
             this.form = new UrTemplate();
-        }
+        },
     },
+    watch: {
+        selectedItem(newValue, oldValue) {
+            this.fetch();
+        }
+    }
 }
 </script>
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\RemoteGeneration\RgApplicationsTemplate */
-class RgApplicationsTemplateShowResource extends JsonResource
+class RgApplicationsTemplateIndexResource extends JsonResource
 {
     /**
      * @param Request $request

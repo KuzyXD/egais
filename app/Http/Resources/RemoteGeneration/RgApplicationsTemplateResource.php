@@ -16,8 +16,10 @@ class RgApplicationsTemplateResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'BasisOfActs' => $this->BasisOfActs,
+            'identificationKind' => $this->identificationKind,
             'created_by' => $this->manager->fio,
-            'type' => $this->type == 1 ? 'Физ. лицо' : ($this->type == 2 ? 'ИП' : 'Юр. лицо'),
+            'type' => $this->type,
             'firstName' => $this->firstName,
             'middleName' => $this->middleName,
             'lastName' => $this->lastName,
