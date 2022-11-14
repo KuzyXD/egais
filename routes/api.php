@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RemoteGeneration\ApplicationTemplateFilesController;
 use App\Http\Controllers\RemoteGeneration\CompanyController;
 use App\Http\Controllers\RemoteGeneration\Login\ClientController;
 use App\Http\Controllers\RemoteGeneration\Login\ManagerController;
@@ -30,10 +31,16 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::post('store', [CompanyController::class, 'store']);
         Route::patch('{id}/update', [CompanyController::class, 'update']);
         Route::delete('{id}/delete', [CompanyController::class, 'destroy']);
+
         Route::get('{id}/templates', [TemplatesController::class, 'index']);
         Route::post('{id}/templates/store', [TemplatesController::class, 'store']);
         Route::get('templates/{template_id}/show', [TemplatesController::class, 'show']);
         Route::patch('templates/{template_id}/update', [TemplatesController::class, 'update']);
         Route::delete('templates/{template_id}/delete', [TemplatesController::class, 'destroy']);
+
+        Route::get('templates/{template_id}/files', [ApplicationTemplateFilesController::class, 'index']);
+        Route::post('templates/{template_id}/files/store', [ApplicationTemplateFilesController::class, 'store']);
+        Route::get('templates/files/{file_id}/show', [ApplicationTemplateFilesController::class, 'show']);
+        Route::delete('templates/files/{file_id}/delete', [ApplicationTemplateFilesController::class, 'destroy']);
     });
 });

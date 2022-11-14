@@ -12,6 +12,7 @@ class CreateRgApplicationTemplateFilesTable extends Migration
             $table->id();
             $table->foreignId('application_template_id')->constrained('rg_applications_templates');
             $table->string('type');
+            $table->string('name');
             $table->string('path');
 
             $table->timestamps();

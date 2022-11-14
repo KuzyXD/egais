@@ -24,4 +24,9 @@ class RgApplicationsTemplate extends Model
     {
         return $this->hasOne(RgCompany::class, 'id', 'created_for');
     }
+
+    public function files()
+    {
+        return $this->hasMany(RgApplicationTemplateFiles::class, 'application_template_id', 'id');
+    }
 }
