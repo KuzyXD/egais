@@ -28,7 +28,7 @@ class TemplatesControllerTest extends TestCase
 
         $response = $this->get('api/rg-manager/company/1/templates/?page=1');
 
-        $response->assertJsonCount(6);
+        $response->assertJsonCount(6, 'data');
     }
 
     public function testStore()
@@ -157,7 +157,7 @@ class TemplatesControllerTest extends TestCase
                 RgApplicationsTemplate::factory(['created_by' => 1, 'id' => 1])->count(1),
                 'applicationTemplates')->create();
 
-        $this->get('api/rg-manager/company/templates/1/show')->assertJsonCount(40, 'data');
+        $this->get('api/rg-manager/company/templates/1/show')->assertJsonCount(42, 'data');
     }
 
     public function testDestroy()
