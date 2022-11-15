@@ -1,7 +1,8 @@
 <template>
     <div id="update-ur-template-modal" ref="modal" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
-         tabindex="-1">
+         tabindex="-1"
+         @focus="fetch">
         <div class="relative p-4 w-full max-w-7xl h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
@@ -74,11 +75,6 @@ export default {
             this.form = new UrTemplate();
         },
     },
-    watch: {
-        selectedItem(newValue, oldValue) {
-            this.fetch();
-        }
-    }
 }
 </script>
 

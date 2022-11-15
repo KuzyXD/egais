@@ -20509,8 +20509,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     update: function update(item) {
+      var _this = this;
+
       this.selectedItem = item;
       this.$refs['update-ur-template'].click();
+      this.$nextTick(function () {
+        return _this.$refs['update-ur-template-modal'].$el.focus();
+      });
     },
     updateTemplate: function updateTemplate(form, closeButton) {
       var vue = this;
@@ -20604,11 +20609,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     clearData: function clearData() {
       this.form = new _TemplatesForm_UrTemplate__WEBPACK_IMPORTED_MODULE_1__.UrTemplate();
-    }
-  },
-  watch: {
-    selectedItem: function selectedItem(newValue, oldValue) {
-      this.fetch();
     }
   }
 });
@@ -22267,6 +22267,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["onSubmit"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_update_ur_template_modal, {
+    ref: "update-ur-template-modal",
     selectedItem: $data.selectedItem,
     onUpdate: $options.updateTemplate
   }, null, 8
@@ -22290,20 +22291,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  id: "update-ur-template-modal",
-  ref: "modal",
-  "aria-hidden": "true",
-  "class": "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full",
-  tabindex: "-1"
-};
-var _hoisted_2 = {
   "class": "relative p-4 w-full max-w-7xl h-full md:h-auto"
 };
-var _hoisted_3 = {
+var _hoisted_2 = {
   "class": "relative bg-white rounded-lg shadow"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "aria-hidden": "true",
   "class": "w-5 h-5",
   fill: "currentColor",
@@ -22317,29 +22311,29 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "Close modal", -1
 /* HOISTED */
 );
 
-var _hoisted_6 = [_hoisted_4, _hoisted_5];
-var _hoisted_7 = {
+var _hoisted_5 = [_hoisted_3, _hoisted_4];
+var _hoisted_6 = {
   "class": "py-6 px-6 lg:px-8"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "mb-4 text-xl font-medium text-gray-900"
 }, "Измените шаблон заявки:", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+var _hoisted_8 = {
   action: "#",
   "class": "space-y-4"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-sm text-gray-500"
 }, "При нажатии кнопки \"Изменить\" вы измените старые на те, которые указаны в форме.", -1
 /* HOISTED */
@@ -22348,7 +22342,16 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ur_fields = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ur-fields");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    id: "update-ur-template-modal",
+    ref: "modal",
+    "aria-hidden": "true",
+    "class": "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full",
+    tabindex: "-1",
+    onFocus: _cache[3] || (_cache[3] = function () {
+      return $options.fetch && $options.fetch.apply($options, arguments);
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     ref: "close",
     "class": "absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center",
     "data-modal-toggle": "update-ur-template-modal",
@@ -22356,23 +22359,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.clearData && $options.clearData.apply($options, arguments);
     })
-  }, _hoisted_6, 512
+  }, _hoisted_5, 512
   /* NEED_PATCH */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ur_fields, {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ur_fields, {
     modelValue: $data.form,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.form = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["modelValue"]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "w-full focus:outline-none text-white bg-green-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
     type: "button",
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.update && $options.update.apply($options, arguments);
     })
-  }, " Изменить ")])])])])], 512
-  /* NEED_PATCH */
+  }, " Изменить ")])])])])], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   );
 }
 

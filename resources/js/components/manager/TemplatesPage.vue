@@ -48,7 +48,7 @@
             </div>
         </div>
         <create-ur-template-modal @submit="create"></create-ur-template-modal>
-        <update-ur-template-modal :selectedItem="selectedItem"
+        <update-ur-template-modal ref="update-ur-template-modal" :selectedItem="selectedItem"
                                   @update="updateTemplate"></update-ur-template-modal>
     </div>
 </template>
@@ -163,6 +163,7 @@ export default {
         update(item) {
             this.selectedItem = item;
             this.$refs['update-ur-template'].click();
+            this.$nextTick(() => this.$refs['update-ur-template-modal'].$el.focus());
         },
         updateTemplate(form, closeButton) {
             const vue = this;
