@@ -13,11 +13,11 @@
 </head>
 
 <body>
-    <div id="app" class="bg-gray-50 min-h-screen">
-        @yield('content')
-    </div>
+<div id="app" class="bg-gray-50 h-screen">
+    @yield('content')
+</div>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>

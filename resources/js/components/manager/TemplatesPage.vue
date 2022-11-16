@@ -1,10 +1,11 @@
 <template>
     <div class="">
         <div class="relative flex flex-col items-center justify-center overflow-x-auto">
-            <div class="relative mx-2">
+            <div class="relative mx-2 pb-14">
                 <custom-table v-show="!loading"
                               :actions="[
                                   {name: 'update', text: 'Изменить'},
+                                  {name: 'files', text: 'Файлы'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
                               ]"
                               :cols=cols
@@ -17,10 +18,11 @@
                               title="Список шаблонов"
                               @delete="deleteTemplate"
                               @deleted="this.deleted = !this.deleted"
+                              @files="showFilesModal"
                               @owned="this.owned = !this.owned"
                               @search="value => this.search = value"
                               @sorted="this.fetch"
-                              @update="update"
+                              @update="showUpdateModal"
                 >
                 </custom-table>
                 <pagination v-show="!loading" class="flex justify-end mt-3"
@@ -34,6 +36,11 @@
                        class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
                        data-modal-toggle="update-ur-template-modal" href="#" @click.prevent="">
                         Изменить шаблон юр. лица
+                    </a>
+                    <a ref="show-files"
+                       class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       data-modal-toggle="show-files-modal" href="#" @click.prevent="">
+                        Отобразить файлы для шаблона заявки
                     </a>
                     <!--                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"-->
                     <!--                       data-modal-toggle="create-template-modal" href="#" @click.prevent="">-->
@@ -50,6 +57,7 @@
         <create-ur-template-modal @submit="create"></create-ur-template-modal>
         <update-ur-template-modal ref="update-ur-template-modal" :selectedItem="selectedItem"
                                   @update="updateTemplate"></update-ur-template-modal>
+        <show-files-modal ref="show-files-modal" :selected-item="selectedItem"></show-files-modal>
     </div>
 </template>
 
@@ -57,9 +65,10 @@
 import {getSortableState, formatYmd} from "../../helper_functions";
 import CreateUrTemplateModal from "./CreateUrTemplateModal";
 import UpdateUrTemplateModal from "./UpdateUrTemplateModal";
+import ShowFilesModal from "./ShowFilesModal";
 
 export default {
-    components: {CreateUrTemplateModal, UpdateUrTemplateModal},
+    components: {ShowFilesModal, CreateUrTemplateModal, UpdateUrTemplateModal},
     data() {
         return {
             companyId: 0,
@@ -160,7 +169,7 @@ export default {
                 alert((Object.values(error.response.data.errors)).flat().join(', '));
             });
         },
-        update(item) {
+        showUpdateModal(item) {
             this.selectedItem = item;
             this.$refs['update-ur-template'].click();
             this.$nextTick(() => this.$refs['update-ur-template-modal'].$el.focus());
@@ -178,6 +187,11 @@ export default {
             }).catch(function (error) {
                 alert((Object.values(error.response.data.errors)).flat().join(', '));
             });
+        },
+        showFilesModal(item) {
+            this.selectedItem = item;
+            this.$refs['show-files'].click();
+            this.$nextTick(() => this.$refs['show-files-modal'].$el.focus());
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {

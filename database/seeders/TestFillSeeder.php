@@ -16,6 +16,6 @@ class TestFillSeeder extends Seeder
         RgManager::factory()->create(['fio' => 'Людмила Сосненко', 'password' => Hash::make('111'), 'id' => 2, 'email' => 'kuzyxd1@yandex.ru']);
         RgCompany::factory()->count(1)->create(['group' => 'КБ', 'manager_id' => 1]);
         RgCompany::factory()->count(1)->create(['group' => 'Вереск', 'manager_id' => 2]);
-        RgApplicationsTemplate::factory()->count(20)->create(['created_by' => 1, 'created_for' => 1]);
+        RgApplicationsTemplate::factory()->count(1)->create(['created_by' => 1, 'created_for' => 1]);
     }
 }

@@ -5,19 +5,24 @@ namespace App\Services\RemoteGeneration;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgApplicationTemplateFiles;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\InputBag;
 
 class RgApplicationTemplateFile
 {
 
     public function store(Request $parameters, $templateId): bool
     {
+        $templateFiles = RgApplicationsTemplate::find($templateId)->files();
+        $oldFile = $templateFiles->whereType($parameters['type'])->first();
+
+        if ($oldFile) {
+            $this->destroy($oldFile->id);
+        }
+
         $fileName = $parameters->file('file')->getClientOriginalName();
         $path = $parameters->file('file')->store("/templateFiles/$templateId");
 
         if ($path) {
-            RgApplicationsTemplate::find($templateId)->files()->create([
+            $templateFiles->create([
                 'name' => $fileName,
                 'path' => $path,
                 'type' => $parameters->get('type')
