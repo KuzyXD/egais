@@ -4,6 +4,7 @@
             <div class="relative mx-2 pb-14">
                 <custom-table v-show="!loading"
                               :actions="[
+                                  {name: 'registrate', text: 'Зарегистрировать в АЦ'},
                                   {name: 'update', text: 'Изменить'},
                                   {name: 'files', text: 'Файлы'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
@@ -20,6 +21,7 @@
                               @deleted="this.deleted = !this.deleted"
                               @files="showFilesModal"
                               @owned="this.owned = !this.owned"
+                              @registrate="showACLoginForm"
                               @search="value => this.search = value"
                               @sorted="this.fetch"
                               @update="showUpdateModal"
@@ -42,6 +44,11 @@
                        data-modal-toggle="show-files-modal" href="#" @click.prevent="">
                         Отобразить файлы для шаблона заявки
                     </a>
+                    <a ref="ac-login"
+                       class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       data-modal-toggle="ac-login-modal" href="#" @click.prevent="">
+                        Отобразить форму авторизации для АЦ
+                    </a>
                     <!--                    <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"-->
                     <!--                       data-modal-toggle="create-template-modal" href="#" @click.prevent="">-->
                     <!--                        Создать шаблон ИП-->
@@ -58,6 +65,7 @@
         <update-ur-template-modal ref="update-ur-template-modal" :selectedItem="selectedItem"
                                   @update="updateTemplate"></update-ur-template-modal>
         <show-files-modal ref="show-files-modal" :selected-item="selectedItem"></show-files-modal>
+        <ac-login-modal ref="show-ac-login-modal" @submit="registrateApplication"></ac-login-modal>
     </div>
 </template>
 
@@ -66,9 +74,10 @@ import {getSortableState, formatYmd} from "../../helper_functions";
 import CreateUrTemplateModal from "./CreateUrTemplateModal";
 import UpdateUrTemplateModal from "./UpdateUrTemplateModal";
 import ShowFilesModal from "./ShowFilesModal";
+import AcLoginModal from "./AcLoginModal";
 
 export default {
-    components: {ShowFilesModal, CreateUrTemplateModal, UpdateUrTemplateModal},
+    components: {ShowFilesModal, CreateUrTemplateModal, UpdateUrTemplateModal, AcLoginModal},
     data() {
         return {
             companyId: 0,
@@ -192,6 +201,23 @@ export default {
             this.selectedItem = item;
             this.$refs['show-files'].click();
             this.$nextTick(() => this.$refs['show-files-modal'].$el.focus());
+        },
+        showACLoginForm(item) {
+            this.selectedItem = item;
+            this.$refs['ac-login'].click();
+            this.$nextTick(() => this.$refs['show-ac-login-modal'].$el.focus());
+        },
+        registrateApplication(form, closeButton) {
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+            form['templateId'] = this.selectedItem.id;
+
+            axios.post(`/api/${apiLocation}/application/registrate`, form).then(function (response) {
+                closeButton.click();
+                alert('Успешно');
+            }).catch(function (error) {
+                alert((Object.values(error.response.data.errors)).flat().join(', '));
+            });
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {

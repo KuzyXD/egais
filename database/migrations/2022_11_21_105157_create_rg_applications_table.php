@@ -4,16 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplicationsListTable extends Migration
+class CreateRgApplicationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('rg_applications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('created_by');
             $table->bigInteger('ac_id')->nullable();
@@ -27,19 +22,16 @@ class CreateApplicationsListTable extends Migration
             $table->string('serial_number_certificate', 50)->nullable();
             $table->string('replace_serial_key', 50)->nullable();
             $table->timestamp('certificate_finished_at')->nullable();
+            $table->string('ac_login')->nullable();
+            $table->string('ac_pass')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('applications_list');
+        Schema::dropIfExists('rg_applications');
     }
 }

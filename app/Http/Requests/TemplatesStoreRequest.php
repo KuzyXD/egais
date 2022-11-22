@@ -22,7 +22,7 @@ class TemplatesStoreRequest extends FormRequest
             'HeadPosition' => 'bail|required_if:type,3|string',
             'company' => 'bail|required_if:type,3|string',
             'position' => 'bail|required_if:type,3|string',
-            'department' => 'bail|required_if:type,3|string',
+            'department' => 'bail|string|nullable',
             'passportSerial' => 'bail|required|string|min:4|max:4',
             'passportNumber' => 'bail|required|string|min:6|max:6',
             'passportDate' => 'bail|required|string|min:10|max:10',

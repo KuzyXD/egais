@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    dd(\App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob::dispatch(1129827));
+});
+
 Route::prefix('rg-client')->group(function () {
     Route::view('/login', 'login.client')->name('client.login');
 });
