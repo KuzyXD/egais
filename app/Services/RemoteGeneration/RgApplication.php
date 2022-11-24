@@ -4,13 +4,53 @@ namespace App\Services\RemoteGeneration;
 
 use App\Enums\Statuses;
 use App\Http\Resources\ApplicationCreateResource;
+use App\Http\Resources\RemoteGeneration\RgApplicationResource;
 use App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\InputBag;
 
 class RgApplication
 {
+    public function index(InputBag $query)
+    {
+        $rg_applications = RgApplications::query()->with(['manager', 'template']);
+        $currentPage = $query->get('page');
+
+        if ($query->get('sort')) {
+            $sortby = explode(';', $query->get('sort'));
+            foreach ($sortby as $sortbyraw) {
+                $sorts = explode(',', $sortbyraw);
+                $rg_applications->orderBy($sorts[0], $sorts[1]);
+            }
+        }
+
+        if ($query->get('status')) {
+            $rg_applications->orWhere('status', $query->get('status'));
+        }
+
+        if ($query->get('search')) {
+            $rg_applications->orWhere('rg_applications.id', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.ac_id', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_managers.fio', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.pin_code', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.comment', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.action_type', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.store_number', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.serial_number_certificate', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.replace_serial_key', 'like', '%' . $query->get('search') . '%');
+        }
+        if ($query->get('deleted', 'false') === 'true') {
+            $rg_applications->withTrashed();
+        }
+        if ($query->get('owned', false) === 'true') {
+            $rg_applications->where('rg_applications.created_by', '=', auth()->id());
+        }
+
+        return RgApplicationResource::collection($rg_applications->paginate(6, ['*'], 'page', $currentPage));
+    }
+
     public function registrate($request): bool
     {
         $apiUrl = config('AC.API_URL');
@@ -65,4 +105,15 @@ class RgApplication
 
         return $response->toException();
     }
+
+    public function destroy($id): ?bool
+    {
+        $application = RgApplications::withTrashed()->find($id);
+
+        if ($application->trashed()) {
+            return $application->restore();
+        }
+        return $application->delete();
+    }
+
 }

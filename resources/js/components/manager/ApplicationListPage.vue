@@ -1,0 +1,172 @@
+<template>
+    <div class="relative flex flex-col items-center justify-center">
+        <div class="px-6 pb-2 max-w-full overflow-x-auto relative">
+            <custom-table v-show="!loading" :actions="[
+                                  {name: 'delete', text: 'Удалить/восстановить'},
+                              ]"
+                          :cols=cols
+                          :filters="[
+                                  {name: 'deleted', text: 'Отобразить удаленные заявки'},
+                                  {name: 'owned', text: 'Отобразить мои заявки'},
+                              ]"
+                          :items="items"
+                          text="Сюда попадают все созданные заявки. В поиске вы можете использовать данные из любого столбца."
+                          title="Список заявок"
+                          @delete="deleteApplication"
+                          @deleted="this.deleted = !this.deleted"
+                          @owned="this.owned = !this.owned"
+                          @search="value => this.search = value"
+                          @sorted="this.fetch"
+            ></custom-table>
+            <pagination v-show="!loading" class="flex justify-start mt-3"
+                        @next="paginationNext"
+                        @previous="paginationPrevious">
+            </pagination>
+            <skeleton v-show="loading"></skeleton>
+        </div>
+    </div>
+</template>
+
+<script>
+import {formatYmd, getSortableState} from "../../helper_functions";
+
+export default {
+    data() {
+        return {
+            cols: [
+                {name: 'ID', key: 'id', sortable: true, sortableState: 'desc'},
+                {name: 'ID в АЦ', key: 'ac_id', sortable: true, sortableState: 'normal'},
+                {name: 'Статус', key: 'status', sortable: true, sortableState: 'normal'},
+                {name: 'Пин-код', key: 'pin_code', sortable: true, sortableState: 'normal'},
+                {name: 'Комментарий', key: 'comment', sortable: true, sortableState: 'normal'},
+                {name: 'Номер шаблона', key: 'template_id', sortable: true, sortableState: 'normal'},
+                {name: 'Номер магазина', key: 'store_number', sortable: true, sortableState: 'normal'},
+                {name: 'Тип действия', key: 'action_type', sortable: true, sortableState: 'normal'},
+                {
+                    name: 'Серийный номер сертификата',
+                    key: 'serial_number_certificate',
+                    sortable: false,
+                    sortableState: 'normal'
+                },
+                {name: 'Действительный с', key: 'certificate_produced_at', sortable: true, sortableState: 'normal'},
+                {name: 'Действительный по', key: 'certificate_finished_at', sortable: true, sortableState: 'normal'},
+                {
+                    name: 'С/Н сертификата для замены',
+                    key: 'replace_serial_key',
+                    sortable: true,
+                    sortableState: 'normal'
+                },
+                {name: 'Создана', key: 'created_at', sortable: true, sortableState: 'normal'},
+                {name: 'Удалена', key: 'deleted_at', sortable: true, sortableState: 'normal'},
+                {name: 'Действия', key: 'actions', sortable: false, sortableState: 'normal'}
+            ],
+            items: [],
+            loading: true,
+
+            deleted: false,
+            owned: false,
+            search: '',
+            page: 1,
+            last_page: 1,
+        }
+    },
+    methods: {
+        fetch() {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+            let apiUri = `/api/${apiLocation}/application/index?page=${this.page}`;
+
+            if (this.search) {
+                apiUri += `&search=${this.search}`;
+            }
+
+            const sortableCols = this.cols.filter(getSortableState);
+            if (sortableCols.length > 0) {
+                apiUri += '&sort='
+                for (let i = 0; i < sortableCols.length; i++) {
+                    apiUri += `${sortableCols[i].key},${sortableCols[i].sortableState}`
+                    if (!((i + 1) >= sortableCols.length)) {
+                        apiUri += ';'
+                    }
+                }
+            }
+
+            apiUri += `&deleted=${this.deleted}`
+            apiUri += `&owned=${this.owned}`
+
+            axios.get(apiUri).then(function (response) {
+                vue.last_page = response.data.meta.last_page
+                vue.items = response.data.data.map(function (object) {
+                    if (object.certificate_produced_at) {
+                        object.certificate_produced_at = formatYmd(new Date(object.certificate_produced_at));
+                    }
+                    if (object.certificate_finished_at) {
+                        object.certificate_finished_at = formatYmd(new Date(object.certificate_finished_at));
+                    }
+
+                    object.created_at = formatYmd(new Date(object.created_at));
+                    //object.updated_at = formatYmd(new Date(object.updated_at));
+                    if (object.deleted_at) {
+                        object.deleted_at = formatYmd(new Date(object.deleted_at));
+                    }
+
+                    return object;
+                });
+
+                window.setTimeout(() => {
+                    vue.loading = false;
+                }, 500);
+
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        deleteApplication(item) {
+            const vue = this;
+            const applicationId = item.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.delete(`/api/${apiLocation}/application/${applicationId}/delete`).then(function (response) {
+                vue.fetch();
+                alert('Успешно');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        paginationNext() {
+            if ((this.page + 1) <= this.last_page) {
+                this.page += 1;
+                this.fetch();
+            }
+        },
+        paginationPrevious() {
+            if ((this.page - 1) >= 1) {
+                this.page -= 1;
+                this.fetch();
+            }
+        },
+    },
+    mounted() {
+        this.fetch();
+    },
+    watch: {
+        deleted() {
+            this.fetch();
+        },
+        search() {
+            this.fetch();
+        },
+        owned() {
+            this.fetch();
+        }
+    },
+}
+</script>
+
+<style scoped>
+
+</style>

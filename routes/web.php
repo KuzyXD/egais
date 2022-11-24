@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    dd(\App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob::dispatch(1129827));
-});
-
 Route::prefix('rg-client')->group(function () {
     Route::view('/login', 'login.client')->name('client.login');
 });
@@ -27,7 +22,7 @@ Route::prefix('rg-manager')->group(function () {
         Route::view('/clients', 'manager.clients_list')->name('manager.clients_list');
         Route::view('/companies', 'manager.company_list')->name('manager.companies');
         Route::view('/companies/{id}/templates', 'manager.templates')->name('manager.companies.templates');
-        Route::view('/applications', 'manager.clients_list')->name('manager.applications');
+        Route::view('/applications', 'manager.application_list')->name('manager.applications');
     });
 });
 

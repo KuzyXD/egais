@@ -11,4 +11,16 @@ class RgApplications extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+    protected $hidden = ['ac_pass', 'ac_login'];
+
+    public function manager()
+    {
+        return $this->hasOne(RgManager::class, 'id', 'created_by');
+    }
+
+    public function template()
+    {
+        return $this->hasOne(RgApplicationsTemplate::class, 'id', 'template_id');
+    }
 }

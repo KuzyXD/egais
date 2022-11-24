@@ -29,4 +29,9 @@ class RgApplicationsTemplate extends Model
     {
         return $this->hasMany(RgApplicationTemplateFiles::class, 'application_template_id', 'id');
     }
+
+    public function applications()
+    {
+        return $this->hasMany(RgApplications::class, 'template_id', 'id');
+    }
 }

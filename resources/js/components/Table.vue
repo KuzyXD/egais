@@ -1,5 +1,5 @@
 <template>
-    <table class="text-sm text-left text-gray-500 table-fixed">
+    <table class="w-full text-sm text-left text-gray-500">
         <caption class="px-5 text-lg font-semibold text-left text-gray-900">
             {{ title }}
             <p v-show="text" class="mt-1 text-sm font-normal text-gray-500">
