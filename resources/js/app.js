@@ -1,3 +1,5 @@
+import clientListPage from "./components/manager/ClientListPage";
+
 require('./bootstrap');
 
 import {createApp} from 'vue';
@@ -14,6 +16,7 @@ import Skeleton from "./components/Skeleton";
 import Logo from "./components/Logo";
 import TemplatesPage from "./components/manager/TemplatesPage";
 import ApplicationListPage from "./components/manager/ApplicationListPage";
+import ClientListPage from "./components/manager/ClientListPage";
 
 const app = createApp({});
 
@@ -28,5 +31,6 @@ app.component('skeleton', Skeleton);
 app.component('pagination', Pagination);
 app.component('logo', Logo);
 app.component('templates-page', TemplatesPage);
+app.component('client-list-page', clientListPage);
 
 app.mount('#app');

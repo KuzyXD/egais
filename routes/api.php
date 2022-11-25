@@ -50,4 +50,12 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::post('registrate', [ApplicationController::class, 'registrateApplication']);
         Route::delete('{id}/delete', [ApplicationController::class, 'destroy']);
     });
+
+    Route::prefix('client')->group(function () {
+        Route::get('index', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'index']);
+        Route::post('store', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'store']);
+        Route::patch('{rgClient}/update', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'update']);
+        Route::get('{rgClient}/show', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'show']);
+        Route::delete('{rgClient}/delete', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'destroy'])->withTrashed();
+    });
 });

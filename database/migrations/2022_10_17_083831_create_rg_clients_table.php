@@ -13,7 +13,7 @@ class CreateRgClientsTable extends Migration
             $table->string('fio');
             $table->string('password');
             $table->string('certificate_serial_number', 50);
-            $table->timestamp('certificate_expire_to_date')->nullable();
+            $table->timestamp('certificate_expire_to_date');
             $table->string('note')->nullable();
 
             $table->softDeletes();

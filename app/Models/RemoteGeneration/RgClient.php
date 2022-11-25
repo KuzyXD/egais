@@ -11,5 +11,5 @@ class RgClient extends Authenticatable
 {
     use HasFactory, SoftDeletes, HasApiTokens;
 
-    protected $fillable = ['fio', 'password', 'certificate_serial_number'];
+    protected $guarded = [];
 }
