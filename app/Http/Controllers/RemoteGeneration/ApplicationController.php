@@ -16,7 +16,7 @@ class ApplicationController extends Controller
             return $paginate->response();
         }
 
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function registrateApplication(ApplicationRegistrateRequest $request, RgApplication $service)
@@ -25,7 +25,7 @@ class ApplicationController extends Controller
             return response('Успешно', 201);
         }
 
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function destroy(Request $request, $id, RgApplication $service)
@@ -33,6 +33,6 @@ class ApplicationController extends Controller
         if ($service->destroy($id)) {
             return response('Успешно', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 }

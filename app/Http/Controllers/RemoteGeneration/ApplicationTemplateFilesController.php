@@ -18,7 +18,7 @@ class ApplicationTemplateFilesController extends Controller
             return response($data, 200);
         }
 
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function store(ApplicationTemplateFileRequest $request, $templateId, RgApplicationTemplateFile $service)
@@ -26,7 +26,7 @@ class ApplicationTemplateFilesController extends Controller
         if ($service->store($request, $templateId)) {
             return response('Успешно', 201);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function show($fileId)
@@ -41,6 +41,6 @@ class ApplicationTemplateFilesController extends Controller
         if ($service->destroy($fileId)) {
             return response('Успешно', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 }

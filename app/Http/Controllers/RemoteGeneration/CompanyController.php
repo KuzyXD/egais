@@ -17,7 +17,7 @@ class CompanyController extends Controller
             return response($paginate, 200);
         }
 
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function store(CompanyStoreRequest $request, RgCompany $companyService)
@@ -25,7 +25,7 @@ class CompanyController extends Controller
         if ($companyService->store($request->validated(), $request->user('rg-manager')->id)) {
             return response('Успешно', 201);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function update(CompanyUpdateRequest $request, $id, RgCompany $companyService)
@@ -33,7 +33,7 @@ class CompanyController extends Controller
         if ($companyService->update($request->validated(), $id)) {
             return response('Успешно изменено', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function destroy($id, RgCompany $companyService)
@@ -41,6 +41,6 @@ class CompanyController extends Controller
         if ($companyService->destroy($id)) {
             return response('Успешно', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 }

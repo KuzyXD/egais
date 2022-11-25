@@ -19,7 +19,7 @@ class TemplatesController extends Controller
             return $paginate->response();
         }
 
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function store(TemplatesStoreRequest $request, $id, RgTemplates $templates)
@@ -27,7 +27,7 @@ class TemplatesController extends Controller
         if ($templates->store($request->validated(), $request->user('rg-manager')->id, intval($id))) {
             return response('Успешно', 201);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function show($template_id)
@@ -40,7 +40,7 @@ class TemplatesController extends Controller
         if ($templates->update($request->validated(), $template_id)) {
             return response('Успешно изменено', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
     public function destroy($template_id, RgTemplates $templates)
@@ -48,6 +48,6 @@ class TemplatesController extends Controller
         if ($templates->destroy($template_id)) {
             return response('Успешно', 200);
         }
-        return response('Произошла ошибка. Свяжитесь с программистом.', '500');
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 }
