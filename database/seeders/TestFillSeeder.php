@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\Statuses;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
+use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
 use Illuminate\Database\Seeder;
@@ -82,5 +83,6 @@ class TestFillSeeder extends Seeder
             "updated_at" => "2022-11-22 11:57:09",
             "deleted_at" => NULL
         ]);
+        RgClient::factory()->count(2)->create();
     }
 }

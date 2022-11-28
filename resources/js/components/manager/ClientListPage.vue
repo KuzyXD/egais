@@ -4,7 +4,7 @@
             <div class="relative max-w-7xl">
                 <custom-table v-show="!loading"
                               :actions="[
-                                  {name: 'to_templates', text: 'Шаблоны заявок'},
+                                  {name: 'update', text: 'Изменить'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
                               ]"
                               :cols=cols
@@ -12,32 +12,43 @@
                                   {name: 'deleted', text: 'Отобразить удаленных клиентов'},
                               ]"
                               :items="items"
-                              text="Добавляйте, удаляйте, изменяйте компании с помощью таблицы. В поиске вы можете использовать данные из любого столбца."
+                              text="Добавляйте, удаляйте, клиентов с помощью таблицы. В поиске вы можете использовать данные из любого столбца."
                               title="Список клиентов"
-                              @delete="deleteCompany"
+                              @delete="deleteClient"
                               @deleted="this.deleted = !this.deleted"
                               @search="value => this.search = value"
                               @sorted="this.fetch"
-                              @to_templates="redirectToTemplates"
+                              @update="showUpdateModal"
                 ></custom-table>
                 <pagination v-show="!loading" class="flex justify-end mt-3"
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a class="inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
-                       data-modal-toggle="create-company-modal" href="#" @click.prevent="">
-                        Создать компанию
+                       data-modal-toggle="create-client-modal" href="#" @click.prevent="">
+                        Создать клиента
+                    </a>
+                    <a ref="update-client-modal-href"
+                       class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       data-modal-toggle="update-client-modal" href="#" @click.prevent="">
+                        Изменить клиента
                     </a>
                 </pagination>
                 <skeleton v-show="loading"></skeleton>
             </div>
         </div>
+        <create-client-modal @submit="create"></create-client-modal>
+        <update-client-modal ref="update-client-modal" :selected-item="selectedItem"
+                             @submit="update"></update-client-modal>
     </div>
 </template>
 
 <script>
 import {formatYmd, getSortableState} from "../../helper_functions";
+import CreateClientModal from "./CreateClientModal";
+import UpdateClientModal from "./UpdateClientModal";
 
 export default {
+    components: {CreateClientModal, UpdateClientModal},
     data() {
         return {
             cols: [
@@ -65,10 +76,11 @@ export default {
             loading: true,
 
             deleted: false,
-            owned: false,
             search: '',
             page: 1,
             last_page: 1,
+
+            selectedItem: {},
         }
     },
     methods: {
@@ -76,7 +88,7 @@ export default {
             const vue = this;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
-            let apiUri = `/api/${apiLocation}/company/list?page=${this.page}`;
+            let apiUri = `/api/${apiLocation}/client/index?page=${this.page}`;
 
             if (this.search) {
                 apiUri += `&search=${this.search}`;
@@ -94,7 +106,6 @@ export default {
             }
 
             apiUri += `&deleted=${this.deleted}`
-            apiUri += `&owned=${this.owned}`
 
             axios.get(apiUri).then(function (response) {
                 vue.last_page = response.data.last_page;
@@ -117,13 +128,13 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        deleteCompany(item) {
+        deleteClient(item) {
             const vue = this;
-            const companyId = item.id;
+            const clientId = item.id;
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
-            axios.delete(`/api/${apiLocation}/company/${companyId}/delete`).then(function (response) {
+            axios.delete(`/api/${apiLocation}/client/${clientId}/delete`).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
             }).catch(function (error) {
@@ -144,6 +155,25 @@ export default {
                 alert((Object.values(error.response.data.errors)).flat().join(', '));
             });
         },
+        update(form, closeButton) {
+            const vue = this;
+            const clientId = this.selectedItem.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.patch(`/api/${apiLocation}/client/${clientId}/update`, form).then(function (response) {
+                vue.fetch();
+                closeButton.click();
+                alert('Успешно');
+            }).catch(function (error) {
+                alert((Object.values(error.response.data.errors)).flat().join(', '));
+            });
+        },
+        showUpdateModal(item) {
+            this.selectedItem = item;
+            this.$refs['update-client-modal-href'].click();
+            this.$nextTick(() => this.$refs['update-client-modal'].$el.focus());
+        },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {
                 this.page += 1;
@@ -156,10 +186,6 @@ export default {
                 this.fetch();
             }
         },
-        redirectToTemplates(item) {
-            const companyId = item.id;
-            window.open(window.location.href + `/${companyId}/templates`)
-        }
     },
     mounted() {
         this.fetch();
@@ -171,9 +197,6 @@ export default {
         search() {
             this.fetch();
         },
-        owned() {
-            this.fetch();
-        }
     },
 }
 </script>

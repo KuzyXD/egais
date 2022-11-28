@@ -27,13 +27,13 @@ class ClientControllerTest extends TestCase
             'fio' => 'Заславский Дмитрий',
             'password' => '111',
             'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => '15.06.2022',
+            'certificate_expire_to_date' => '2022-05-31',
             'note' => 'тестовая сущность'
         ];
 
         $this->post('api/rg-manager/client/store', $data);
 
-        $data['certificate_expire_to_date'] = Date::createFromFormat('d.m.Y', $data['certificate_expire_to_date']);
+        $data['certificate_expire_to_date'] = \Carbon\Carbon::parse($data['certificate_expire_to_date']);
 
         $this->assertDatabaseHas('rg_clients', Arr::except($data, 'password'));
     }

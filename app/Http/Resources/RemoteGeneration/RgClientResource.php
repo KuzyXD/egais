@@ -22,7 +22,7 @@ class RgClientResource extends JsonResource
             'note' => $this->note,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'delete_at' => $this->deleted_at,
+            'deleted_at' => $this->deleted_at,
         ];
     }
 }
