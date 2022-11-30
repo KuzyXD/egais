@@ -8,6 +8,7 @@ use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -83,6 +84,10 @@ class TestFillSeeder extends Seeder
             "updated_at" => "2022-11-22 11:57:09",
             "deleted_at" => NULL
         ]);
-        RgClient::factory()->count(2)->create();
+        RgClient::factory()->count(1)->create([
+            'fio' => 'Кузнецов Илья Олегович',
+            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
+            'certificate_expire_to_date' => Carbon::parse('2023-06-15')
+        ]);
     }
 }

@@ -163,7 +163,7 @@ export default {
         return {
             certificates: [],
             selectedCertificate: undefined,
-            password: '15krot68',
+            password: '111',
             errorText: '',
             cadesplugin_initialization
         };

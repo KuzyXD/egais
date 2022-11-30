@@ -16,6 +16,11 @@ Route::prefix('rg-client')->group(function () {
     Route::view('/login', 'login.client')->name('client.login');
 });
 
+Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
+    Route::view('/dashboard', 'client.dashboard');
+});
+
+
 Route::prefix('rg-manager')->group(function () {
     Route::view('/login', 'login.staff')->name('manager.login');
     Route::prefix('list')->group(function () {

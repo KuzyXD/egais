@@ -17,6 +17,7 @@ class RgClientResource extends JsonResource
         return [
             'id' => $this->id,
             'fio' => $this->fio,
+            'group' => $this->group,
             'certificate_serial_number' => $this->certificate_serial_number,
             'certificate_expire_to_date' => $this->certificate_expire_to_date,
             'note' => $this->note,
