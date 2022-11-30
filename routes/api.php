@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RemoteGeneration\ApplicationController;
 use App\Http\Controllers\RemoteGeneration\ApplicationTemplateFilesController;
+use App\Http\Controllers\RemoteGeneration\ClientGroupController;
 use App\Http\Controllers\RemoteGeneration\CompanyController;
 use App\Http\Controllers\RemoteGeneration\Login\ClientController;
 use App\Http\Controllers\RemoteGeneration\Login\ManagerController;
@@ -57,5 +58,11 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::patch('{rgClient}/update', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'update']);
         Route::get('{rgClient}/show', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'show']);
         Route::delete('{rgClient}/delete', [\App\Http\Controllers\RemoteGeneration\ClientController::class, 'destroy'])->withTrashed();
+    });
+
+    Route::prefix('group')->group(function () {
+        Route::get('list', [ClientGroupController::class, 'index']);
+        Route::get('{rgClient}/show', [ClientGroupController::class, 'show']);
+        Route::patch('{rgClient}/update', [ClientGroupController::class, 'update']);
     });
 });

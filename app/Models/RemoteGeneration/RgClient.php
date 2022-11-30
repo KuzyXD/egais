@@ -12,4 +12,9 @@ class RgClient extends Authenticatable
     use HasFactory, SoftDeletes, HasApiTokens;
 
     protected $guarded = [];
+
+    public function companies()
+    {
+        return $this->hasMany(RgCompany::class, 'group', 'group');
+    }
 }

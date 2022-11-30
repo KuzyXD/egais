@@ -15,6 +15,7 @@ class CreateRgClientsTable extends Migration
             $table->string('certificate_serial_number', 50);
             $table->timestamp('certificate_expire_to_date');
             $table->string('note')->nullable();
+            $table->string('group')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
