@@ -2,6 +2,7 @@
     <div class="relative flex flex-col items-center justify-center">
         <div class="px-6 pb-2 max-w-full overflow-x-auto relative">
             <custom-table v-show="!loading" :actions="[
+                                  {name: 'show_files', text: 'Файлы'},
                                   {name: 'delete', text: 'Удалить/восстановить'},
                               ]"
                           :cols=cols
@@ -16,12 +17,20 @@
                           @deleted="this.deleted = !this.deleted"
                           @owned="this.owned = !this.owned"
                           @search="value => this.search = value"
+                          @show_files="showFilesModal"
                           @sorted="this.fetch"
             ></custom-table>
             <pagination v-show="!loading" class="flex justify-start mt-3"
                         @next="paginationNext"
                         @previous="paginationPrevious">
+                <a ref="show-application-files-modal-ref"
+                   class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                   data-modal-toggle="show-application-files-modal" href="#" @click.prevent="">
+                    Отобразить форму авторизации для АЦ
+                </a>
             </pagination>
+            <show-application-files-modal ref="show-application-files-modal"
+                                          :selected-item="selectedItem"></show-application-files-modal>
             <skeleton v-show="loading"></skeleton>
         </div>
     </div>
@@ -29,8 +38,10 @@
 
 <script>
 import {formatYmd, getSortableState} from "../../helper_functions";
+import ShowApplicationFilesModal from "./ShowApplicationFilesModal";
 
 export default {
+    components: {ShowApplicationFilesModal},
     data() {
         return {
             cols: [
@@ -68,6 +79,8 @@ export default {
             search: '',
             page: 1,
             last_page: 1,
+
+            selectedItem: {}
         }
     },
     methods: {
@@ -136,6 +149,11 @@ export default {
                 console.log(error.response);
                 alert('Ошибка, обратитесь к программисту.');
             });
+        },
+        showFilesModal(item) {
+            this.selectedItem = item;
+            this.$refs['show-application-files-modal-ref'].click();
+            this.$nextTick(() => this.$refs['show-application-files-modal'].$el.focus());
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {

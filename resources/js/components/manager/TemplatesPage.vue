@@ -73,7 +73,7 @@
 import {getSortableState, formatYmd} from "../../helper_functions";
 import CreateUrTemplateModal from "./CreateUrTemplateModal";
 import UpdateUrTemplateModal from "./UpdateUrTemplateModal";
-import ShowFilesModal from "./ShowFilesModal";
+import ShowFilesModal from "./ShowTemplateFilesModal";
 import AcLoginModal from "./AcLoginModal";
 
 export default {

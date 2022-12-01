@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\Statuses;
+use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgClient;
@@ -64,7 +65,7 @@ class TestFillSeeder extends Seeder
             "updated_at" => "2022-11-22 11:12:30",
             "deleted_at" => NULL
         ]);
-        RgApplications::factory()->count(1)->create([
+        RgApplications::factory([
             "id" => 1,
             "created_by" => 1,
             "ac_id" => 1138353,
@@ -83,7 +84,7 @@ class TestFillSeeder extends Seeder
             "created_at" => "2022-11-22 11:55:40",
             "updated_at" => "2022-11-22 11:57:09",
             "deleted_at" => NULL
-        ]);
+        ])->count(1)->create();
         RgClient::factory()->count(1)->create([
             'fio' => 'Кузнецов Илья Олегович',
             'certificate_serial_number' => '01d880ad474855900000000c381d0002',
