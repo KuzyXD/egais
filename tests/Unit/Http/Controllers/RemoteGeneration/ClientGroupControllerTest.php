@@ -7,13 +7,13 @@ use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
 use App\Services\RemoteGeneration\RgClientGroup;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ClientGroupControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testIndex()
     {

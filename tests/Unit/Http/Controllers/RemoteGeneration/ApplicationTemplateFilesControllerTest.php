@@ -7,7 +7,7 @@ use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgApplicationTemplateFiles;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ use Tests\TestCase;
 
 class ApplicationTemplateFilesControllerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use DatabaseMigrations, WithFaker;
 
     public function testShow()
     {

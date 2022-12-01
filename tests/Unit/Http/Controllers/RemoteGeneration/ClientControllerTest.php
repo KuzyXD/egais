@@ -5,7 +5,7 @@ namespace Http\Controllers\RemoteGeneration;
 use App\Http\Controllers\RemoteGeneration\ClientController;
 use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgManager;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 use Laravel\Sanctum\Sanctum;
@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class ClientControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testStore()
     {
@@ -80,9 +80,7 @@ class ClientControllerTest extends TestCase
 
         $this->patch('api/rg-manager/client/1/update', Arr::except($requestParameters, 'id'));
 
-        $dataForVerificate = $parameters;
-        $dataForVerificate['certificate_serial_number'] = '01d880ad474855900043000c381d0002';
-        $this->assertDatabaseHas('rg_clients', $dataForVerificate);
+        $this->assertDatabaseHas('rg_clients', ['certificate_serial_number' => $requestParameters['certificate_serial_number']]);
     }
 
     public function testDestroy()

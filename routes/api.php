@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RemoteGeneration\ApplicationController;
+use App\Http\Controllers\RemoteGeneration\ApplicationFilesController;
 use App\Http\Controllers\RemoteGeneration\ApplicationTemplateFilesController;
 use App\Http\Controllers\RemoteGeneration\ClientGroupController;
 use App\Http\Controllers\RemoteGeneration\CompanyController;
@@ -50,6 +51,13 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::get('index', [ApplicationController::class, 'index']);
         Route::post('registrate', [ApplicationController::class, 'registrateApplication']);
         Route::delete('{id}/delete', [ApplicationController::class, 'destroy']);
+
+        Route::prefix('{application}/files')->group(function () {
+            Route::get('index', [ApplicationFilesController::class, 'index']);
+            Route::get('{rgApplicationFiles}/show', [ApplicationFilesController::class, 'show']);
+            Route::post('store', [ApplicationFilesController::class, 'store']);
+            Route::delete('{rgApplicationFiles}/delete', [ApplicationFilesController::class, 'destroy']);
+        });
     });
 
     Route::prefix('client')->group(function () {

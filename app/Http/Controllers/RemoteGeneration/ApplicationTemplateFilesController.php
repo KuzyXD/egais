@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\RemoteGeneration;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ApplicationTemplateFileRequest;
+use App\Http\Requests\ApplicationFileRequest;
 use App\Models\RemoteGeneration\RgApplicationTemplateFiles;
 use App\Services\RemoteGeneration\RgApplicationTemplateFile;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class ApplicationTemplateFilesController extends Controller
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
-    public function store(ApplicationTemplateFileRequest $request, $templateId, RgApplicationTemplateFile $service)
+    public function store(ApplicationFileRequest $request, $templateId, RgApplicationTemplateFile $service)
     {
         if ($service->store($request, $templateId)) {
             return response('Успешно', 201);

@@ -8,12 +8,12 @@ use Illuminate\Support\Arr;
 
 class AddRgClientCommand extends Command
 {
-    protected $signature = 'rgclient:add {fio} {certificate_serial_number} {password}';
+    protected $signature = 'rgclient:add {fio} {certificate_serial_number} {certificate_expire_to_date} {password}';
 
     protected $description = 'Добавляет клиента в базу данных для доступа к удаленному перевыпуску';
 
     public function handle(RgClient $clientService): bool
     {
-        return $clientService->create(Arr::except($this->arguments(), 'command')) ? self::SUCCESS : self::FAILURE;
+        return $clientService->create(Arr::except($this->arguments(), ['command', 0])) ? self::SUCCESS : self::FAILURE;
     }
 }

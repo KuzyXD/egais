@@ -5,13 +5,13 @@ namespace Http\Controllers\RemoteGeneration;
 use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class CompanyControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testIndex()
     {
@@ -40,7 +40,7 @@ class CompanyControllerTest extends TestCase
 
         $response = $this->get('api/rg-manager/company/list?page=1&sort=id,desc&deleted=false&owned=false');
 
-        $this->assertGreaterThan(10, $response->json('data')[0]['id']);
+        $this->assertGreaterThan(9, $response->json('data')[0]['id']);
     }
 
     public function testStore()
@@ -108,6 +108,6 @@ class CompanyControllerTest extends TestCase
         RgManager::factory(['fio' => 'Шагалеев Максим', 'id' => 1])->create();
         RgCompany::factory()->count(10)->create(['manager_id' => 1, 'group' => 'КБ']);
 
-        $this->get('api/rg-client/company/1/list')->assertJsonCount(10);
+        $this->get('api/rg-client/company/list')->assertJsonCount(10);
     }
 }

@@ -8,13 +8,14 @@ use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ApplicationControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testIndex()
     {
@@ -32,9 +33,7 @@ class ApplicationControllerTest extends TestCase
                 'applicationTemplates')->create();
 
 
-        $response = $this->get('api/rg-manager/application/index/?page=1');
-
-        $response->assertJsonCount(6);
+        $this->get('api/rg-manager/application/index/?page=1')->assertJsonCount(6, 'data');
     }
 
     public function testDestroy()
