@@ -74,4 +74,10 @@ class RgCompany
     {
         return \App\Models\RemoteGeneration\RgCompany::find($id)->restore();
     }
+
+    public function indexCompanyByClientGroup($group): array
+    {
+        $array = \App\Models\RemoteGeneration\RgCompany::select('name')->whereGroup($group)->get()->toArray();
+        return Arr::flatten($array);
+    }
 }

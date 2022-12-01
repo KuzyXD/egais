@@ -22,4 +22,9 @@ class RgCompany extends Model
     {
         return $this->hasMany(RgApplicationsTemplate::class, 'created_for', 'id');
     }
+
+    public function applications(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(RgApplications::class, RgApplicationsTemplate::class, 'created_for', 'template_id');
+    }
 }

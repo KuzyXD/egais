@@ -2,6 +2,7 @@
 
 namespace Http\Controllers\RemoteGeneration;
 
+use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -94,5 +95,19 @@ class CompanyControllerTest extends TestCase
 
         $this->patch("api/rg-manager/company/$existedCompanyId/update", $data);
         $this->assertDatabaseHas('rg_companies', $data);
+    }
+
+    public function testIndexCompanyByClientGroup()
+    {
+        Sanctum::actingAs(
+            RgClient::factory(['fio' => 'Илья Кузнецов', 'id' => 1, 'group' => 'КБ'])->create(),
+            ['*'],
+            'rg-client'
+        );
+
+        RgManager::factory(['fio' => 'Шагалеев Максим', 'id' => 1])->create();
+        RgCompany::factory()->count(10)->create(['manager_id' => 1, 'group' => 'КБ']);
+
+        $this->get('api/rg-client/company/1/list')->assertJsonCount(10);
     }
 }

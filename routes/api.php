@@ -66,3 +66,11 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::patch('{rgClient}/update', [ClientGroupController::class, 'update']);
     });
 });
+
+Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
+    Route::prefix('company')->group(function () {
+        Route::get('list', [CompanyController::class, 'indexCompanyByClientGroup']);
+        Route::get('/{company}/application/list', [ApplicationController::class, 'indexApplicationsByCompany']);
+    });
+
+});

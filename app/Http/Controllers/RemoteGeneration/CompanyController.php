@@ -36,6 +36,15 @@ class CompanyController extends Controller
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
+    public function indexCompanyByClientGroup(Request $request, RgCompany $companyService)
+    {
+        $result = $companyService->indexCompanyByClientGroup($request->user('rg-client')->group);
+        if ($result) {
+            return response($result, 200);
+        }
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
+    }
+
     public function destroy($id, RgCompany $companyService)
     {
         if ($companyService->destroy($id)) {

@@ -116,4 +116,10 @@ class RgApplication
         return $application->delete();
     }
 
+    public function indexApplicationsByCompany(\App\Models\RemoteGeneration\RgCompany $rgCompany)
+    {
+        $array = $rgCompany->applications->toArray();
+        return $array;
+    }
+
 }
