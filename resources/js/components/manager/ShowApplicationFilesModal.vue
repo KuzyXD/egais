@@ -56,10 +56,16 @@
                                       fill-rule="evenodd"></path>
                             </svg>
                             <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
-                                Сейчас тут пусто. Загрузите сюда файлы из окна слева.
+                                Сейчас тут пусто. Загрузите сюда файлы из окна слева или воспользуйтесь кнопка
+                                "автозагрузки из шаблона".
                             </div>
                         </div>
                     </div>
+                    <button
+                        class="space-y-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button" @click="getTemplateFiles">
+                        Автозагрузка из шаблона
+                    </button>
                 </div>
             </div>
         </div>
@@ -149,6 +155,19 @@ export default {
             axios.delete(`/api/${apiLocation}/application/${applicationID}/files/${fileId}/delete`, {responseType: "blob"}).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        getTemplateFiles() {
+            const vue = this;
+            const applicationID = this.selectedItem.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/application/${applicationID}/files/template/getfiles`).then(function (response) {
+                vue.$nextTick(() => vue.fetch());
             }).catch(function (error) {
                 console.log(error.response);
                 alert('Ошибка, обратитесь к программисту.');

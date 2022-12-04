@@ -33,10 +33,10 @@ class RgApplicationFile
 
     public function deleteOldFile($files, $type): void
     {
-        $oldFile = $files->whereType($type)->first();
+        $oldFile = $files->where('type', $type)->first();
 
         if ($oldFile) {
-            $this->destroy($oldFile->id);
+            $this->destroy($oldFile);
         }
     }
 
@@ -54,7 +54,7 @@ class RgApplicationFile
         $applicationFiles = $application->files();
 
         foreach ($collection as $item) {
-            $this->deleteOldFile($applicationFiles, $item['type']);
+            $this->deleteOldFile($application->files()->get(), $item['type']);
             $applicationFiles->create($item->only(['type', 'name', 'path']));
         }
 

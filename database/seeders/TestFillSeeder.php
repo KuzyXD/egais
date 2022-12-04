@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Enums\FileTypes;
 use App\Enums\Statuses;
 use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
+use App\Models\RemoteGeneration\RgApplicationTemplateFiles;
 use App\Models\RemoteGeneration\RgClient;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
@@ -21,7 +23,7 @@ class TestFillSeeder extends Seeder
         RgManager::factory()->create(['fio' => 'Людмила Сосненко', 'password' => Hash::make('111'), 'id' => 2, 'email' => 'kuzyxd1@yandex.ru']);
         RgCompany::factory()->count(1)->create(['group' => 'КБ', 'manager_id' => 1]);
         RgCompany::factory()->count(1)->create(['group' => 'Вереск', 'manager_id' => 2]);
-        RgApplicationsTemplate::factory()->count(1)->create(["id" => 1,
+        $applicationTemplate = RgApplicationsTemplate::factory(["id" => 1,
             "created_by" => 1,
             "created_for" => 1,
             "type" => 3,
@@ -64,7 +66,11 @@ class TestFillSeeder extends Seeder
             "created_at" => "2022-11-22 11:12:30",
             "updated_at" => "2022-11-22 11:12:30",
             "deleted_at" => NULL
-        ]);
+        ])->create();
+        RgApplicationTemplateFiles::factory(['type' => FileTypes::PASSPORT()->label])->for($applicationTemplate, 'applicationTemplate')->create();
+        RgApplicationTemplateFiles::factory(['type' => FileTypes::PHOTO()->label])->for($applicationTemplate, 'applicationTemplate')->create();
+        RgApplicationTemplateFiles::factory(['type' => FileTypes::SNILS()->label])->for($applicationTemplate, 'applicationTemplate')->create();
+
         RgApplications::factory([
             "id" => 1,
             "created_by" => 1,

@@ -20681,6 +20681,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         alert('Ошибка, обратитесь к программисту.');
       });
     },
+    getTemplateFiles: function getTemplateFiles() {
+      var vue = this;
+      var applicationID = this.selectedItem.id;
+      var regex = /\w+-\w+/;
+      var apiLocation = regex.exec(window.location.pathname);
+      axios.get("/api/".concat(apiLocation, "/application/").concat(applicationID, "/files/template/getfiles")).then(function (response) {
+        vue.$nextTick(function () {
+          return vue.fetch();
+        });
+      })["catch"](function (error) {
+        console.log(error.response);
+        alert('Ошибка, обратитесь к программисту.');
+      });
+    },
     clearData: function clearData() {
       this.$refs.urTemplateFields.clearData();
     }
@@ -23417,7 +23431,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "fill-rule": "evenodd"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-3 text-sm font-medium text-green-700 dark:text-green-800"
-}, " Сейчас тут пусто. Загрузите сюда файлы из окна слева. ")], -1
+}, " Сейчас тут пусто. Загрузите сюда файлы из окна слева или воспользуйтесь кнопка \"автозагрузки из шаблона\". ")], -1
 /* HOISTED */
 );
 
@@ -23434,7 +23448,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-hidden": "true",
     "class": "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex items-start",
     tabindex: "-1",
-    onFocusOnce: _cache[3] || (_cache[3] = function () {
+    onFocusOnce: _cache[4] || (_cache[4] = function () {
       return $options.fetch && $options.fetch.apply($options, arguments);
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -23472,7 +23486,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["id", "name", "type", "onDelete", "onDownload"]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  )), _hoisted_15])])])])], 544
+  )), _hoisted_15]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "space-y-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    type: "button",
+    onClick: _cache[3] || (_cache[3] = function () {
+      return $options.getTemplateFiles && $options.getTemplateFiles.apply($options, arguments);
+    })
+  }, " Автозагрузка из шаблона ")])])])], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   );
 }
