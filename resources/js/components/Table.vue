@@ -1,5 +1,5 @@
 <template>
-    <table class="w-full text-sm text-left text-gray-500">
+    <table class="w-full text-sm text-left text-gray-500 table-auto min-w-max">
         <caption class="px-5 text-lg font-semibold text-left text-gray-900">
             {{ title }}
             <p v-show="text" class="mt-1 text-sm font-normal text-gray-500">
@@ -12,7 +12,7 @@
                            type="checkbox"
                            @change="$emit(filter.name)">
                     <label :for="'checkbox'+index" class="ml-2 text-sm font-medium text-gray-900">{{
-                            filter.text
+                        filter.text
                         }}</label>
                 </div>
             </div>
@@ -40,7 +40,8 @@
         </caption>
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
-            <th v-for="(col, colIndex) in localCols" :id="col.key" :key="colIndex" class="py-3 px-6" scope="col">
+            <th v-for="(col, colIndex) in localCols" :id="col.key" :key="colIndex"
+                :class="'py-3 px-6 w-' + (col.width ?? '36')" scope="col">
                 <div class="flex items-center">
                     {{ col.name }}
                     <a v-if="col.sortable" href="#" @click.prevent="changeSortableState(col)">

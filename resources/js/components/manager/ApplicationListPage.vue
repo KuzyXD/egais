@@ -1,45 +1,43 @@
 <template>
-    <div class="relative flex flex-col items-center justify-center">
-        <div class="px-6 pb-2 max-w-full overflow-x-auto relative">
-            <custom-table v-show="!loading" :actions="[
-                                  {name: 'open_in_lk', text: 'Открыть в ЛК'},
-                                  {name: 'show_files', text: 'Файлы'},
-                                  {name: 'delete', text: 'Удалить/восстановить'},
-                              ]"
-                          :cols=cols
-                          :filters="[
-                                  {name: 'deleted', text: 'Отобразить удаленные заявки'},
-                                  {name: 'owned', text: 'Отобразить мои заявки'},
-                              ]"
-                          :items="items"
-                          text="Сюда попадают все созданные заявки. В поиске вы можете использовать данные из любого столбца."
-                          title="Список заявок"
-                          @delete="deleteApplication"
-                          @deleted="this.deleted = !this.deleted"
-                          @open_in_lk="open_in_lk"
-                          @owned="this.owned = !this.owned"
-                          @search="value => this.search = value"
-                          @show_files="showFilesModal"
-                          @sorted="this.fetch"
-            ></custom-table>
-            <pagination v-show="!loading" class="flex justify-start mt-3"
-                        @next="paginationNext"
-                        @previous="paginationPrevious">
-                <a ref="show-application-files-modal-ref"
-                   class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
-                   data-modal-toggle="show-application-files-modal" href="#" @click.prevent="">
-                    Отобразить форму авторизации для АЦ
-                </a>
-                <a ref="open_in_lk-ref" :href="'https://lk.iecp.ru/application/' + selectedItem.ac_id"
-                   class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
-                   target='_blank'>
-                    Открыть в АЦ
-                </a>
-            </pagination>
-            <show-application-files-modal ref="show-application-files-modal"
-                                          :selected-item="selectedItem"></show-application-files-modal>
-            <skeleton v-show="loading"></skeleton>
-        </div>
+    <div class="px-6 pb-2 overflow-x-auto relative max-w-max">
+        <custom-table v-show="!loading" :actions="[
+                              {name: 'open_in_lk', text: 'Открыть в ЛК'},
+                              {name: 'show_files', text: 'Файлы'},
+                              {name: 'delete', text: 'Удалить/восстановить'},
+                          ]"
+                      :cols=cols
+                      :filters="[
+                              {name: 'deleted', text: 'Отобразить удаленные заявки'},
+                              {name: 'owned', text: 'Отобразить мои заявки'},
+                          ]"
+                      :items="items"
+                      text="Сюда попадают все созданные заявки. В поиске вы можете использовать данные из любого столбца."
+                      title="Список заявок"
+                      @delete="deleteApplication"
+                      @deleted="this.deleted = !this.deleted"
+                      @open_in_lk="open_in_lk"
+                      @owned="this.owned = !this.owned"
+                      @search="value => this.search = value"
+                      @show_files="showFilesModal"
+                      @sorted="this.fetch"
+        ></custom-table>
+        <pagination v-show="!loading" class="flex justify-start mt-3"
+                    @next="paginationNext"
+                    @previous="paginationPrevious">
+            <a ref="show-application-files-modal-ref"
+               class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+               data-modal-toggle="show-application-files-modal" href="#" @click.prevent="">
+                Отобразить форму авторизации для АЦ
+            </a>
+            <a ref="open_in_lk-ref" :href="'https://lk.iecp.ru/application/' + selectedItem.ac_id"
+               class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+               target='_blank'>
+                Открыть в АЦ
+            </a>
+        </pagination>
+        <show-application-files-modal ref="show-application-files-modal"
+                                      :selected-item="selectedItem"></show-application-files-modal>
+        <skeleton v-show="loading"></skeleton>
     </div>
 </template>
 
@@ -54,29 +52,41 @@ export default {
             cols: [
                 {name: 'ID', key: 'id', sortable: true, sortableState: 'desc'},
                 {name: 'ID в АЦ', key: 'ac_id', sortable: true, sortableState: 'normal'},
-                {name: 'Статус', key: 'status', sortable: true, sortableState: 'normal'},
-                {name: 'Пин-код', key: 'pin_code', sortable: true, sortableState: 'normal'},
-                {name: 'Комментарий', key: 'comment', sortable: true, sortableState: 'normal'},
-                {name: 'Номер шаблона', key: 'template_id', sortable: true, sortableState: 'normal'},
-                {name: 'Номер магазина', key: 'store_number', sortable: true, sortableState: 'normal'},
-                {name: 'Тип действия', key: 'action_type', sortable: true, sortableState: 'normal'},
+                {name: 'Статус', key: 'status', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Пин-код', key: 'pin_code', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Комментарий', key: 'comment', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Номер шаблона', key: 'template_id', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Номер магазина', key: 'store_number', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Тип действия', key: 'action_type', sortable: true, sortableState: 'normal', width: '52'},
                 {
                     name: 'Серийный номер сертификата',
                     key: 'serial_number_certificate',
                     sortable: false,
-                    sortableState: 'normal'
+                    sortableState: 'normal', width: '52'
                 },
-                {name: 'Действительный с', key: 'certificate_produced_at', sortable: true, sortableState: 'normal'},
-                {name: 'Действительный по', key: 'certificate_finished_at', sortable: true, sortableState: 'normal'},
+                {
+                    name: 'Действительный с',
+                    key: 'certificate_produced_at',
+                    sortable: true,
+                    sortableState: 'normal',
+                    width: '52'
+                },
+                {
+                    name: 'Действительный по',
+                    key: 'certificate_finished_at',
+                    sortable: true,
+                    sortableState: 'normal',
+                    width: '52'
+                },
                 {
                     name: 'С/Н сертификата для замены',
                     key: 'replace_serial_key',
                     sortable: true,
-                    sortableState: 'normal'
+                    sortableState: 'normal', width: '52'
                 },
-                {name: 'Создана', key: 'created_at', sortable: true, sortableState: 'normal'},
-                {name: 'Удалена', key: 'deleted_at', sortable: true, sortableState: 'normal'},
-                {name: 'Действия', key: 'actions', sortable: false, sortableState: 'normal'}
+                {name: 'Создана', key: 'created_at', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Удалена', key: 'deleted_at', sortable: true, sortableState: 'normal', width: '52'},
+                {name: 'Действия', key: 'actions', sortable: false, sortableState: 'normal', width: '52'}
             ],
             items: [],
             loading: true,
