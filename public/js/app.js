@@ -20012,6 +20012,10 @@ __webpack_require__.r(__webpack_exports__);
         return _this.$refs['show-application-files-modal'].$el.focus();
       });
     },
+    open_in_lk: function open_in_lk(item) {
+      this.selectedItem = item;
+      this.$refs['open_in_lk-ref'].click();
+    },
     paginationNext: function paginationNext() {
       if (this.page + 1 <= this.last_page) {
         this.page += 1;
@@ -22626,6 +22630,7 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "px-6 pb-2 max-w-full overflow-x-auto relative"
 };
+var _hoisted_3 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -22639,6 +22644,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_table, {
     actions: [{
+      name: 'open_in_lk',
+      text: 'Открыть в ЛК'
+    }, {
       name: 'show_files',
       text: 'Файлы'
     }, {
@@ -22660,6 +22668,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onDeleted: _cache[0] || (_cache[0] = function ($event) {
       return _this.deleted = !_this.deleted;
     }),
+    onOpen_in_lk: $options.open_in_lk,
     onOwned: _cache[1] || (_cache[1] = function ($event) {
       return _this.owned = !_this.owned;
     }),
@@ -22670,7 +22679,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSorted: this.fetch
   }, null, 8
   /* PROPS */
-  , ["cols", "items", "onDelete", "onShow_files", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
+  , ["cols", "items", "onDelete", "onOpen_in_lk", "onShow_files", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loading]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
     "class": "flex justify-start mt-3",
     onNext: $options.paginationNext,
     onPrevious: $options.paginationPrevious
@@ -22684,7 +22693,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
       }, " Отобразить форму авторизации для АЦ ", 512
       /* NEED_PATCH */
-      )];
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        ref: "open_in_lk-ref",
+        href: 'https://lk.iecp.ru/application/' + $data.selectedItem.ac_id,
+        "class": "hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4",
+        target: "_blank"
+      }, " Открыть в АЦ ", 8
+      /* PROPS */
+      , _hoisted_3)];
     }),
     _: 1
     /* STABLE */
