@@ -14,24 +14,23 @@ class RgApplicationsTemplate extends Model
 
     protected $guarded = [];
 
-
-    public function manager(): HasOne
+    public function manager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(RgManager::class, 'id', 'created_by');
+        return $this->belongsTo(RgManager::class, 'created_by', 'id');
     }
 
-    public function company(): HasOne
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(RgCompany::class, 'id', 'created_for');
+        return $this->belongsTo(RgCompany::class, 'created_for', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(RgApplicationTemplateFiles::class, 'application_template_id', 'id');
     }
 
-    public function applications()
+    public function applications(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(RgApplications::class, 'template_id', 'id');
+        return $this->belongsToMany(RgApplications::class, RgApplications::class, 'id', 'template_id');
     }
 }

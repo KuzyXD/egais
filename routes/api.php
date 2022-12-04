@@ -57,6 +57,8 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
             Route::get('{rgApplicationFiles}/show', [ApplicationFilesController::class, 'show']);
             Route::post('store', [ApplicationFilesController::class, 'store']);
             Route::delete('{rgApplicationFiles}/delete', [ApplicationFilesController::class, 'destroy']);
+
+            Route::get('template/getfiles', [ApplicationFilesController::class, 'getTemplateFiles']);
         });
     });
 

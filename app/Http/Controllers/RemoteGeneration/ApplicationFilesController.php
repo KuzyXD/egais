@@ -43,4 +43,12 @@ class ApplicationFilesController extends Controller
         }
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
+
+    public function getTemplateFiles(RgApplications $application, RgApplicationFile $service)
+    {
+        if ($service->getTemplateFiles($application)) {
+            return response('Успешно', 201);
+        }
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
+    }
 }

@@ -13,7 +13,7 @@ class RgApplicationTemplateFiles extends Model
     protected $hidden = ['application_template_id', 'path'];
     protected $guarded = ['application_template_id'];
 
-    public function applicationTemplate()
+    public function applicationTemplate(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(RgApplicationsTemplate::class, 'application_template_id', 'id');
     }

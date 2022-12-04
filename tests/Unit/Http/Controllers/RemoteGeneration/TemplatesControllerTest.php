@@ -2,6 +2,8 @@
 
 namespace Http\Controllers\RemoteGeneration;
 
+use App\Enums\Statuses;
+use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Models\RemoteGeneration\RgManager;
@@ -21,10 +23,8 @@ class TemplatesControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory(['manager_id' => 1, 'id' => 1])
-            ->has(
-                RgApplicationsTemplate::factory(['created_by' => 1])->count(6),
-                'applicationTemplates')->create();
+        $company = RgCompany::factory(['manager_id' => 1, 'id' => 1])->create();
+        $templates = RgApplicationsTemplate::factory(['created_by' => 1, 'created_for' => 1])->count(6)->create();
 
         $response = $this->get('api/rg-manager/company/1/templates/?page=1');
 

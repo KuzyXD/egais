@@ -5,6 +5,7 @@ namespace App\Services\RemoteGeneration;
 use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use Illuminate\Http\Request;
+use function MongoDB\BSON\toRelaxedExtendedJSON;
 
 class RgApplicationFile
 {
@@ -12,11 +13,8 @@ class RgApplicationFile
     {
         $files = $rgApplication->files();
         $rgApplicationId = $rgApplication->id;
-        $oldFile = $files->whereType($parameters['type'])->first();
 
-        if ($oldFile) {
-            $this->destroy($oldFile->id);
-        }
+        $this->deleteOldFile($files, $parameters['type']);
 
         $fileName = $parameters->file('file')->getClientOriginalName();
         $path = $parameters->file('file')->store("/files/$rgApplicationId");
@@ -33,11 +31,33 @@ class RgApplicationFile
         return false;
     }
 
+    public function deleteOldFile($files, $type): void
+    {
+        $oldFile = $files->whereType($type)->first();
+
+        if ($oldFile) {
+            $this->destroy($oldFile->id);
+        }
+    }
+
     public function destroy(RgApplicationFiles $files): ?bool
     {
         if ($files->trashed()) {
             return $files->restore();
         }
         return $files->delete();
+    }
+
+    public function getTemplateFiles(RgApplications $application): bool
+    {
+        $collection = $application->templateFiles()->get();
+        $applicationFiles = $application->files();
+
+        foreach ($collection as $item) {
+            $this->deleteOldFile($applicationFiles, $item['type']);
+            $applicationFiles->create($item->only(['type', 'name', 'path']));
+        }
+
+        return true;
     }
 }

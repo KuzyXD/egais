@@ -25,12 +25,9 @@ class ApplicationControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory(['manager_id' => 1, 'id' => 1])
-            ->has(
-                RgApplicationsTemplate::factory(['created_by' => 1])->count(6)->has(
-                    RgApplications::factory(['created_by' => 1, 'status' => Statuses::CREATED()->label])->count(2), 'applications'
-                ),
-                'applicationTemplates')->create();
+        $company = RgCompany::factory(['manager_id' => 1, 'id' => 1])->create();
+        $template = RgApplicationsTemplate::factory(['id' => 1, 'created_by' => 1, 'created_for' => 1])->for($company, 'company')->create();
+        $application = RgApplications::factory(['created_by' => 1, 'template_id' => 1, 'status' => Statuses::CREATED()->label])->count(6)->create();
 
 
         $this->get('api/rg-manager/application/index/?page=1')->assertJsonCount(6, 'data');
@@ -44,12 +41,10 @@ class ApplicationControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory(['manager_id' => 1, 'id' => 1])
-            ->has(
-                RgApplicationsTemplate::factory(['created_by' => 1])->count(1)->has(
-                    RgApplications::factory(['id' => 1, 'created_by' => 1, 'status' => Statuses::CREATED()->label])->count(1), 'applications'
-                ),
-                'applicationTemplates')->create();
+        $company = RgCompany::factory(['manager_id' => 1, 'id' => 1])->create();
+        $template = RgApplicationsTemplate::factory(['id' => 1, 'created_by' => 1, 'created_for' => 1])->for($company, 'company')->create();
+        $application = RgApplications::factory(['id' => 1, 'created_by' => 1, 'template_id' => 1, 'status' => Statuses::CREATED()->label])->count(1)->create();
+
 
         $this->delete('api/rg-manager/application/1/delete/');
 
@@ -65,11 +60,9 @@ class ApplicationControllerTest extends TestCase
         );
 
         RgManager::factory(['fio' => 'Шагалеев Максим', 'id' => 1])->create();
-        RgCompany::factory(['manager_id' => 1, 'group' => 'КБ', 'name' => 'Альфа-М'])->count(1)->has(
-            RgApplicationsTemplate::factory(['created_by' => 1])->count(1)->has(
-                RgApplications::factory(['created_by' => 1, 'status' => Statuses::CREATED()->label])->count(3), 'applications'
-            ), 'applicationTemplates'
-        )->create();
+        $company = RgCompany::factory(['manager_id' => 1, 'id' => 1])->create();
+        $template = RgApplicationsTemplate::factory(['id' => 1, 'created_by' => 1, 'created_for' => 1])->for($company, 'company')->create();
+        $application = RgApplications::factory(['created_by' => 1, 'template_id' => 1, 'status' => Statuses::CREATED()->label])->count(3)->create();
 
 
         $this->get('api/rg-client/company/1/application/list')->assertJsonCount(3);

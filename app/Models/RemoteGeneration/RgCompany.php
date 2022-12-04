@@ -13,9 +13,9 @@ class RgCompany extends Model
 
     protected $guarded = [];
 
-    public function manager(): HasOne
+    public function manager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(RgManager::class, 'id', 'manager_id');
+        return $this->belongsTo(RgManager::class, 'id', 'manager_id');
     }
 
     public function applicationTemplates(): \Illuminate\Database\Eloquent\Relations\HasMany
