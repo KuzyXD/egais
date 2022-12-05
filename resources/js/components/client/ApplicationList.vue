@@ -29,6 +29,7 @@
                               :items="items"
                               text="Сюда попадают все созданные заявки. В поиске вы можете использовать данные из любого столбца."
                               title="Список заявок для компании"
+                              @action="goToSignedRoute"
                               @deleted="this.deleted = !this.deleted"
                               @search="value => this.search = value"
                               @sorted="this.fetchApplications"
@@ -36,6 +37,12 @@
                 <pagination v-show="!loadingApplications" class="flex justify-start mt-3"
                             @next="paginationNext"
                             @previous="paginationPrevious">
+                    <a ref="redirect-to-signed-route-ref"
+                       class=" inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       href=""
+                       target='_blank'>
+                        Отобразить форму авторизации для АЦ
+                    </a>
                 </pagination>
             </div>
         </div>
@@ -95,7 +102,7 @@ export default {
 
             selectedItem: {},
             selectedCompany: 'Выберите компанию здесь',
-            companies: []
+            companies: [],
         }
     },
     methods: {
@@ -185,14 +192,13 @@ export default {
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        showFilesModal(item) {
-            this.selectedItem = item;
-            this.$refs['show-application-files-modal-ref'].click();
-            this.$nextTick(() => this.$refs['show-application-files-modal'].$el.focus());
-        },
-        open_in_lk(item) {
-            this.selectedItem = item;
-            this.$refs['open_in_lk-ref'].click();
+        goToSignedRoute(item) {
+            const applicationId = item.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            this.$refs["redirect-to-signed-route-ref"].href = `/api/${apiLocation}/application/${applicationId}/getsignedroute`
+            this.$refs["redirect-to-signed-route-ref"].click();
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {
@@ -208,7 +214,6 @@ export default {
         },
     },
     mounted() {
-        //this.fetch();
         this.fetchCompanies();
     },
     watch: {

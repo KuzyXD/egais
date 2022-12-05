@@ -4,8 +4,10 @@ namespace App\Http\Controllers\RemoteGeneration;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicationRegistrateRequest;
+use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Services\RemoteGeneration\RgApplication;
+use App\Services\RemoteGeneration\RgGetSignedRoute;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -45,5 +47,10 @@ class ApplicationController extends Controller
         }
 
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
+    }
+
+    public function getSignedRoute(Request $request, RgApplications $rgApplication, RgGetSignedRoute $service)
+    {
+        return redirect($service->getSignedRoute($rgApplication));
     }
 }

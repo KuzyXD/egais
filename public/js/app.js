@@ -19778,18 +19778,12 @@ __webpack_require__.r(__webpack_exports__);
         alert('Ошибка, обратитесь к программисту.');
       });
     },
-    showFilesModal: function showFilesModal(item) {
-      var _this = this;
-
-      this.selectedItem = item;
-      this.$refs['show-application-files-modal-ref'].click();
-      this.$nextTick(function () {
-        return _this.$refs['show-application-files-modal'].$el.focus();
-      });
-    },
-    open_in_lk: function open_in_lk(item) {
-      this.selectedItem = item;
-      this.$refs['open_in_lk-ref'].click();
+    goToSignedRoute: function goToSignedRoute(item) {
+      var applicationId = item.id;
+      var regex = /\w+-\w+/;
+      var apiLocation = regex.exec(window.location.pathname);
+      this.$refs["redirect-to-signed-route-ref"].href = "/api/".concat(apiLocation, "/application/").concat(applicationId, "/getsignedroute");
+      this.$refs["redirect-to-signed-route-ref"].click();
     },
     paginationNext: function paginationNext() {
       if (this.page + 1 <= this.last_page) {
@@ -19805,7 +19799,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    //this.fetch();
     this.fetchCompanies();
   },
   watch: {
@@ -22402,6 +22395,12 @@ var _hoisted_7 = {
 var _hoisted_8 = {
   "class": "px-6 pb-2 overflow-x-auto relative max-w-max"
 };
+var _hoisted_9 = {
+  ref: "redirect-to-signed-route-ref",
+  "class": "inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4",
+  href: "",
+  target: "_blank"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
@@ -22449,6 +22448,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     items: $data.items,
     text: "Сюда попадают все созданные заявки. В поиске вы можете использовать данные из любого столбца.",
     title: "Список заявок для компании",
+    onAction: $options.goToSignedRoute,
     onDeleted: _cache[2] || (_cache[2] = function ($event) {
       return _this.deleted = !_this.deleted;
     }),
@@ -22458,11 +22458,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSorted: this.fetchApplications
   }, null, 8
   /* PROPS */
-  , ["cols", "items", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loadingApplications]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
+  , ["cols", "items", "onAction", "onSorted"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loadingApplications]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
     "class": "flex justify-start mt-3",
     onNext: $options.paginationNext,
     onPrevious: $options.paginationPrevious
-  }, null, 8
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_9, " Отобразить форму авторизации для АЦ ", 512
+      /* NEED_PATCH */
+      )];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
   /* PROPS */
   , ["onNext", "onPrevious"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.loadingApplications]])])])]);
 }

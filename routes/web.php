@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('rg-client')->group(function () {
     Route::view('/login', 'login.client')->name('client.login');
+    Route::view('/action', 'client.action')->name('client.action')->middleware('signed');
 });
 
 Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
     Route::view('/dashboard', 'client.dashboard');
-    Route::view('/list/applications', 'client.application_list');
+    Route::view('/list/applications', 'client.application_list')->name('client.application_list');
 });
 
 

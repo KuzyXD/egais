@@ -83,4 +83,7 @@ Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
         Route::get('/{company}/application/list', [ApplicationController::class, 'indexApplicationsByCompany']);
     });
 
+    Route::prefix('application/{rgApplication}')->group(function () {
+        Route::get('/getsignedroute', [ApplicationController::class, 'getSignedRoute'])->name('getsignedroute');
+    });
 });
