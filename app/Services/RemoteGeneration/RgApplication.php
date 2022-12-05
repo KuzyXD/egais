@@ -5,6 +5,7 @@ namespace App\Services\RemoteGeneration;
 use App\Enums\Statuses;
 use App\Http\Resources\ApplicationCreateResource;
 use App\Http\Resources\RemoteGeneration\RgApplicationResource;
+use App\Http\Resources\RemoteGeneration\RgClientApplicationsResource;
 use App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
@@ -116,10 +117,35 @@ class RgApplication
         return $application->delete();
     }
 
-    public function indexApplicationsByCompany(\App\Models\RemoteGeneration\RgCompany $rgCompany)
+    public function indexApplicationsByCompany(\App\Models\RemoteGeneration\RgCompany $rgCompany, $query)
     {
-        $array = $rgCompany->applications->toArray();
-        return $array;
+        $rg_applications = $rgCompany->applications();
+        $currentPage = $query->get('page');
+
+        if ($query->get('sort')) {
+            $sortby = explode(';', $query->get('sort'));
+            foreach ($sortby as $sortbyraw) {
+                $sorts = explode(',', $sortbyraw);
+                $rg_applications->orderBy($sorts[0], $sorts[1]);
+            }
+        }
+
+        if ($query->get('status')) {
+            $rg_applications->orWhere('status', $query->get('status'));
+        }
+
+        if ($query->get('search')) {
+            $rg_applications->orWhere('rg_applications.id', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.ac_id', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.comment', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.serial_number_certificate', 'like', '%' . $query->get('search') . '%');
+            $rg_applications->orWhere('rg_applications.replace_serial_key', 'like', '%' . $query->get('search') . '%');
+        }
+        if ($query->get('deleted', 'false') === 'true') {
+            $rg_applications->withTrashed();
+        }
+
+        return RgClientApplicationsResource::collection($rg_applications->paginate(6, ['*'], 'page', $currentPage));
     }
 
 }

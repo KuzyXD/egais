@@ -29,9 +29,9 @@ class ApplicationController extends Controller
 
     public function indexApplicationsByCompany(Request $request, RgCompany $company, RgApplication $service)
     {
-        $result = $service->indexApplicationsByCompany($company);
-        if ($result) {
-            return response($result, 200);
+        $paginate = $service->indexApplicationsByCompany($company, $request->query);
+        if ($paginate) {
+            return $paginate->response();
         }
 
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);

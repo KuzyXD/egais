@@ -21,7 +21,7 @@ class TestFillSeeder extends Seeder
     {
         RgManager::factory()->create(['fio' => 'Илья Кузнецов', 'password' => Hash::make('111'), 'id' => 1, 'email' => 'kuzyxd@yandex.ru']);
         RgManager::factory()->create(['fio' => 'Людмила Сосненко', 'password' => Hash::make('111'), 'id' => 2, 'email' => 'kuzyxd1@yandex.ru']);
-        RgCompany::factory()->count(1)->create(['group' => 'КБ', 'manager_id' => 1]);
+        RgCompany::factory()->count(3)->create(['group' => 'КБ', 'manager_id' => 1]);
         RgCompany::factory()->count(1)->create(['group' => 'Вереск', 'manager_id' => 2]);
         $applicationTemplate = RgApplicationsTemplate::factory(["id" => 1,
             "created_by" => 1,
@@ -72,7 +72,6 @@ class TestFillSeeder extends Seeder
         RgApplicationTemplateFiles::factory(['type' => FileTypes::SNILS()->label])->for($applicationTemplate, 'applicationTemplate')->create();
 
         RgApplications::factory([
-            "id" => 1,
             "created_by" => 1,
             "ac_id" => 1138353,
             "template_id" => 1,
@@ -90,11 +89,12 @@ class TestFillSeeder extends Seeder
             "created_at" => "2022-11-22 11:55:40",
             "updated_at" => "2022-11-22 11:57:09",
             "deleted_at" => NULL
-        ])->count(1)->create();
+        ])->count(13)->create();
         RgClient::factory()->count(1)->create([
             'fio' => 'Кузнецов Илья Олегович',
             'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Carbon::parse('2023-06-15')
+            'certificate_expire_to_date' => Carbon::parse('2023-06-15'),
+            'group' => 'КБ'
         ]);
     }
 }

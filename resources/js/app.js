@@ -17,6 +17,7 @@ import Logo from "./components/Logo";
 import TemplatesPage from "./components/manager/TemplatesPage";
 import ApplicationListPage from "./components/manager/ApplicationListPage";
 import ClientListPage from "./components/manager/ClientListPage";
+import ApplicationList from "./components/client/ApplicationList";
 
 const app = createApp({});
 
@@ -31,6 +32,7 @@ app.component('skeleton', Skeleton);
 app.component('pagination', Pagination);
 app.component('logo', Logo);
 app.component('templates-page', TemplatesPage);
-app.component('client-list-page', clientListPage);
+app.component('client-list-page', ClientListPage);
+app.component('application-list-client', ApplicationList);
 
 app.mount('#app');

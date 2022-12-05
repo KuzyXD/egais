@@ -77,7 +77,6 @@ class RgCompany
 
     public function indexCompanyByClientGroup($group): array
     {
-        $array = \App\Models\RemoteGeneration\RgCompany::select('name')->whereGroup($group)->get()->toArray();
-        return Arr::flatten($array);
+        return \App\Models\RemoteGeneration\RgCompany::select('id', 'name')->whereGroup($group)->get()->toArray();
     }
 }
