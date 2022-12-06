@@ -18,6 +18,7 @@ import TemplatesPage from "./components/manager/TemplatesPage";
 import ApplicationListPage from "./components/manager/ApplicationListPage";
 import ClientListPage from "./components/manager/ClientListPage";
 import ApplicationList from "./components/client/ApplicationList";
+import Action from "./components/client/Action";
 
 const app = createApp({});
 
@@ -34,5 +35,6 @@ app.component('logo', Logo);
 app.component('templates-page', TemplatesPage);
 app.component('client-list-page', ClientListPage);
 app.component('application-list-client', ApplicationList);
+app.component('application-action', Action);
 
 app.mount('#app');

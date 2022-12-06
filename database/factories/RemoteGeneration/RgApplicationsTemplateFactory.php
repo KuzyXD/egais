@@ -28,7 +28,6 @@ class RgApplicationsTemplateFactory extends Factory
             'HeadPosition' => $this->faker->word(),
             'company' => $this->faker->company(),
             'position' => $this->faker->word(),
-            'department' => $this->faker->word(),
             'passportSerial' => $this->faker->numerify('####'),
             'passportNumber' => $this->faker->numerify('######'),
             'passportDate' => $this->faker->date('d-m-Y'),

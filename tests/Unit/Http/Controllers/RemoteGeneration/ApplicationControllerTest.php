@@ -83,4 +83,20 @@ class ApplicationControllerTest extends TestCase
 
         $this->get('api/rg-client/application/1/getsignedroute')->assertRedirectToSignedRoute();
     }
+
+    public function testGetDn()
+    {
+        Sanctum::actingAs(
+            RgClient::factory(['fio' => 'Илья Кузнецов', 'id' => 1, 'group' => 'КБ'])->create(),
+            ['*'],
+            'rg-client'
+        );
+
+        RgManager::factory(['fio' => 'Шагалеев Максим', 'id' => 1])->create();
+        $company = RgCompany::factory(['manager_id' => 1, 'id' => 1])->create();
+        $template = RgApplicationsTemplate::factory(['id' => 1, 'created_by' => 1, 'created_for' => 1])->for($company, 'company')->create();
+        $application = RgApplications::factory(['created_by' => 1, 'template_id' => 1, 'status' => Statuses::CREATED()->label])->count(3)->create();
+
+        $this->get('api/rg-client/application/1/dn')->assertJsonCount(15, 'data.dn');
+    }
 }

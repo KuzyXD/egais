@@ -53,4 +53,19 @@ class ApplicationController extends Controller
     {
         return redirect($service->getSignedRoute($rgApplication));
     }
+
+    public function getStatus(Request $request, RgApplications $rgApplication)
+    {
+        return response($rgApplication->status, 200);
+    }
+
+    public function getDn(Request $request, RgApplications $rgApplication, RgApplication $service)
+    {
+        $dn = $service->collectDn($rgApplication);
+        if ($dn) {
+            return $dn->response();
+        }
+
+        return response('Произошла ошибка. Свяжитесь с программистом.', 500);
+    }
 }

@@ -6,6 +6,7 @@ use App\Enums\Statuses;
 use App\Http\Resources\ApplicationCreateResource;
 use App\Http\Resources\RemoteGeneration\RgApplicationResource;
 use App\Http\Resources\RemoteGeneration\RgClientApplicationsResource;
+use App\Http\Resources\RemoteGeneration\RgUrDnGenerationResource;
 use App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
@@ -148,4 +149,10 @@ class RgApplication
         return RgClientApplicationsResource::collection($rg_applications->paginate(6, ['*'], 'page', $currentPage));
     }
 
+    public function collectDn(RgApplications $rgApplication)
+    {
+        $template = $rgApplication->template;
+
+        return new RgUrDnGenerationResource($template);
+    }
 }

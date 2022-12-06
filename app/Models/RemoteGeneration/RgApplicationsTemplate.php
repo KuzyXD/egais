@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+/**
+ * @property int $type 1 - физ.лицо, 2 - ИП, 3 - Юр лицо
+ */
 class RgApplicationsTemplate extends Model
 {
     use HasFactory, SoftDeletes;

@@ -26,7 +26,7 @@ class CreateRgApplicationsTemplatesTable extends Migration
             $table->string("HeadPosition", 500)->nullable();
             $table->string("company", 500)->nullable();
             $table->string("position", 500)->nullable();
-            $table->string("department", 500)->nullable();
+            $table->string("department", 500)->default('Общее подразделение');
             $table->string("passportSerial", 4)->nullable();
             $table->string("passportNumber", 6)->nullable();
             $table->string("passportDate", 10)->nullable();

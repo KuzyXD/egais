@@ -40,7 +40,6 @@ class TestFillSeeder extends Seeder
             "HeadPosition" => "ДИРЕКТОР",
             "company" => "ООО \"ПОСЕЙДОН\"",
             "position" => "Представитель по доверенности",
-            "department" => NULL,
             "passportSerial" => "7512",
             "passportNumber" => "092592",
             "passportDate" => "2012-06-09",
@@ -71,6 +70,12 @@ class TestFillSeeder extends Seeder
         RgApplicationTemplateFiles::factory(['type' => FileTypes::PHOTO()->label])->for($applicationTemplate, 'applicationTemplate')->create();
         RgApplicationTemplateFiles::factory(['type' => FileTypes::SNILS()->label])->for($applicationTemplate, 'applicationTemplate')->create();
 
+        RgClient::factory()->count(1)->create([
+            'fio' => 'Кузнецов Илья Олегович',
+            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
+            'certificate_expire_to_date' => Carbon::parse('2023-06-15'),
+            'group' => 'КБ'
+        ]);
         RgApplications::factory([
             "created_by" => 1,
             "ac_id" => 1138353,
@@ -79,7 +84,7 @@ class TestFillSeeder extends Seeder
             "comment" => NULL,
             "action_type" => NULL,
             "store_number" => NULL,
-            "status" => "SENDING_DOCUMENTS",
+            "status" => Statuses::REQUEST_GENERATION()->label,
             "certificate_produced_at" => NULL,
             "serial_number_certificate" => NULL,
             "replace_serial_key" => NULL,
@@ -89,12 +94,6 @@ class TestFillSeeder extends Seeder
             "created_at" => "2022-11-22 11:55:40",
             "updated_at" => "2022-11-22 11:57:09",
             "deleted_at" => NULL
-        ])->count(13)->create();
-        RgClient::factory()->count(1)->create([
-            'fio' => 'Кузнецов Илья Олегович',
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Carbon::parse('2023-06-15'),
-            'group' => 'КБ'
-        ]);
+        ])->create();
     }
 }
