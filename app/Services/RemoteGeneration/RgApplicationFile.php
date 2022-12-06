@@ -5,10 +5,40 @@ namespace App\Services\RemoteGeneration;
 use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use Illuminate\Http\Request;
-use function MongoDB\BSON\toRelaxedExtendedJSON;
+use Illuminate\Support\Facades\Storage;
 
 class RgApplicationFile
 {
+    public function getTemplateFiles(RgApplications $application): bool
+    {
+        $collection = $application->templateFiles()->get();
+        $applicationFiles = $application->files();
+
+        foreach ($collection as $item) {
+            $this->deleteOldFile($application->files()->get(), $item['type']);
+            $applicationFiles->create($item->only(['type', 'name', 'path']));
+        }
+
+        return true;
+    }
+
+    public function deleteOldFile($files, $type): void
+    {
+        $oldFile = $files->where('type', $type)->first();
+
+        if ($oldFile) {
+            $this->destroy($oldFile);
+        }
+    }
+
+    public function destroy(RgApplicationFiles $files): ?bool
+    {
+        if ($files->trashed()) {
+            return $files->restore();
+        }
+        return $files->delete();
+    }
+
     public function store(Request $parameters, RgApplications $rgApplication): bool
     {
         $files = $rgApplication->files();
@@ -31,33 +61,25 @@ class RgApplicationFile
         return false;
     }
 
-    public function deleteOldFile($files, $type): void
+    public function storeRequestInBase64(Request $parameters, RgApplications $rgApplication): bool
     {
-        $oldFile = $files->where('type', $type)->first();
+        $files = $rgApplication->files();
+        $rgApplicationId = $rgApplication->id;
 
-        if ($oldFile) {
-            $this->destroy($oldFile);
+        $this->deleteOldFile($files, $parameters['type']);
+
+        $fileName = "request.p10";
+        $path = "/files/$rgApplicationId/$fileName";
+        $stored = Storage::put($path, $parameters['file']);
+
+        if ($stored) {
+            $files->create([
+                'name' => $fileName,
+                'path' => $path,
+                'type' => $parameters->get('type')
+            ]);
+            return true;
         }
-    }
-
-    public function destroy(RgApplicationFiles $files): ?bool
-    {
-        if ($files->trashed()) {
-            return $files->restore();
-        }
-        return $files->delete();
-    }
-
-    public function getTemplateFiles(RgApplications $application): bool
-    {
-        $collection = $application->templateFiles()->get();
-        $applicationFiles = $application->files();
-
-        foreach ($collection as $item) {
-            $this->deleteOldFile($application->files()->get(), $item['type']);
-            $applicationFiles->create($item->only(['type', 'name', 'path']));
-        }
-
-        return true;
+        return false;
     }
 }

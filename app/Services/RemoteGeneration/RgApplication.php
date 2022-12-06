@@ -155,4 +155,9 @@ class RgApplication
 
         return new RgUrDnGenerationResource($template);
     }
+
+    public function sendDocuments()
+    {
+        //todo
+    }
 }

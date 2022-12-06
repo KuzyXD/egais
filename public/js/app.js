@@ -19709,7 +19709,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _context.t0.log.call(_context.t0, _context.t1);
 
-              case 13:
+                _context.t2 = _this2;
+                _context.next = 16;
+                return requestString;
+
+              case 16:
+                _context.t3 = _context.sent;
+
+                _context.t2.sendRequest.call(_context.t2, _context.t3);
+
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -19717,7 +19726,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    sendRequest: function sendRequest() {//todo
+    sendRequest: function sendRequest(requestString) {
+      var vue = this;
+      var regex = /\w+-\w+/;
+      var apiLocation = regex.exec(window.location.pathname);
+      var formData = new FormData();
+      formData.append('type', 'REQUEST');
+      formData.append('file', requestString);
+      axios.post("/api/".concat(apiLocation, "/application/").concat(this.applicationid, "/sendrequest"), formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        alert('Успешно. Запрос отправлен.');
+      })["catch"](function (error) {
+        console.log(error.response);
+        alert('Ошибка, обратитесь к программисту.');
+      });
     }
   },
   mounted: function mounted() {

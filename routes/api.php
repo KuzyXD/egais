@@ -87,6 +87,7 @@ Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
         Route::get('/getsignedroute', [ApplicationController::class, 'getSignedRoute'])->name('getsignedroute');
         Route::get('/status', [ApplicationController::class, 'getStatus']);
         Route::get('/dn', [ApplicationController::class, 'getDn']);
+        Route::post('/sendrequest', [ApplicationFilesController::class, 'recieveRequestFileInBase64']);
         //Route::get('/certificate', [ApplicationController::class, 'getStatus']);
         //Route::post('/finish', [ApplicationController::class, 'getStatus']);
     });

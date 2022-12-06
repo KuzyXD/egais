@@ -15,6 +15,7 @@
                 <div>
                     <span class="font-medium">Вы не можете взаимодействовать с заявкой:</span>
                     <ul class="mt-1.5 ml-4 text-red-700 list-disc list-inside">
+                        <li>Статус заявки сменился после выполненных вами действий на этой странице</li>
                         <li>Текущий статус заявки не предусматривает действия от клиента</li>
                         <li>Произошла ошибка программы</li>
                     </ul>
@@ -64,13 +65,13 @@ export default {
             const apiLocation = regex.exec(window.location.pathname);
 
             axios.get(`/api/${apiLocation}/application/${this.applicationid}/status`).then(function (response) {
-                vue.setStatus(response.data)
+                vue.setStatusFromRemote(response.data)
             }).catch(function (error) {
                 console.log(error.response);
                 alert('Ошибка, обратитесь к программисту.');
             });
         },
-        setStatus(status) {
+        setStatusFromRemote(status) {
             setTimeout(() => {
                 this.loading = false;
                 this.status = this.allowedstatuses.indexOf(status)
@@ -104,16 +105,34 @@ export default {
             console.log(containerName, dnString, IdentificationKind)
             const requestString = await cadesplugin_request_creation.createRequest(containerName, dnString, IdentificationKind)
             console.log(await requestString);
+            this.sendRequest(await requestString);
         },
-        sendRequest() {
-            //todo
+        sendRequest(requestString) {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            let formData = new FormData();
+            formData.append('type', 'REQUEST');
+            formData.append('file', requestString);
+
+            axios.post(`/api/${apiLocation}/application/${this.applicationid}/sendrequest`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                vue.status = -1
+                alert('Успешно. Запрос отправлен.');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
         }
     },
     mounted() {
         this.$nextTick(() => {
             this.fetchStatus();
         })
-
     }
 }
 </script>
