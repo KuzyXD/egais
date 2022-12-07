@@ -181,7 +181,7 @@ export default {
         showUpdateModal(item) {
             this.selectedItem = item;
             this.$refs['update-ur-template'].click();
-            this.$nextTick(() => this.$refs['update-ur-template-modal'].$el.focus());
+            this.$nextTick(() => this.$refs['update-ur-template-modal'].$refs.renew.click());
         },
         updateTemplate(form, closeButton) {
             const vue = this;
@@ -200,7 +200,7 @@ export default {
         showFilesModal(item) {
             this.selectedItem = item;
             this.$refs['show-files'].click();
-            this.$nextTick(() => this.$refs['show-files-modal'].$el.focus());
+            this.$nextTick(() => this.$refs['show-files-modal'].$refs.renew.click());
         },
         showACLoginForm(item) {
             this.selectedItem = item;

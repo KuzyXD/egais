@@ -1,8 +1,8 @@
 <template>
     <div id="show-application-files-modal" ref="modal" aria-hidden="true"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex items-start"
-         tabindex="-1"
-         @focus.once="fetch">
+         tabindex="-1">
+        <a ref="renew" href="#" @click.prevent="fetch">Обновить</a>
         <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
@@ -56,13 +56,13 @@
                                       fill-rule="evenodd"></path>
                             </svg>
                             <div class="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
-                                Сейчас тут пусто. Загрузите сюда файлы из окна слева или воспользуйтесь кнопка
+                                Загрузите сюда файлы из окна слева или воспользуйтесь кнопка
                                 "автозагрузки из шаблона".
                             </div>
                         </div>
                     </div>
                     <button
-                        class="space-y-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button" @click="getTemplateFiles">
                         Автозагрузка из шаблона
                     </button>
@@ -174,7 +174,7 @@ export default {
             });
         },
         clearData() {
-            this.$refs.urTemplateFields.clearData();
+            this.$refs.applicationFileFields.clearData();
         },
     },
 }

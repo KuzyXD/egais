@@ -170,7 +170,7 @@ export default {
         showFilesModal(item) {
             this.selectedItem = item;
             this.$refs['show-application-files-modal-ref'].click();
-            this.$nextTick(() => this.$refs['show-application-files-modal'].$el.focus());
+            this.$nextTick(() => this.$refs['show-application-files-modal'].$refs.renew.click());
         },
         open_in_lk(item) {
             this.selectedItem = item;

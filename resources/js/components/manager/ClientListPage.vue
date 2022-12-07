@@ -184,7 +184,7 @@ export default {
         showUpdateModal(item) {
             this.selectedItem = item;
             this.$refs['update-client-modal-href'].click();
-            this.$nextTick(() => this.$refs['update-client-modal'].$el.focus());
+            this.$nextTick(() => this.$refs['update-client-modal'].$refs.renew.click());
         },
         updateClientGroup(form, closeButton) {
             const vue = this;
@@ -203,7 +203,7 @@ export default {
         showUpdateGroupModal(item) {
             this.selectedItem = item;
             this.$refs['update-client-group-modal-href'].click();
-            this.$nextTick(() => this.$refs['update-client-group-modal'].$el.focus());
+            this.$nextTick(() => this.$refs['update-client-group-modal'].$refs.renew.click());
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {
