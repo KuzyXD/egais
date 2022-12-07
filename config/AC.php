@@ -5,7 +5,8 @@ return [
     'METHODS' => [
         'REGISTRATE' => '/request/create',
         'STATUS_CHECK' => '/request/status',
-        'FILE_ATTACH' => '/request/attach_file'
+        'FILE_ATTACH' => '/request/attach_file',
+        'RESULT' => '/request/result'
     ]
 ];
 

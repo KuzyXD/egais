@@ -3,6 +3,7 @@
 namespace App\Jobs\RemoteGeneration;
 
 use App\Enums\FileTypes;
+use App\Enums\Statuses;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Services\CryptoHelper;
 use Illuminate\Bus\Queueable;
@@ -33,9 +34,11 @@ class SendDocumentsJob implements ShouldQueue
     {
         try {
             if ($this->createZipArchive() && $this->sendZipArchive()) {
-                return $this->sendSignedZip(
+                if ($this->sendSignedZip(
                     $this->signZipArchive()
-                );
+                )) {
+                    $this->application->update(['status' => Statuses::REQUEST_GENERATION()->label]);
+                }
             }
         } catch (\Exception $exception) {
             $this->fail($exception);
@@ -103,7 +106,7 @@ class SendDocumentsJob implements ShouldQueue
         ])->successful();
     }
 
-    public function sendSignedZip($base64ofSignedZip)
+    public function sendSignedZip($base64ofSignedZip): bool
     {
         $apiUrl = config('AC.API_URL');
         $method = config('AC.METHODS.FILE_ATTACH');

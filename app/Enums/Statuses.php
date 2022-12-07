@@ -13,6 +13,8 @@ use Spatie\Enum\Enum;
  * @method static self REQUEST_GENERATION()
  * @method static self GENERATING_CERTIFICATE()
  * @method static self CERTIFICATE_READY()
+ * @method static self READY_TO_INSTALL()
+ * @method static self FINISHED()
  * @method static self DECLINED()
  */
 class Statuses extends Enum

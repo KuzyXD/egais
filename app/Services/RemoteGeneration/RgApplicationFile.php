@@ -38,7 +38,7 @@ class RgApplicationFile
         }
         return $files->delete();
     }
-
+    
     public function store(Request $parameters, RgApplications $rgApplication): bool
     {
         $files = $rgApplication->files();

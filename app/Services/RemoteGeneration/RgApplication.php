@@ -2,6 +2,7 @@
 
 namespace App\Services\RemoteGeneration;
 
+use App\Enums\FileTypes;
 use App\Enums\Statuses;
 use App\Http\Resources\ApplicationCreateResource;
 use App\Http\Resources\RemoteGeneration\RgApplicationResource;
@@ -10,6 +11,7 @@ use App\Http\Resources\RemoteGeneration\RgUrDnGenerationResource;
 use App\Jobs\RemoteGeneration\RetrieveRemoteStatusJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationsTemplate;
+use App\Services\CryptoHelper;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\InputBag;
 
@@ -91,7 +93,7 @@ class RgApplication
     public function retrieveRemoteStatus($requestId)
     {
         $model = RgApplications::whereAcId($requestId)->first();
-        $response = $this->getRemoteStatus($model, $requestId);
+        $response = $this->getRemoteStatus($model);
 
         if ($response->successful()) {
             $model->status = Statuses::from($response->json('0.statusId'))->label;
@@ -101,7 +103,7 @@ class RgApplication
         return $response->toException();
     }
 
-    public function getRemoteStatus(RgApplications $model, $requestId): \Illuminate\Http\Client\Response
+    public function getRemoteStatus(RgApplications $model): \Illuminate\Http\Client\Response
     {
         $apiUrl = config('AC.API_URL');
         $method = config('AC.METHODS.STATUS_CHECK');
@@ -109,7 +111,7 @@ class RgApplication
         return Http::post($apiUrl . $method, [
             'login' => $model->ac_login,
             'pass' => $model->ac_pass,
-            'requests' => [$requestId]
+            'requests' => [$model->ac_id]
         ]);
     }
 
@@ -161,8 +163,16 @@ class RgApplication
         return new RgUrDnGenerationResource($template);
     }
 
-    public function sendDocuments()
+    public function updateCertificateFields(RgApplications $application)
     {
-        //todo
+        $certificateBinary = \Storage::get($application->files()->whereType(FileTypes::CERTIFICATE()->label)->first()->path);
+        $cryptoService = new CryptoHelper();
+        $result = $cryptoService->parseCertificateForDateAndSn($certificateBinary);
+
+        $application->update([
+            'certificate_produced_at' => $result[0],
+            'certificate_finished_at' => $result[1],
+            'serial_number_certificate' => $result[2],
+        ]);
     }
 }

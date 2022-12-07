@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use FG\ASN1\ASNObject;
+
 /**
  * Crypto Helper class
  */
@@ -172,6 +174,35 @@ class CryptoHelper
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    public function parseCertificateForDateAndSn($binary)
+    {
+        $object = ASNObject::fromBinary($binary);
+        $topLevelContainer = $object->getChildren();
+        $certificateInfo = $topLevelContainer[0];
+        $certInfoFields = $certificateInfo->getChildren();
+
+        $fromDate = $certInfoFields[4][0]->getContent();
+        $toDate = $certInfoFields[4][1]->getContent();
+        $hexSn = $this->decSnToHexSn($object[0][1]->getContent());
+
+        return [$fromDate, $toDate, $hexSn];
+    }
+
+    public function decSnToHexSn($dec)
+    {
+        $hex = array();
+        while ($dec) {
+            // get modulus // based on docs both params are string
+            $modulus = bcmod($dec, '16');
+            // convert to hex and prepend to array
+            array_unshift($hex, dechex($modulus));
+            // update decimal number
+            $dec = bcdiv(bcsub($dec, $modulus), 16);
+        }
+
+        return implode('', $hex);
     }
 }
 
