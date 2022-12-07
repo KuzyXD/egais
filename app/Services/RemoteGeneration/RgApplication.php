@@ -90,15 +90,8 @@ class RgApplication
 
     public function retrieveRemoteStatus($requestId)
     {
-        $apiUrl = config('AC.API_URL');
-        $method = config('AC.METHODS.STATUS_CHECK');
         $model = RgApplications::whereAcId($requestId)->first();
-
-        $response = Http::post($apiUrl . $method, [
-            'login' => $model->ac_login,
-            'pass' => $model->ac_pass,
-            'requests' => [$requestId]
-        ]);
+        $response = $this->getRemoteStatus($model, $requestId);
 
         if ($response->successful()) {
             $model->status = Statuses::from($response->json('0.statusId'))->label;
@@ -106,6 +99,18 @@ class RgApplication
         }
 
         return $response->toException();
+    }
+
+    public function getRemoteStatus(RgApplications $model, $requestId): \Illuminate\Http\Client\Response
+    {
+        $apiUrl = config('AC.API_URL');
+        $method = config('AC.METHODS.STATUS_CHECK');
+
+        return Http::post($apiUrl . $method, [
+            'login' => $model->ac_login,
+            'pass' => $model->ac_pass,
+            'requests' => [$requestId]
+        ]);
     }
 
     public function destroy($id): ?bool

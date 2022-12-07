@@ -4,4 +4,5 @@ export class ApplicationFiles {
     static SNILS = 'СНИЛС';
     static PROCURATION = 'Доверенность';
     static APPLICATION = 'Заявление';
+    static REQUEST = 'Запрос';
 }
