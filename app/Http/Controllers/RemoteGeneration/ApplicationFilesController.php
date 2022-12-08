@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\RemoteGeneration;
 
+use App\Enums\Statuses;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicationFileRequest;
 use App\Http\Requests\ApplicationRequestFileRequest;
+use App\Jobs\RemoteGeneration\SendRequestJob;
 use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgApplicationTemplateFiles;
@@ -49,7 +51,8 @@ class ApplicationFilesController extends Controller
     public function recieveRequestFileInBase64(ApplicationRequestFileRequest $request, RgApplications $rgApplication, RgApplicationFile $fileService, RgApplication $applicationService)
     {
         if ($fileService->storeRequestInBase64($request, $rgApplication)) {
-            //todo отправить документы в АЦ
+            SendRequestJob::dispatch($rgApplication);
+
             return response('Успешно', 201);
         }
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);

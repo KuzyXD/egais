@@ -50,6 +50,7 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
     Route::prefix('application')->group(function () {
         Route::get('index', [ApplicationController::class, 'index']);
         Route::post('registrate', [ApplicationController::class, 'registrateApplication']);
+        Route::get('{rgApplication}/senddocs', [ApplicationController::class, 'sendDocs']);
         Route::delete('{id}/delete', [ApplicationController::class, 'destroy']);
 
         Route::prefix('{application}/files')->group(function () {

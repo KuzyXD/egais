@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RemoteGeneration;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicationRegistrateRequest;
+use App\Jobs\RemoteGeneration\SendDocumentsJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Services\RemoteGeneration\RgApplication;
@@ -67,5 +68,12 @@ class ApplicationController extends Controller
         }
 
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
+    }
+
+    public function sendDocs(Request $request, RgApplications $rgApplication)
+    {
+        SendDocumentsJob::dispatch($rgApplication);
+
+        return response('', 200);
     }
 }

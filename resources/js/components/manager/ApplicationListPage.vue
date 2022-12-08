@@ -3,6 +3,7 @@
         <custom-table v-show="!loading" :actions="[
                               {name: 'open_in_lk', text: 'Открыть в ЛК'},
                               {name: 'show_files', text: 'Файлы'},
+                              {name: 'send_docs', text: 'Отправить документы'},
                               {name: 'delete', text: 'Удалить/восстановить'},
                           ]"
                       :cols=cols
@@ -20,6 +21,7 @@
                       @search="value => this.search = value"
                       @show_files="showFilesModal"
                       @sorted="this.fetch"
+                      @send_docs="sendDocs"
         ></custom-table>
         <pagination v-show="!loading" class="flex justify-start mt-3"
                     @next="paginationNext"
@@ -160,6 +162,20 @@ export default {
             const apiLocation = regex.exec(window.location.pathname);
 
             axios.delete(`/api/${apiLocation}/application/${applicationId}/delete`).then(function (response) {
+                vue.fetch();
+                alert('Успешно');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        sendDocs(item) {
+            const vue = this;
+            const applicationId = item.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/application/${applicationId}/senddocs`).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
             }).catch(function (error) {

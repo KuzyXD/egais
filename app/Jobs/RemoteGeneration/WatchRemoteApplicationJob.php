@@ -44,6 +44,7 @@ class WatchRemoteApplicationJob implements ShouldQueue
         }
 
         if ($convertedStatus->equals(Statuses::CERTIFICATE_READY())) {
+            GetResultProductJob::dispatch($this->application)->delay(now()->addSeconds(5));
             return $this->application->update(['status' => $convertedStatus->label]);
         } else if ($convertedStatus->equals(Statuses::SENDING_DOCUMENTS()) || $convertedStatus->equals(Statuses::DECLINED())) {
             return $this->application->update(['status' => Statuses::DECLINED()->label]);

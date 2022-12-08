@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Enums\Statuses;
+use App\Jobs\RemoteGeneration\WatchRemoteApplicationJob;
+use App\Models\RemoteGeneration\RgApplications;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +19,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $applications = RgApplications::whereStatus(Statuses::GENERATING_CERTIFICATE()->label)->get();
+            foreach ($applications as $application) {
+                WatchRemoteApplicationJob::dispatch($application);
+            }
+        })->everyTwoMinutes();
     }
 
     /**

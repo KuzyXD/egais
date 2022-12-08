@@ -1,5 +1,3 @@
-import clientListPage from "./components/manager/ClientListPage";
-
 require('./bootstrap');
 
 import {createApp} from 'vue';

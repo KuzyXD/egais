@@ -27,7 +27,6 @@ class GetResultProductJob implements ShouldQueue
         $this->application = is_int($application) ? RgApplications::whereAcId($application)->first() : $application;
     }
 
-
     public function handle(RgApplication $service)
     {
         try {
