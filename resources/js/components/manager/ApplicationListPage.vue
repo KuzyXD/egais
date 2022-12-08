@@ -4,6 +4,7 @@
                               {name: 'open_in_lk', text: 'Открыть в ЛК'},
                               {name: 'show_files', text: 'Файлы'},
                               {name: 'send_docs', text: 'Отправить документы'},
+                              {name: 'change_status', text: 'Сменить статус'},
                               {name: 'delete', text: 'Удалить/восстановить'},
                           ]"
                       :cols=cols
@@ -22,6 +23,7 @@
                       @show_files="showFilesModal"
                       @sorted="this.fetch"
                       @send_docs="sendDocs"
+                      @change_status="showChangeStatusModal"
         ></custom-table>
         <pagination v-show="!loading" class="flex justify-start mt-3"
                     @next="paginationNext"
@@ -29,16 +31,22 @@
             <a ref="show-application-files-modal-ref"
                class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
                data-modal-toggle="show-application-files-modal" href="#" @click.prevent="">
-                Отобразить форму авторизации для АЦ
+                Открыть файлы заявки
             </a>
             <a ref="open_in_lk-ref" :href="'https://lk.iecp.ru/application/' + selectedItem.ac_id"
                class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
                target='_blank'>
                 Открыть в АЦ
             </a>
+            <a ref="show-change-status-modal-ref"
+               class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+               data-modal-toggle="show-change-status-modal" href="#" @click.prevent="">
+                Открыть смену статусов у заявки
+            </a>
         </pagination>
         <show-application-files-modal ref="show-application-files-modal"
                                       :selected-item="selectedItem"></show-application-files-modal>
+        <change-status-modal ref="show-change-status-modal" :selected-item="selectedItem" @submit="changeStatus"></change-status-modal>
         <skeleton v-show="loading"></skeleton>
     </div>
 </template>
@@ -46,9 +54,10 @@
 <script>
 import {formatYmd, getSortableState} from "../../helper_functions";
 import ShowApplicationFilesModal from "./ShowApplicationFilesModal";
+import ChangeStatusModal from "./ChangeStatusModal";
 
 export default {
-    components: {ShowApplicationFilesModal},
+    components: {ShowApplicationFilesModal, ChangeStatusModal},
     data() {
         return {
             cols: [
@@ -191,6 +200,26 @@ export default {
         open_in_lk(item) {
             this.selectedItem = item;
             this.$refs['open_in_lk-ref'].click();
+        },
+        showChangeStatusModal(item) {
+            this.selectedItem = item;
+            this.$refs['show-change-status-modal-ref'].click();
+            this.$nextTick(() => this.$refs['show-change-status-modal'].$refs.renew.click());
+        },
+        changeStatus(form, closeButton) {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const applicationId = this.selectedItem.id;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.post(`/api/${apiLocation}/application/${applicationId}/changestatus`, form).then(function (response) {
+                vue.fetch();
+                closeButton.click();
+                alert('Успешно');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
         },
         paginationNext() {
             if ((this.page + 1) <= this.last_page) {

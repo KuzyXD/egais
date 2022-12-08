@@ -22,6 +22,7 @@ class TranslatedStatuses extends Statuses
     {
         return [
             'UNKNOWN' => 'Статус неизвестен',
+            'CREATED' => 'Создана локально',
             'SYSTEM_PROCESSING' => 'В обработке',
             'IN_MODERATION' => 'На модерации',
             'SENDING_DOCUMENTS' => 'Отправка документов',

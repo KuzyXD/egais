@@ -71,7 +71,7 @@ class RgApplication
         $result = $this->saveApplication($request, $requestId);
 
         if ($result) {
-            RetrieveRemoteStatusJob::dispatch($requestId)->delay(now()->addSeconds(20));
+            RetrieveRemoteStatusJob::dispatch($requestId)->delay(now()->addSeconds(40));
         }
 
         return $result;
