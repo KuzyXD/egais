@@ -2,10 +2,7 @@
     <div>
         <div
             class="relative flex flex-col items-center justify-center py-12 lg:py-6">
-            <div class="p-5">
-                <span class="text-green-500 text-7xl">ПНК.</span>
-                <span class="text-light-blue text-7xl">ЕГАИС</span>
-            </div>
+            <logo></logo>
             <div
                 class="w-1/3 max-w-md p-6 bg-white border border-gray-200 shadow-md  md:rounded-lg lg:p-8">
                 <form class="space-y-6" @submit.prevent="login">
@@ -163,7 +160,7 @@ export default {
         return {
             certificates: [],
             selectedCertificate: undefined,
-            password: '111',
+            password: '',
             errorText: '',
             cadesplugin_initialization
         };

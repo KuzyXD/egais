@@ -1620,13 +1620,13 @@ input:checked + .toggle-bg {
 .leading-9 {
   line-height: 2.25rem;
 }
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(14 159 110 / var(--tw-text-opacity));
-}
 .text-light-blue {
   --tw-text-opacity: 1;
   color: rgb(0 148 198 / var(--tw-text-opacity));
+}
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 159 110 / var(--tw-text-opacity));
 }
 .text-gray-500 {
   --tw-text-opacity: 1;
