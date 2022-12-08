@@ -2,6 +2,7 @@
 
 namespace App\Jobs\RemoteGeneration;
 
+use App\Enums\Statuses;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Services\RemoteGeneration\RgApplication;
 use Exception;
@@ -30,6 +31,10 @@ class RetrieveRemoteStatusJob implements ShouldQueue
 
         if ($status instanceof Exception) {
             $this->fail($status);
+        }
+
+        if($status->equals(Statuses::SYSTEM_PROCESSING()->label)) {
+            RetrieveRemoteStatusJob::dispatch($this->application);
         }
     }
 

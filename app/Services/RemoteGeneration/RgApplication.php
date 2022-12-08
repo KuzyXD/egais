@@ -96,8 +96,10 @@ class RgApplication
         $response = $this->getRemoteStatus($model);
 
         if ($response->successful()) {
-            $model->status = Statuses::from($response->json('0.statusId'))->label;
-            return $model->save();
+            $status = Statuses::from($response->json('0.statusId'));
+            $model->status = $status->label;
+            $model->save();
+            return $status;
         }
 
         return $response->toException();
