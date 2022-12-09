@@ -10,9 +10,9 @@ class CreateRgApplicationsTable extends Migration
     {
         Schema::create('rg_applications', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('created_by');
+            $table->foreignId('created_by')->constrained('rg_managers');
             $table->bigInteger('ac_id')->nullable();
-            $table->bigInteger('template_id');
+            $table->foreignId('template_id')->constrained('rg_applications_templates');
             $table->string('pin_code')->nullable();
             $table->string('comment')->nullable();
             $table->string('action_type')->nullable();

@@ -12,4 +12,9 @@ class RgManager extends Authenticatable
     use HasFactory, SoftDeletes, HasApiTokens;
 
     protected $fillable = ['fio', 'email', 'password', 'tel'];
+
+    public function companies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RgCompany::class, 'manager_id', 'id');
+    }
 }

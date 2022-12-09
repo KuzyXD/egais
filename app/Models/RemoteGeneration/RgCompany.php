@@ -15,7 +15,7 @@ class RgCompany extends Model
 
     public function manager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(RgManager::class, 'id', 'manager_id');
+        return $this->belongsTo(RgManager::class, 'manager_id', 'id');
     }
 
     public function applicationTemplates(): \Illuminate\Database\Eloquent\Relations\HasMany

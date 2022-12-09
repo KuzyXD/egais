@@ -51,27 +51,29 @@ class SendDocumentsJob implements ShouldQueue
         $applicationId = $this->application->id;
         $zipPath = Storage::path("files/$applicationId") . '/archive.zip';
 
-        if(Storage::exists("files/$applicationId" . '/archive.zip')) {
+        if (Storage::exists("files/$applicationId" . '/archive.zip')) {
             Storage::delete("files/$applicationId" . '/archive.zip');
+
         }
 
-        $filesToAdd = $this->application->files()
-            ->orWhere('type', FileTypes::PASSPORT()->label)
-            ->orWhere('type', FileTypes::PHOTO()->label)
-            ->orWhere('type', FileTypes::SNILS()->label)
-            ->orWhere('type', FileTypes::APPLICATION()->label);
+        $isNeedProcuration = $this->isNeedProcuration();
 
-        dump($filesToAdd->get());
+        $filesToAdd = $this->application->files()->where(function ($query) use ($isNeedProcuration) {
+            $query->where('type', FileTypes::PASSPORT()->label)
+                ->orWhere('type', FileTypes::PHOTO()->label)
+                ->orWhere('type', FileTypes::SNILS()->label)
+                ->orWhere('type', FileTypes::APPLICATION()->label);
 
-        if ($this->isNeedProcuration()) {
-            $filesToAdd->orWhere('type', FileTypes::PROCURATION()->label);
-        }
+            if ($isNeedProcuration) {
+                $query->orWhere('type', FileTypes::PROCURATION()->label);
+            }
+        });
 
         if ($zip->open($zipPath, ZipArchive::CREATE) !== TRUE) {
             throw new \Exception('Не удалось добавить файл в архив у заявки' . $this->application->id);
         }
 
-        foreach ($filesToAdd as $file) {
+        foreach ($filesToAdd->get() as $file) {
             $filenameForAC = $file->type . '.' . $this->getExtensions($file);
             if (!$zip->addFile(Storage::path($file->path), $filenameForAC)) {
                 throw new \Exception('Не удалось добавить файл в архив у заявки' . $this->application->id);

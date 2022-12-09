@@ -34,6 +34,6 @@ class RgApplicationsTemplate extends Model
 
     public function applications(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(RgApplications::class, RgApplications::class, 'id', 'template_id');
+        return $this->hasMany(RgApplications::class, RgApplications::class, 'id', 'template_id');
     }
 }

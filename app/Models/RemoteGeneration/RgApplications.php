@@ -14,14 +14,14 @@ class RgApplications extends Model
 
     protected $hidden = ['ac_pass', 'ac_login'];
 
-    public function manager(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function manager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(RgManager::class, 'id', 'created_by');
+        return $this->belongsTo(RgManager::class, 'created_by', 'id');
     }
 
-    public function template(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function template(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(RgApplicationsTemplate::class, 'id', 'template_id');
+        return $this->belongsTo(RgApplicationsTemplate::class, 'template_id', 'id');
     }
 
     public function templateFiles(): \Illuminate\Database\Eloquent\Relations\HasManyThrough

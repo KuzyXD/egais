@@ -15,9 +15,10 @@ class RgApplicationFilesFactory extends Factory
     public function definition(): array
     {
         $this->faker->addProvider(new FakerEnumProvider($this->faker));
+
         return [
             'name' => $this->faker->word() . '.' . $this->faker->fileExtension(),
-            'type' => $this->faker->randomEnumLabel(FileTypes::class),
+            'type' => $this->faker->unique(true)->randomEnumLabel(FileTypes::class),
             'path' => $this->faker->filePath(),
             'sig_path' => $this->faker->filePath() . '.sig'
         ];

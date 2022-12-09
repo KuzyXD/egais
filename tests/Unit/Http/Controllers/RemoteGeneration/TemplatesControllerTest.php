@@ -39,7 +39,7 @@ class TemplatesControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory()->create(['id' => 1]);
+        RgCompany::factory(['manager_id' => 1])->create();
 
         $templateData = [
             'type' => 3,
@@ -184,7 +184,7 @@ class TemplatesControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory()->create(['id' => 1]);
+        RgCompany::factory()->create(['manager_id' => 1]);
 
         $templateData = [
             'type' => 3,
@@ -240,7 +240,7 @@ class TemplatesControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory()->create(['id' => 1]);
+        RgCompany::factory()->create(['manager_id' => 1]);
 
         $templateData = [
             'type' => 2,
@@ -284,7 +284,7 @@ class TemplatesControllerTest extends TestCase
             'rg-manager'
         );
 
-        RgCompany::factory()->create(['id' => 1]);
+        RgCompany::factory()->create(['manager_id' => 1]);
 
         $templateData = [
             'type' => 1,

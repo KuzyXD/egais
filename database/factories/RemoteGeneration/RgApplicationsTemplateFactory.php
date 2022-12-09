@@ -13,7 +13,6 @@ class RgApplicationsTemplateFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_by' => $this->faker->randomNumber(),
             'type' => 3,
             'identificationKind' => 1,
             'BasisOfActs' => 'устава',
@@ -56,7 +55,6 @@ class RgApplicationsTemplateFactory extends Factory
     public function ip(): array
     {
         return [
-            'created_by' => $this->faker->randomNumber(),
             'type' => 2,
             'identificationKind' => 1,
             'firstName' => $this->faker->firstName(),
@@ -88,7 +86,6 @@ class RgApplicationsTemplateFactory extends Factory
     public function phys(): array
     {
         return [
-            'created_by' => $this->faker->randomNumber(),
             'type' => 1,
             'identificationKind' => 1,
             'firstName' => $this->faker->firstName(),

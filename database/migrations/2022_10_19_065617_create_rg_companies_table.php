@@ -12,7 +12,7 @@ class CreateRgCompaniesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('group');
-            $table->bigInteger('manager_id');
+            $table->foreignId('manager_id')->constrained('rg_managers');
 
             $table->timestamps();
             $table->softDeletes();
