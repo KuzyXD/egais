@@ -3,5 +3,4 @@ export class UrTemplateFiles {
     static PHOTO = 'Фото';
     static SNILS = 'СНИЛС';
     static PROCURATION = 'Доверенность';
-    static REQUEST = 'Запрос';
 }

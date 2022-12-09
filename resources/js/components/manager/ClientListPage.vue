@@ -159,7 +159,7 @@ export default {
             const regex = /\w+-\w+/;
             const apiLocation = regex.exec(window.location.pathname);
 
-            axios.post(`/api/${apiLocation}/company/store`, form).then(function (response) {
+            axios.post(`/api/${apiLocation}/client/store`, form).then(function (response) {
                 vue.fetch();
                 closeButton.click();
                 alert('Успешно');

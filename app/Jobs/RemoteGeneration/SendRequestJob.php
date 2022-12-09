@@ -13,6 +13,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class SendRequestJob implements ShouldQueue
 {
@@ -28,28 +30,39 @@ class SendRequestJob implements ShouldQueue
     public function handle()
     {
         try {
-            $file = Storage::get($this->application->files()->whereType(FileTypes::REQUEST()->label)->first()->path);
-            if ($this->sendRequest($file)) {
+            $file = Storage::get($this->application->files->where('type', FileTypes::REQUEST()->label)->first()->path);
+            $response = $this->sendRequest($file);
+
+            if ($response) {
                 $this->application->update(['status' => Statuses::GENERATING_CERTIFICATE()->label]);
             }
+
         } catch (\Exception $exception) {
             $this->fail($exception);
         }
     }
 
-    public function sendRequest($file): bool
+    public function sendRequest($file)
     {
         $apiUrl = config('AC.API_URL');
         $method = config('AC.METHODS.FILE_ATTACH');
 
-        return Http::post($apiUrl . $method, [
+        $response = Http::post($apiUrl . $method, [
             'login' => $this->application->ac_login,
             'pass' => $this->application->ac_pass,
             'requestId' => $this->application->ac_id,
             'File_Name' => 'request.p10',
             'File' => base64_encode($file),
             'FileType' => FileTypes::REQUEST()->value
-        ])->successful();
+        ]);
+
+        if($response->failed()) {
+            //todo сохранить ошибку для вывода менеджеру
+            $this->application->update(['status' => Statuses::DECLINED()->label]);
+            $this->fail($response->body());
+        }
+
+        return $response->successful() ?: $response->body();
     }
 
     public function failed($exception)

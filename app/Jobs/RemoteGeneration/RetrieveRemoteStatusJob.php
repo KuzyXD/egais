@@ -33,7 +33,7 @@ class RetrieveRemoteStatusJob implements ShouldQueue
             $this->fail($status);
         }
 
-        if($status->equals(Statuses::SYSTEM_PROCESSING()->label)) {
+        if($status->equals(Statuses::SYSTEM_PROCESSING())) {
             RetrieveRemoteStatusJob::dispatch($this->application);
         }
     }

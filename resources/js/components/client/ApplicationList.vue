@@ -38,7 +38,7 @@
                             @next="paginationNext"
                             @previous="paginationPrevious">
                     <a ref="redirect-to-signed-route-ref"
-                       class=" inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
+                       class="hidden inline-flex bg-green-500 text-white items-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-300 focus:ring-4"
                        href=""
                        target='_blank'>
                         Отобразить форму авторизации для АЦ

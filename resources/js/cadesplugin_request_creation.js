@@ -67,21 +67,21 @@ export const cadesplugin_request_creation = reactive({
         let result = "";
         for (const [key, value] of Object.entries(object)) {
             if (key === "2.5.4.3") {
-                result = result.concat(`OID.${key}="""${value.replace(/"/g, "\"\"\"\"").replace(/«/g, "\"\"\"\"").replace(/»/g, "\"\"\"\"")}""",`);
+                result = result.concat(`OID.${key}="${value.replace(/"/g, "\"\"").replace(/«/g, "\"").replace(/»/g, "\"")}",`);
             } else if (key === "2.5.4.10") {
-                result = result.concat(`OID.${key}="""${value.replace(/"/g, "\"\"\"\"").replace(/«/g, "\"\"\"\"").replace(/»/g, "\"\"\"\"")}""",`);
+                result = result.concat(`OID.${key}="${value.replace(/"/g, "\"\"").replace(/«/g, "\"").replace(/»/g, "\"")}",`);
             } else if (key === "2.5.4.9") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else if (key === "2.5.4.8") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else if (key === "2.5.4.7") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else if (key === "2.5.4.11") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else if (key === "2.5.4.42") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else if (key === "2.5.4.12") {
-                result = result.concat(`OID.${key}="""${value}""",`);
+                result = result.concat(`OID.${key}="${value}",`);
             } else {
                 result = result.concat(`OID.${key}=${value},`);
             }

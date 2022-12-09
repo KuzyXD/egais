@@ -69,7 +69,7 @@ class RgApplicationFile
         $this->deleteOldFile($files, $parameters['type']);
 
         $fileName = "request.p10";
-        $path = "/files/$rgApplicationId/$fileName";
+        $path = "files/$rgApplicationId/$fileName";
         $stored = Storage::put($path, $parameters['file']);
 
         if ($stored) {

@@ -20,13 +20,14 @@
 </template>
 
 <script>
-import {UrTemplateFiles} from "./UrTemplateFiles";
+
+import {ApplicationFiles} from "../ApplicationFiles";
 
 export default {
     props: ['type', 'name', 'id'],
     computed: {
         getTranslatedType() {
-            return UrTemplateFiles[this.type];
+            return ApplicationFiles[this.type];
         }
     }
 }

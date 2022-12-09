@@ -48,22 +48,26 @@ class SendDocumentsJob implements ShouldQueue
     public function createZipArchive(): bool
     {
         $zip = new \ZipArchive();
+        $applicationId = $this->application->id;
+        $zipPath = Storage::path("files/$applicationId") . '/archive.zip';
 
-        $filesToAdd = $this->application->files()->whereType([
-            FileTypes::PASSPORT()->label,
-            FileTypes::PHOTO()->label,
-            FileTypes::SNILS()->label,
-            FileTypes::APPLICATION()->label
-        ]);
+        if(Storage::exists("files/$applicationId" . '/archive.zip')) {
+            Storage::delete("files/$applicationId" . '/archive.zip');
+        }
+
+        $filesToAdd = $this->application->files()
+            ->orWhere('type', FileTypes::PASSPORT()->label)
+            ->orWhere('type', FileTypes::PHOTO()->label)
+            ->orWhere('type', FileTypes::SNILS()->label)
+            ->orWhere('type', FileTypes::APPLICATION()->label);
+
+        dump($filesToAdd->get());
 
         if ($this->isNeedProcuration()) {
             $filesToAdd->orWhere('type', FileTypes::PROCURATION()->label);
         }
 
-        $filesToAdd = $filesToAdd->get();
-        $applicationId = $this->application->id;
-
-        if ($zip->open(Storage::path("files/$applicationId") . '/archive.zip', ZipArchive::CREATE) !== TRUE) {
+        if ($zip->open($zipPath, ZipArchive::CREATE) !== TRUE) {
             throw new \Exception('Не удалось добавить файл в архив у заявки' . $this->application->id);
         }
 

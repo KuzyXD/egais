@@ -36,10 +36,10 @@ class WatchRemoteApplicationJob implements ShouldQueue
 
     public function fetchRemoteStatus(RgApplication $rgApplicationsService): bool
     {
-        $status = $rgApplicationsService->getRemoteStatus($this->application);
+        $status = $rgApplicationsService->getRemoteStatus($this->application)->json('0.statusId');
         $convertedStatus = Statuses::from($status);
 
-        if ($convertedStatus->equals(Statuses::GENERATING_CERTIFICATE())) {
+        if ($convertedStatus->equals(Statuses::GENERATING_CERTIFICATE()) || $convertedStatus->equals(Statuses::IN_MODERATION())) {
             return true;
         }
 
