@@ -26,7 +26,7 @@ class RgApplications extends Model
 
     public function templateFiles(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
-        return $this->hasManyThrough(RgApplicationTemplateFiles::class, RgApplicationsTemplate::class, 'id', 'application_template_id');
+        return $this->hasManyThrough(RgApplicationTemplateFiles::class, RgApplicationsTemplate::class, 'id', 'application_template_id', 'template_id');
     }
 
     public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
