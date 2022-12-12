@@ -2,9 +2,11 @@
 
 namespace App\Services\RemoteGeneration;
 
+use App\Enums\FileTypes;
 use App\Models\RemoteGeneration\RgApplicationFiles;
 use App\Models\RemoteGeneration\RgApplications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class RgApplicationFile
@@ -81,5 +83,12 @@ class RgApplicationFile
             return true;
         }
         return false;
+    }
+
+    public function getCertificateInBase64(RgApplications $rgApplication)
+    {
+        $cert = $rgApplication->files()->whereType(FileTypes::CERTIFICATE()->label)->first();
+
+        return base64_encode(Storage::get($cert->path));
     }
 }

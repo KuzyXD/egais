@@ -91,6 +91,8 @@ Route::middleware(['auth:rg-client'])->prefix('rg-client')->group(function () {
         Route::get('/status', [ApplicationController::class, 'getStatus']);
         Route::get('/dn', [ApplicationController::class, 'getDn']);
         Route::post('/sendrequest', [ApplicationFilesController::class, 'recieveRequestFileInBase64']);
+        Route::get('/getcertificate', [ApplicationFilesController::class, 'getCertificateInBase64']);
+        Route::get('/markasinstalled', [ApplicationFilesController::class, 'certificateInstalled']);
         //Route::get('/certificate', [ApplicationController::class, 'getStatus']);
         //Route::post('/finish', [ApplicationController::class, 'getStatus']);
     });

@@ -34,6 +34,18 @@
                     </button>
                 </div>
             </div>
+            <div v-show="status === 1"
+                 class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
+                <h1 class="text-lg font-semibold text-gray-900 mb-4">Установка сертификата</h1>
+                <p class="text-sm text-gray-400">Нажмите на кнопку снизу, чтобы приступить к установке сертификата.</p>
+                <div class="flex justify-center">
+                    <button
+                        class="focus:outline-none w-1/2 text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-6"
+                        type="button" @click="installCertificate">
+                        Начать
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -123,6 +135,33 @@ export default {
             }).then(function (response) {
                 vue.status = -1
                 alert('Успешно. Запрос отправлен.');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        installCertificate() {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/application/${this.applicationid}/getcertificate`).then(async function (response) {
+                if(await vue.cadesplugin_certificate_install.installCertificate(response.data)) {
+                    vue.markAsInstalled()
+                }
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        markAsInstalled() {
+            const vue = this;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/application/${this.applicationid}/markasinstalled`).then(function (response) {
+                alert('Отметка об установке выставлена')
+                vue.fetchStatus()
             }).catch(function (error) {
                 console.log(error.response);
                 alert('Ошибка, обратитесь к программисту.');

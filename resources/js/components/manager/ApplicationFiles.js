@@ -5,4 +5,6 @@ export class ApplicationFiles {
     static PROCURATION = 'Доверенность';
     static APPLICATION = 'Заявление';
     static REQUEST = 'Запрос';
+    static CERTIFICATE = 'Сертификат';
+    static CERTIFICATE_BLANK = 'Бланк сертификата';
 }

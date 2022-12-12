@@ -58,6 +58,16 @@ class ApplicationFilesController extends Controller
         return response('Произошла ошибка. Свяжитесь с программистом.', 500);
     }
 
+    public function getCertificateInBase64(RgApplications $rgApplication, RgApplicationFile $fileService)
+    {
+        return response($fileService->getCertificateInBase64($rgApplication));
+    }
+
+    public function certificateInstalled(RgApplications $rgApplication)
+    {
+        return $rgApplication->update(['status' => Statuses::FINISHED()->label]);
+    }
+
     public function store(ApplicationFileRequest $request, RgApplications $application, RgApplicationFile $service)
     {
         if ($service->store($request, $application)) {
