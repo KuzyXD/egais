@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicationRegistrateRequest;
 use App\Http\Requests\ChangeStatusRequest;
 use App\Jobs\RemoteGeneration\SendDocumentsJob;
+use App\Jobs\RemoteGeneration\SendRequestJob;
 use App\Models\RemoteGeneration\RgApplications;
 use App\Models\RemoteGeneration\RgCompany;
 use App\Services\RemoteGeneration\RgApplication;
@@ -77,6 +78,13 @@ class ApplicationController extends Controller
     public function sendDocs(Request $request, RgApplications $rgApplication)
     {
         SendDocumentsJob::dispatch($rgApplication);
+
+        return response('', 200);
+    }
+
+    public function sendRequest(Request $request, RgApplications $rgApplication)
+    {
+        SendRequestJob::dispatch($rgApplication);
 
         return response('', 200);
     }

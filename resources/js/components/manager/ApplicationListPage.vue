@@ -4,6 +4,7 @@
                               {name: 'open_in_lk', text: 'Открыть в ЛК'},
                               {name: 'show_files', text: 'Файлы'},
                               {name: 'send_docs', text: 'Отправить документы'},
+                              {name: 'send_request', text: 'Отправить запрос'},
                               {name: 'change_status', text: 'Сменить статус'},
                               {name: 'delete', text: 'Удалить/восстановить'},
                           ]"
@@ -23,6 +24,7 @@
                       @show_files="showFilesModal"
                       @sorted="this.fetch"
                       @send_docs="sendDocs"
+                      @send_request="sendRequest"
                       @change_status="showChangeStatusModal"
         ></custom-table>
         <pagination v-show="!loading" class="flex justify-start mt-3"
@@ -185,6 +187,20 @@ export default {
             const apiLocation = regex.exec(window.location.pathname);
 
             axios.get(`/api/${apiLocation}/application/${applicationId}/senddocs`).then(function (response) {
+                vue.fetch();
+                alert('Успешно');
+            }).catch(function (error) {
+                console.log(error.response);
+                alert('Ошибка, обратитесь к программисту.');
+            });
+        },
+        sendRequest(item) {
+            const vue = this;
+            const applicationId = item.id;
+            const regex = /\w+-\w+/;
+            const apiLocation = regex.exec(window.location.pathname);
+
+            axios.get(`/api/${apiLocation}/application/${applicationId}/sendrequest`).then(function (response) {
                 vue.fetch();
                 alert('Успешно');
             }).catch(function (error) {

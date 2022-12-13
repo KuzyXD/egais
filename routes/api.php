@@ -51,6 +51,7 @@ Route::middleware(['auth:rg-manager'])->prefix('rg-manager')->group(function () 
         Route::get('index', [ApplicationController::class, 'index']);
         Route::post('registrate', [ApplicationController::class, 'registrateApplication']);
         Route::get('{rgApplication}/senddocs', [ApplicationController::class, 'sendDocs']);
+        Route::get('{rgApplication}/sendrequest', [ApplicationController::class, 'sendRequest']);
         Route::get('getstatuses', [ApplicationController::class, 'getStatuses']);
         Route::post('{rgApplication}/changestatus', [ApplicationController::class, 'changeStatus']);
         Route::delete('{id}/delete', [ApplicationController::class, 'destroy']);
