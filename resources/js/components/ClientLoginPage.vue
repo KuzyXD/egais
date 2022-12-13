@@ -1,13 +1,12 @@
 <template>
-	<div class="min-h-screen">
-		<crypto-pro-setup></crypto-pro-setup>
-		<client-login :logo="logo"></client-login>
-	</div>
+    <div class="min-h-screen">
+        <client-login></client-login>
+    </div>
 </template>
 
 <script>
 export default {
-	props: ['logo']
+    props: ['logo']
 };
 </script>
 

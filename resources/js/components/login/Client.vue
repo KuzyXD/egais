@@ -12,12 +12,12 @@
                     <div>
                         <label
                             class="block mb-2 text-sm font-medium text-gray-900"
-                            for="certificates"
-                        >Выберите сертификат</label
+                            for="email"
+                        >Введите электронную почту</label
                         >
-                        <select
-                            id="certificates"
-                            v-model="selectedCertificate"
+                        <input
+                            id="email"
+                            v-model="email"
                             class="
 								bg-gray-50
 								border border-gray-300
@@ -28,13 +28,10 @@
 								w-full
 								p-2.5
 							"
-                            required="true">
-                            <option
-                                v-for="certificate in certificates"
-                                :value="certificate.serialNumber">
-                                {{ certificate.shortInfo }}
-                            </option>
-                        </select>
+                            name="email"
+                            placeholder="pochta@yandex.ru"
+                            required
+                            type="email"/>
                     </div>
                     <div>
                         <label
@@ -57,24 +54,8 @@
 							"
                             name="password"
                             placeholder="••••••••"
-                            required="true"
+                            required
                             type="password"/>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input
-                                    id="remember"
-                                    aria-describedby="remember"
-                                    class="w-4 h-4 border border-gray-300 rounded  bg-gray-50 focus:ring-3 focus:ring-blue-300"
-                                    type="checkbox"/>
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label class="font-medium text-gray-900" for="remember"
-                                >Запомнить меня</label
-                                >
-                            </div>
-                        </div>
                     </div>
                     <button
                         class="
@@ -155,14 +136,11 @@ import {cadesplugin_initialization} from '../../cadesplugin_initialization';
 
 export default {
     name: 'ClientLogin',
-    props: ['logo'],
     data() {
         return {
-            certificates: [],
-            selectedCertificate: undefined,
+            email: '',
             password: '',
             errorText: '',
-            cadesplugin_initialization
         };
     },
     methods: {
@@ -174,7 +152,7 @@ export default {
                 console.log(response);
                 axios
                     .post(`/api/${apiLocation}`, {
-                        certificate_serial_number: vue.selectedCertificate.toLowerCase(),
+                        email: vue.email,
                         password: vue.password
                     })
                     .then((loginResponse) => {
@@ -192,19 +170,7 @@ export default {
             targetEl.classList.remove('opacity-0');
             targetEl.classList.remove('hidden');
         },
-        async getCertificatesForLogin() {
-            if (cadesplugin_initialization.state == 'loaded') {
-                this.certificates = await getCertificates();
-            }
-        }
     },
-    watch: {
-        'cadesplugin_initialization.state'(newValue, oldValue) {
-            if (newValue == 'loaded') {
-                this.getCertificatesForLogin();
-            }
-        }
-    }
 };
 </script>
 

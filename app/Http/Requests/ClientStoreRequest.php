@@ -11,8 +11,7 @@ class ClientStoreRequest extends FormRequest
         return [
             'fio' => 'bail|required|string',
             'password' => 'bail|required|string',
-            'certificate_serial_number' => 'bail|required|string',
-            'certificate_expire_to_date' => 'bail|required|string|min:10|max:10',
+            'email' => 'bail|required|email',
             'note' => 'bail|nullable|string',
         ];
     }

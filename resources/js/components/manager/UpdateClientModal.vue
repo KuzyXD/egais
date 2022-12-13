@@ -32,31 +32,20 @@
                                    required type="text">
                         </div>
                         <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Почта:</label>
+                            <input id="email"
+                                   v-model="form.email"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                   name="email"
+                                   required type="email">
+                        </div>
+                        <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">Пароль:</label>
                             <input id="password"
                                    v-model="form.password"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                    name="password"
                                    required type="text">
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Серийный номер
-                                сертификата:</label>
-                            <input id="certificate_serial_number"
-                                   v-model="form.certificate_serial_number"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                   name="certificate_serial_number"
-                                   required type="text">
-                        </div>
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Дата окончания
-                                сертификата:</label>
-                            <input id="certificate_expire_to_date"
-                                   v-model="form.certificate_expire_to_date"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                   name="certificate_expire_to_date"
-                                   pattern="dd-mm-yyyy" required
-                                   type="date">
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">Комментарий:</label>
@@ -80,17 +69,14 @@
 </template>
 
 <script>
-import {formatYmd} from "../../helper_functions";
-
 export default {
     props: ['selectedItem'],
     data() {
         return {
             form: {
                 fio: '',
+                email: '',
                 password: '',
-                certificate_serial_number: '',
-                certificate_expire_to_date: '',
                 note: '',
             }
         }
@@ -104,7 +90,6 @@ export default {
 
             axios.get(`/api/${apiLocation}/client/${clientId}/show`).then(function (response) {
                 vue.form = response.data.data;
-                vue.form.certificate_expire_to_date = formatYmd(new Date(vue.form.certificate_expire_to_date))
             }).catch(function (error) {
                 console.log(error.response);
                 alert('Ошибка, обратитесь к программисту.');
@@ -116,9 +101,8 @@ export default {
         clearData() {
             this.form = {
                 fio: '',
+                email: '',
                 password: '',
-                certificate_serial_number: '',
-                certificate_expire_to_date: '',
                 note: ''
             };
         }

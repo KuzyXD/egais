@@ -24,7 +24,7 @@ class ClientLoginAuthenticate extends FormRequest
     public function rules()
     {
         return [
-            'certificate_serial_number' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required|string'
         ];
     }

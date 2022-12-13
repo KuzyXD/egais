@@ -72,8 +72,7 @@ class TestFillSeeder extends Seeder
 
         RgClient::factory()->count(1)->create([
             'fio' => 'Кузнецов Илья Олегович',
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Carbon::parse('2023-06-15'),
+            'email' => 'kuzyxd@Yandex.ru',
             'group' => 'КБ'
         ]);
         RgApplications::factory([

@@ -14,8 +14,7 @@ class RgClientFactory extends Factory
         return [
             'fio' => $this->faker->name(),
             'password' => '$2a$12$yloCK36BBLj7F5gxiMY.8OSLXhLHkv3Qt37D.FAZJjo7Z1Z.3FJRy', //111,
-            'certificate_serial_number' => $this->faker->numerify('###################'),
-            'certificate_expire_to_date' => $this->faker->dateTime()
+            'email' => $this->faker->email()
         ];
     }
 }

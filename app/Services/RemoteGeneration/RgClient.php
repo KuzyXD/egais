@@ -40,14 +40,15 @@ class RgClient
     public function create($parameters): ModelsClient
     {
         $parameters['password'] = Hash::make($parameters['password']);
-        $parameters['certificate_expire_to_date'] = \Carbon\Carbon::parse($parameters['certificate_expire_to_date']);
-
         return ModelsClient::create($parameters);
     }
 
     public function update($parameters, \App\Models\RemoteGeneration\RgClient $rgClient): bool
     {
-        $parameters['certificate_expire_to_date'] = \Carbon\Carbon::parse($parameters['certificate_expire_to_date']);
+        if ($parameters['password'] != null) {
+            $parameters['password'] = Hash::make($parameters['password']);
+        }
+
         return $rgClient->update($parameters);
     }
 

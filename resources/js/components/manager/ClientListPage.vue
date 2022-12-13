@@ -65,19 +65,8 @@ export default {
             cols: [
                 {name: 'ID', key: 'id', sortable: true, sortableState: 'desc'},
                 {name: 'ФИО', key: 'fio', sortable: true, sortableState: 'normal'},
+                {name: 'Почта', key: 'email', sortable: true, sortableState: 'normal'},
                 {name: 'Группа', key: 'group', sortable: true, sortableState: 'normal'},
-                {
-                    name: 'Серийный номер сертификта',
-                    key: 'certificate_serial_number',
-                    sortable: true,
-                    sortableState: 'normal'
-                },
-                {
-                    name: 'Дата окончания сертификата',
-                    key: 'certificate_expire_to_date',
-                    sortable: true,
-                    sortableState: 'normal'
-                },
                 {name: 'Заметка', key: 'note', sortable: true, sortableState: 'normal'},
                 {name: 'Создан', key: 'created_at', sortable: true, sortableState: 'normal'},
                 {name: 'Обновлен', key: 'update_at', sortable: true, sortableState: 'normal'},

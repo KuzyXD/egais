@@ -11,8 +11,7 @@ class ClientUpdateRequest extends FormRequest
         return [
             'fio' => 'bail|nullable|string',
             'password' => 'bail|nullable|string',
-            'certificate_serial_number' => 'bail|nullable|string',
-            'certificate_expire_to_date' => 'bail|nullable|string|min:10|max:10',
+            'email' => 'bail|nullable|email',
             'note' => 'bail|nullable|string',
         ];
     }

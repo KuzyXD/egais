@@ -14,8 +14,7 @@ class AddRgClientCommandTest extends TestCase
     {
         $data = [
             'fio' => $this->faker->name(),
-            'certificate_serial_number' => $this->faker->numerify('###################'),
-            'certificate_expire_to_date' => '2022-05-16',
+            'email' => $this->faker->email(),
             'password' => '111',
         ];
 

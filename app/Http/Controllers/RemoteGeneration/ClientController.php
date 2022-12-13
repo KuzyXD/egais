@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Http\Resources\RemoteGeneration\RgClientResource;
+use App\Http\Resources\RemoteGeneration\RgClientShowResource;
 use App\Models\RemoteGeneration\RgClient;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class ClientController extends Controller
 
     public function show(RgClient $rgClient)
     {
-        return new RgClientResource($rgClient);
+        return new RgClientShowResource($rgClient);
     }
 
     public function update(ClientUpdateRequest $request, RgClient $rgClient, \App\Services\RemoteGeneration\RgClient $service)

@@ -25,16 +25,13 @@ class ClientControllerTest extends TestCase
 
         $data = [
             'fio' => 'Заславский Дмитрий',
+            'email' => 'test@yandex.ru',
             'password' => '111',
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => '2022-05-31',
             'note' => 'тестовая сущность'
         ];
 
         $this->post('api/rg-manager/client/store', $data);
-
-        $data['certificate_expire_to_date'] = \Carbon\Carbon::parse($data['certificate_expire_to_date']);
-
+        
         $this->assertDatabaseHas('rg_clients', Arr::except($data, 'password'));
     }
 
@@ -48,8 +45,7 @@ class ClientControllerTest extends TestCase
 
         $parameters = [
             'id' => 1,
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Date::createFromDate('2022', '6', '15'),
+            'email' => 'test@yandex.ru',
             'note' => 'тестовая сущность'
         ];
         RgClient::factory($parameters)->create();
@@ -68,19 +64,14 @@ class ClientControllerTest extends TestCase
         $parameters = [
             'id' => 1,
             'fio' => 'Дмитрий Тестович',
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Date::createFromDate('2022', '6', '15'),
+            'email' => 'test@yandex.ru',
             'note' => 'тестовая сущность'
         ];
         RgClient::factory($parameters)->create();
 
-        $requestParameters = $parameters;
-        $requestParameters['certificate_serial_number'] = '01d880ad474855900043000c381d0002'; //изменили серийный номер
-        $requestParameters['certificate_expire_to_date'] = '15.06.2022'; //изменил на строку для запроса
+        $this->patch('api/rg-manager/client/1/update', Arr::except($parameters, 'id'));
 
-        $this->patch('api/rg-manager/client/1/update', Arr::except($requestParameters, 'id'));
-
-        $this->assertDatabaseHas('rg_clients', ['certificate_serial_number' => $requestParameters['certificate_serial_number']]);
+        $this->assertDatabaseHas('rg_clients', $parameters);
     }
 
     public function testDestroy()
@@ -93,8 +84,7 @@ class ClientControllerTest extends TestCase
 
         $parameters = [
             'id' => 1,
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Date::createFromDate('2022', '6', '15'),
+            'email' => 'test@yandex.ru',
             'note' => 'тестовая сущность'
         ];
         RgClient::factory($parameters)->create();
@@ -113,8 +103,7 @@ class ClientControllerTest extends TestCase
 
         $parameters = [
             'id' => 1,
-            'certificate_serial_number' => '01d880ad474855900000000c381d0002',
-            'certificate_expire_to_date' => Date::createFromDate('2022', '6', '15'),
+            'email' => 'test@yandex.ru',
             'note' => 'тестовая сущность',
             'deleted_at' => Date::now()
         ];
